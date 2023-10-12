@@ -159,3 +159,25 @@ def create_bar_plots(values, categories, error, title):
     # Show the chart
     plt.tight_layout()
     plt.show()
+
+def create_plots(engine_options, judge_options):
+    iteration_number = []
+    number_answered= []
+    names = []
+    error_answered= []
+    error_iteration = []
+    for engine in engine_options:
+        for engine_judge in judge_options:
+            df = analysis(engine, engine_judge, engine+ ' + ' +engine_judge)
+            df.columns= df.columns.get_level_values(1)
+            make_spider_plot(df, engine, engine_judge)
+            iteration_number.append(df.at['Iterations', 'Mean'])
+            number_answered.append(df.at['Number Answered', 'Mean'])
+            error_answered.append(np.std(df.at['Number Answered', 'Samples']))
+            error_iteration.append(np.std(df.at['Iterations', 'Samples']))
+            names.append(engine+'+'+engine_judge)
+
+    make_spider_plot(engine_options, judge_options)
+
+    create_bar_plots(iteration_number, names, error_iteration, 'iteration_number')
+    create_bar_plots(number_answered, names, error_answered, 'number_answered') 
