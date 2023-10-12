@@ -1,0 +1,50 @@
+In individuals aged 18 to 85 years with hypertrophic cardiomyopathy who are treated with beta blockers only, calcium channels blockers only, or who switch from one to the other, is there a difference in time to developing atrial fibrillation, ventricular arrhythmia, heart failure or receiving a heart transplant?
+In patients at least 18 years old, and prescribed ibuprofen, is there any difference in peak blood glucose after treatment compared to patients prescribed acetaminophen?
+Among those with myotonic dystrophy, we are interested in whether treatments of mexiletine (typically used to ameliorate their muscle symptoms) would increase the risk of arrhythmia (both atrial and ventricular).
+Do outcomes differ for patients with syndromic vs non-syndromic causes of thoracic aortic aneurysms?
+Do patients who have an elevated incidental B12 lab go on to develop malignancy?
+In patients with chronic obstructive pulmonary disease (COPD), does the use of inhaled corticosteroids reduce the frequency of acute exacerbations compared to long-acting beta agonists?
+Among individuals with rheumatoid arthritis, is methotrexate more effective than hydroxychloroquine in reducing joint inflammation and damage?
+In patients diagnosed with major depressive disorder, is cognitive behavioral therapy (CBT) more effective than medication alone in reducing depressive symptoms?
+Is there a difference in bone density in postmenopausal women treated with bisphosphonates compared to those treated with hormone replacement therapy?
+Do patients with type 2 diabetes on metformin have a reduced risk of cardiovascular events compared to those on sulfonylureas?
+Among individuals with migraine headaches, does treatment with triptans result in faster relief compared to NSAIDs?
+In patients with glaucoma, is the use of prostaglandin analogs more effective in reducing intraocular pressure than beta-blockers?
+Among children with asthma, does the use of leukotriene receptor antagonists reduce the number of hospitalizations compared to inhaled corticosteroids?
+For patients with Parkinson's disease, is deep brain stimulation more effective in reducing motor symptoms than medication alone?
+Do patients with osteoarthritis of the knee experience better pain relief with hyaluronic acid injections compared to corticosteroid injections?
+In individuals with chronic insomnia, does melatonin supplementation improve sleep duration and quality compared to benzodiazepines?
+Among patients with ulcerative colitis, is infliximab more effective in inducing remission than mesalamine?
+Is there a difference in outcomes for patients with acute myocardial infarction treated with thrombolytics compared to primary percutaneous coronary intervention?
+Do patients with systemic lupus erythematosus on hydroxychloroquine have a reduced incidence of flares compared to those on azathioprine?
+In children with attention-deficit/hyperactivity disorder (ADHD), is methylphenidate more effective than behavioral therapy in improving school performance?
+Among patients with psoriasis, does treatment with biologics result in better skin clearance compared to topical therapies?
+For individuals with chronic hepatitis B, is tenofovir more effective in reducing viral load than entecavir?
+Do patients with irritable bowel syndrome (IBS) experience better symptom relief with probiotic supplementation compared to antispasmodic medications?
+In patients with macular degeneration, does treatment with anti-VEGF agents improve visual acuity compared to laser photocoagulation?
+Among individuals with osteoporosis, is there a difference in fracture risk for those treated with denosumab compared to those on raloxifene?
+Do patients with chronic kidney disease on angiotensin-converting enzyme (ACE) inhibitors have slower disease progression than those on calcium channel blockers?
+In individuals with bipolar disorder, is lamotrigine more effective in preventing mood episodes than lithium?
+Among patients with congestive heart failure, does the use of spironolactone reduce mortality compared to beta-blockers?
+For patients with generalized anxiety disorder, is buspirone more effective in reducing anxiety symptoms than selective serotonin reuptake inhibitors (SSRIs)?
+Do patients with chronic venous insufficiency experience better symptom relief with compression stockings compared to venous ablation?
+In patients with acute stroke, does early physical therapy improve functional outcomes compared to delayed rehabilitation?
+Among individuals with epilepsy, is the ketogenic diet more effective in reducing seizure frequency than antiepileptic drugs?
+Do patients with ankylosing spondylitis on tumor necrosis factor (TNF) inhibitors have better spinal mobility compared to those on nonsteroidal anti-inflammatory drugs (NSAIDs)?
+In patients with gastroesophageal reflux disease (GERD), is laparoscopic fundoplication more effective in symptom relief than proton pump inhibitors?
+Among individuals with multiple sclerosis, does treatment with disease-modifying therapies reduce relapse rate compared to corticosteroids?
+For patients with celiac disease, does strict gluten-free diet adherence improve gastrointestinal symptoms compared to a low-gluten diet?
+Do patients with benign prostatic hyperplasia on alpha-blockers experience better urinary flow than those on 5-alpha reductase inhibitors?
+In individuals with narcolepsy, is modafinil more effective in reducing daytime sleepiness than traditional stimulants?
+Among patients with sickle cell disease, does hydroxyurea reduce the frequency of pain crises compared to blood transfusions?
+Do patients with peripheral artery disease who undergo angioplasty have better limb outcomes compared to those treated with bypass surgery?
+In patients with severe acne, is isotretinoin more effective in reducing acne lesions than topical retinoids?
+Among women with polycystic ovary syndrome (PCOS), does metformin improve fertility outcomes compared to clomiphene citrate?
+For patients with chronic sinusitis, is endoscopic sinus surgery more effective in symptom relief than long-term antibiotic therapy?
+Do patients with fibromyalgia on pregabalin experience better pain relief compared to those on tricyclic antidepressants?
+In individuals with obsessive-compulsive disorder (OCD), is exposure and response prevention therapy more effective than medication alone in symptom reduction?
+Among patients with Crohn's disease, does adalimumab reduce the need for surgery compared to corticosteroids?
+For patients with vertigo, is vestibular rehabilitation therapy more effective in reducing dizziness episodes than betahistine?
+Do individuals with hyperthyroidism treated with radioactive iodine have better thyroid function outcomes compared to those on antithyroid drugs?
+In patients with chronic hepatitis C, is sofosbuvir/ledipasvir more effective in achieving sustained virologic response than pegylated interferon and ribavirin?
+Among individuals with restless leg syndrome, does pramipexole improve sleep quality compared to gabapentin?
