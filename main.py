@@ -25,4 +25,4 @@ def general_response_experiment():
 def policy_tuning_experiment(agent, openai_token):
     policy_tuning(agent, openai_token)
 
-policy_tuning("gpt-4", openai_token)
+policy_tuning_experiment("gpt-4", openai_token)
