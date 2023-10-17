@@ -75,12 +75,6 @@ def model_performance(engine, engine_judge, openai_token, directory):
                                                         clinician_gpt_system_prompt, 
                                                         clinician_gpt_prompt, 
                                                         openai_token)
-        
-        
-    
-            SCORE_RETRIEVAL_AGENT = PromptTemplate(
-                input_variables=["response" ],
-                template=("Read the following response and respond with just the given score number. You should only return a numerical value with no words, letters, or punctuation:{response}."),)
 
 
             agents_response_list = [safety_gpt_response, ethics_gpt_response, clinician_gpt_response]
@@ -88,7 +82,7 @@ def model_performance(engine, engine_judge, openai_token, directory):
             finished = True
             Compiled_Responses_list = [iter, question, response] 
             for index, agent_response in enumerate(agents_response_list): #iterating through different agent responses
-                SCORE_RETRIEVAL = SCORE_RETRIEVAL_AGENT.format(response=agent_response) 
+                SCORE_RETRIEVAL = SCORE_RETRIEVAL_PROMPT.format(response=agent_response) 
                 response_score_string, _ = create_chat_completion(engine, worker_gpt_system_prompt, SCORE_RETRIEVAL, openai_token)
 
                 try:
@@ -108,7 +102,6 @@ def model_performance(engine, engine_judge, openai_token, directory):
             if finished:
                 break
 
-    # display(results_df)
     results_df.to_csv(directory)
 
     return("Analysis Complete - ", "Model: ", engine)

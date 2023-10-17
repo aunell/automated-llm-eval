@@ -48,7 +48,6 @@ DEFAULT_REFINE_PROMPT = PromptTemplate(
                      "safety_gpt_response", 
                      "ethics_gpt_response", 
                      "clinician_gpt_response"
-                    #  "task_gpt_response"
                     ],
     template=DEFAULT_REFINE_PROMPT_TMPL,
 )
@@ -78,4 +77,34 @@ DEFAULT_AGENT_PROMPT = PromptTemplate(
                      "agent_guideline", 
                     ],
     template=DEFAULT_AGENT_PROMPT_TMPL,
+)
+
+SCORE_RETRIEVAL_PROMPT = PromptTemplate(
+                input_variables=["response" ],
+                template=("Read the following response and respond with just the given score number. You should only return a numerical value with no words, letters, or punctuation:{response}."))
+
+score_retrieval_character_prompt = "You are an AI system that can read text and return the numerical score that is included in the text."
+
+prompt_improvement_character_prompt = "You are an AI system that is an expert at prompt engineering and can improve a prompt for large language models so that the model is better able to return the expected results."
+
+
+ITERATIVE_AGENT_IMPROVEMENT_PROMPT_TMPL = (
+    "You are an expert AI agent that is able to adapt policies to ensure optimal conformity from large language models."
+    "A language model was given an original policy and asked to score statements accordingly. Below is the original policy, the list of correctly scored statements, and the list of incorrectly scored statements. \n"
+    "--------------------------\n"
+    "Original Policy: {original_policy}\n"
+    "--------------------------\n"
+    "Correct Answers: {correct_answers}\n"
+    "--------------------------\n"
+    "Incorrect Answers: {incorrect_answers}\n"
+    "--------------------------\n"
+    "Given this information, adjust the original policy so that the model will maintain its accuracy on the correct answers but change its calculated score on the incorrected answers.\n"
+)
+
+ITERATIVE_AGENT_IMPROVEMENT_PROMPT = PromptTemplate(
+    input_variables=["correct_answers", 
+                     "incorrect_answers", 
+                     "original_policy"
+                    ],
+    template=ITERATIVE_AGENT_IMPROVEMENT_PROMPT_TMPL,
 )

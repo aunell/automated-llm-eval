@@ -2,8 +2,6 @@ import statistics as stats
 import pandas as pd
 from test import run_number
 
-# run_number = 3
-
 def model_runs_list_creation(engine, engine_judge):
     model_runs_list=[]
     for k in range(run_number):
