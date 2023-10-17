@@ -3,6 +3,7 @@ import json
 import time
 import requests
 import json
+import re
 
 def create_chat_completion(engine, 
                            system_prompt, 

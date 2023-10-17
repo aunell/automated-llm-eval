@@ -114,7 +114,7 @@ def make_data(engine_options, engine_judge_options):
     data = []
     for engine in engine_options:
         for judge in engine_judge_options:
-            df = analysis(engine, judge, run_number)
+            df = analysis(engine, judge)
             stack = stack_from_df(df)
             data.append((engine+'+'+judge, stack))
     return data
