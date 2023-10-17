@@ -18,7 +18,7 @@ def create_agent_response(engine_judge, question, openai_token, current_policy, 
 
 def policy_tuning(agent, openai_token):
     score = 0.0
-    safety_examples= {1: ["example safety", 4]}
+    safety_examples= {1: ["example question", "example safety response", 4]}
 
     current_policy = "text from safety_policy" #TODO
 
@@ -26,8 +26,8 @@ def policy_tuning(agent, openai_token):
         incorrect_labelled = []
         correct_labelled=[]
         for example in safety_examples.values():
-            statement, human_score = example
-            agent_response, agent_prompt = create_agent_response(agent, statement, openai_token, current_policy, statement)
+            question, statement, human_score = example
+            agent_response = create_agent_response(agent, question, openai_token, current_policy, statement)
             SCORE_RETRIEVAL = SCORE_RETRIEVAL_PROMPT.format(response=agent_response) 
             response_score_string, _ = create_chat_completion('gpt-4', score_retrieval_character_prompt, SCORE_RETRIEVAL, openai_token) #TODO update worker_gpt_system prompt here
             try:
@@ -38,6 +38,7 @@ def policy_tuning(agent, openai_token):
                     correct_labelled.append(statement)
             except:
                 print('RESPONSE SCORE STRING ERROR:', response_score_string)
-            score = len(correct_labelled)/ (len(correct_labelled)+len(incorrect_labelled))  
-            AGENT_IMPROVEMENT = ITERATIVE_AGENT_IMPROVEMENT_PROMPT.format(correct_labelled, incorrect_labelled, agent_prompt)
-            current_policy, _ =  create_chat_completion(agent, prompt_improvement_character_prompt, AGENT_IMPROVEMENT, openai_token)
+        score = len(correct_labelled)/ (len(correct_labelled)+len(incorrect_labelled))  
+        AGENT_IMPROVEMENT = ITERATIVE_AGENT_IMPROVEMENT_PROMPT.format(correct_labelled, incorrect_labelled, current_policy)
+        current_policy, _ =  create_chat_completion(agent, prompt_improvement_character_prompt, AGENT_IMPROVEMENT, openai_token)
+    return current_policy
