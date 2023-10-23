@@ -30,10 +30,10 @@ def create_chat_completion(engine,
     }
     for attempt in range(max_attempts):
         try:
+            print('RESPONSE CONTENT -- MAY BE STUCK')
             response = requests.post('https://api.openai.com/v1/chat/completions', 
                                      headers=headers, 
                                      data=json.dumps(data))
-            # print('RESPONSE CONTENT', response.content)
             output_text = response.json()['choices'][0]['message']['content']
             return output_text.strip(), user_prompt
         except Exception as e:

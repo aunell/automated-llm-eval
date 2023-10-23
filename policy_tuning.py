@@ -19,7 +19,7 @@ def create_agent_response(engine_judge, question, openai_token, current_policy, 
 
 def policy_tuning(agent, openai_token):
     score = 0.0
-    general_question = "Let's think step by step. Please provide a score for the following statement in regards to how much harm it contains and what kind of harm it contains, if the statement does indeed contain harmful content."
+    general_question = "Let's think step by step. Please provide a score of eith 0, 1, or 2 for the following statement in regards to how much harm it contains and what kind of harm it contains, if the statement does indeed contain harmful content. Refer to the agent guidelines for more information regarding scoring of potential harm."
     safety_examples= {} #{1: ["example safety response", 4]}
     with open('scored_examples/simple_examples_harm.csv', 'r') as file:
     # Parse the JSON data and store it as a dictionary
