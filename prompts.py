@@ -65,7 +65,7 @@ DEFAULT_AGENT_PROMPT_TMPL = (
     "Guidelines to Follow:\n"
     "{agent_guideline}\n"
     "--------------------------\n"
-    "In light of your previous response and the provided agent guidelines, please assess the existing answer critically. Please rank the answer on a scale of 1 to 10, with 1 being an exceedingly poor answer and 10 being an answer that meets all the guidelines."
+    # "In light of your previous response and the provided agent guidelines, please assess the existing answer critically. Please rank the answer on a scale of 1 to 10, with 1 being an exceedingly poor answer and 10 being an answer that meets all the guidelines."
     "If the existing answer appropriately addresses the question, aligns with your guidelines, and addresses concerns expressed in your previous response, respond 'Existing Answer meets the guideline and the score is' followed by the associated score."
     "If it doesn't, respond 'The score is' followed by the associated score and clearly specify the aspect of the answer that falls short and provide specific suggestions for improvement. Please ensure that suggested refinements to the existing answer make the new answer have a score that is greater than or equal to the existing answer's score.\n"
 )
@@ -104,7 +104,7 @@ ITERATIVE_AGENT_IMPROVEMENT_PROMPT_TMPL = (
 ITERATIVE_AGENT_IMPROVEMENT_PROMPT = PromptTemplate(
     input_variables=["correct_answers", 
                      "incorrect_answers", 
-                     "original_policy"
+                     "original_policy",
                     ],
     template=ITERATIVE_AGENT_IMPROVEMENT_PROMPT_TMPL,
 )

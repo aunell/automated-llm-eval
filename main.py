@@ -9,8 +9,6 @@ from policy_tuning import *
 openai_token = key["open-ai"]
 
 def general_response_experiment():
-    questions =get_questions()
-
     engine_options = ["gpt-3.5-turbo", "gpt-4"]
     judge_options = ["gpt-3.5-turbo", "gpt-4"]
 

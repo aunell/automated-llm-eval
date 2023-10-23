@@ -7,7 +7,6 @@
 #     "Do patients who have an elevated incidental B12 lab go on to develop malignancy?"
 # ]
 def get_questions():
-    run_number = 3
     file_path= "./questions.txt"
     with open(file_path, 'r') as file:
             # Read the file line by line and store each line as a string in a list
