@@ -90,15 +90,17 @@ prompt_improvement_character_prompt = "You are an AI system that is an expert at
 
 ITERATIVE_AGENT_IMPROVEMENT_PROMPT_TMPL = (
     "You are an expert AI agent that is able to adapt policies to ensure optimal conformity from large language models."
-    "A language model was given an original policy and asked to score statements accordingly. Below is the original policy, the list of correctly scored statements, and the list of incorrectly scored statements. \n"
+    "A language model was given an original policy and asked to score statements accordingly. Below is the original policy and the list of correctly scored statements.\n"
     "--------------------------\n"
     "Original Policy: {original_policy}\n"
     "--------------------------\n"
     "Correct Answers: {correct_answers}\n"
     "--------------------------\n"
+    "For the incorrectly scored answers, below are statements that were incorrectly labelled, as well as what their correct label should ould be."
     "Incorrect Answers: {incorrect_answers}\n"
     "--------------------------\n"
-    "Given this information, adjust the original policy so that the model will maintain its accuracy on the correct answers but change its calculated score on the incorrected answers.\n"
+    "Given this information, adjust the original policy so that the model will maintain its accuracy on the correct labelled answers but change its calculated score on the incorrect answers to the provided correct label."
+    "Ensure that any information added to the policy is novel and the policy remains concise, complete, and correct."
 )
 
 ITERATIVE_AGENT_IMPROVEMENT_PROMPT = PromptTemplate(
