@@ -24,3 +24,5 @@ def policy_tuning_experiment(agent, openai_token):
     policy_tuning(agent, openai_token)
 
 policy_tuning_experiment("gpt-4", openai_token)
+create_accuracy_plot('policy_mutation_track_neg.csv', "Accuracy of Policy by Iteration: Negative COT", "acc_policy_neg_COT.png")
+create_len_of_policy_plot('policy_mutation_track_neg.csv', "Length of Policy by Iteration: Negative COT", "len_policy_neg_COT.png")

@@ -9,9 +9,9 @@ def create_chat_completion(engine,
                            system_prompt, 
                            user_prompt, 
                            openai_token, 
-                           max_attempts=5,
+                           max_attempts=30, #5,
                            temperature=0.9, 
-                           max_tokens= 512, #256, 
+                           max_tokens= 768, #256, 
                            top_p=0.9):
     # set up API key
     headers = {
@@ -33,7 +33,7 @@ def create_chat_completion(engine,
             response = requests.post('https://api.openai.com/v1/chat/completions', 
                                      headers=headers, 
                                      data=json.dumps(data))
-
+            print('response is', response.json())
             output_text = response.json()['choices'][0]['message']['content']
             return output_text.strip(), user_prompt
         except Exception as e:

@@ -49,6 +49,8 @@ def policy_tuning(agent, openai_token):
         k=0
         incorrect_labelled = []
         correct_labelled=[]
+        wrong= []
+        right = []
         for example in dataset.values():
             print('iteration:', k)
             k+=1
@@ -60,30 +62,36 @@ def policy_tuning(agent, openai_token):
             try:
                 response_score = int(response_score_string)
                 if response_score != human_score:
-                    statement_analysis = "The following statement: " + statement + "was given a score of: " + response_score +"by the agent, but the correct score should have been: " + human_score
+                    print('incorrect result from agent')
+                    statement_analysis = "The following statement: " + statement + " was given a score of: " + str(response_score) +" by the agent, but the correct score should have been: " + str(human_score) + ". The agent's reasoning for this score is as follows: " + agent_response
                     print(statement_analysis)
                     incorrect_labelled.append(statement_analysis)
+                    wrong.append(statement)
                 else:
+                    # statement_analysis = "The following statement was judged correctly by the agent: " + statement + "The agent's reasoning for this score is as follows: " + agent_response
+                    # print(statement_analysis)
                     correct_labelled.append(statement)
+                    right.append(statement)
             except:
                 print('RESPONSE SCORE STRING ERROR:', response_score_string)
         score = len(correct_labelled)/ (len(correct_labelled)+len(incorrect_labelled))  
-        return current_policy, score, correct_labelled, incorrect_labelled
+        return current_policy, score, correct_labelled, incorrect_labelled, wrong, right
 
-    current_policy_before, score_before, _, _ = check_policy_accuracy(test_data)
+    current_policy_before, score_before, _, _, wrong, right = check_policy_accuracy(test_data)
 
     data = {}
     i=0
     while score <.9 and i<5:
         print('score is', score)
-        current_policy, score, correct_labelled, incorrect_labelled = check_policy_accuracy(safety_examples)
-        data[i]=[current_policy, score]
+        current_policy, score, correct_labelled, incorrect_labelled, wrong, right = check_policy_accuracy(safety_examples)
+        data[i]=[current_policy, score, wrong, right]
         AGENT_IMPROVEMENT = ITERATIVE_AGENT_IMPROVEMENT_PROMPT.format(correct_answers = correct_labelled, incorrect_answers = incorrect_labelled, original_policy = current_policy)
         current_policy, _ =  create_chat_completion(agent, prompt_improvement_character_prompt, AGENT_IMPROVEMENT, openai_token)
         print('NEW POLICY for i IS:', i, current_policy)
-        save_as_csv(data, 'policy_mutation1.csv')
+        save_as_csv(data, 'policy_mutation_neg.csv')
         i+=1
-    current_policy_after, score_after, _, _ = check_policy_accuracy(test_data)
+    current_policy_after, score_after, _, _, _, _ = check_policy_accuracy(test_data)
     # data["final policies"] = [current_policy_before, current_policy_after]
     data["final scores"] = [score_before, score_after]
+    save_as_csv(data, 'policy_mutation_track_neg.csv')
     return current_policy

@@ -9,6 +9,8 @@ from matplotlib.spines import Spine
 from matplotlib.transforms import Affine2D
 
 from model_analysis import analysis
+import pandas as pd
+from matplotlib.ticker import MultipleLocator
 
 
 def radar_factory(num_vars, frame='circle'):
@@ -181,3 +183,68 @@ def create_plots(engine_options, judge_options):
 
     create_bar_plots(iteration_number, names, error_iteration, 'iteration_number')
     create_bar_plots(number_answered, names, error_answered, 'number_answered') 
+
+def create_accuracy_plot(csv_file, title, save_as):
+    df = pd.read_csv(csv_file)
+
+# Transpose the DataFrame to have time data as rows and values as columns
+    df = df.transpose()
+    start_score = df.iloc[-1, 0]
+    end_score = df.iloc[-1, 1]
+    print(start_score, end_score)
+    # Extract the time and value data, and filter out non-integer time values
+    time_data = df.index[:5]
+    value_data = df.iloc[:5,-1].astype(float)
+
+    # Filter out non-integer time values
+    time_data = time_data[time_data.str.isnumeric()]
+    time_data = time_data.astype(int)
+
+    # Create a line plot
+    plt.figure(figsize=(10, 6))
+    plt.plot(time_data, value_data, marker='o', linestyle='-')
+    plt.xlabel("Iteration Number")
+    plt.ylabel("Accuracy")
+    plt.title(title)
+    plt.grid(True)
+    plt.tight_layout()
+    ax = plt.gca()
+    ax.xaxis.set_major_locator(MultipleLocator(1))
+    legend_text = f"Starting Test Accuracy: {start_score:.3f}, Ending Test Accuracy: {end_score:.3f}"
+    plt.legend([legend_text])
+    # print('plotting')
+    plt.savefig(save_as)
+
+    # Show the plot or save it to a file
+    plt.show()
+
+
+
+def create_len_of_policy_plot(csv_file, title, save_as):
+    df = pd.read_csv(csv_file)
+
+    # Transpose the DataFrame to have time data as rows and values as columns
+    df = df.transpose()
+    # Extract the time and value data, and filter out non-integer time values
+    time_data = df.index[:5]
+    value_data = df.iloc[:5,-2].str.len()
+
+    # Filter out non-integer time values
+    time_data = time_data[time_data.str.isnumeric()]
+    time_data = time_data.astype(int)
+
+    # Create a line plot
+    plt.figure(figsize=(10, 6))
+    plt.plot(time_data, value_data, marker='o', linestyle='-')
+    plt.xlabel("Iteration Number")
+    plt.ylabel("Length of Policy in Characters")
+    plt.title(title)
+    plt.grid(True)
+    plt.tight_layout()
+    ax = plt.gca()
+    ax.xaxis.set_major_locator(MultipleLocator(1))
+    # print('plotting')
+    plt.savefig(save_as)
+
+    # Show the plot or save it to a file
+    plt.show()
