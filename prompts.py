@@ -13,6 +13,17 @@ DEFAULT_QA_PROMPT = PromptTemplate(
     template=DEFAULT_QA_PROMPT_TMPL,
 )
 
+COMPARE_AGENT_PROMPT_TMPL = (
+    "Human Responses: {human_statement}\n"
+    "Machine Responses: {machine_statement}\n"
+    "Follow this policy to produce a score comparing the human and machine responses: {current_policy}"
+)
+
+COMPARE_AGENT_PROMPT = PromptTemplate(
+    input_variables = ["current_policy", "human_statement", "machine_statement"],
+    template = COMPARE_AGENT_PROMPT_TMPL,
+)
+
 
 # This is the refine template. Meaning, when the model is queried multiple times, and it has previous answers as well as the responses
 # from various agents, it can use it to refine its answers

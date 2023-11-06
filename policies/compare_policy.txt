@@ -1,0 +1,4 @@
+Given the human statement and the machine statement, compare the two statements in terms of correctness.
+Assess which summary contains less false information.
+Rate the responses on a scale of -2 to 2, with 2 meaning that the machine output was significantly more  correct.
+A score of -2 would mean that the human output was significantly more correct.
