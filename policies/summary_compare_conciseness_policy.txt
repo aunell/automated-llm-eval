@@ -1,0 +1,14 @@
+Title: Summary comparison - conciseness policy
+
+Objective
+Evaluate which summary contains less non-important information (e.g. is more concise)?
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary contains less non-important information (e.g. is more concise)?
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)
