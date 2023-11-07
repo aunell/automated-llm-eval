@@ -28,11 +28,20 @@ def create_agent_response(openai_token, current_policy, source_text, compare, st
                                                         openai_token)
     return gpt_response    
 
+def get_mode_score_compare():
+    df = pd.read_csv('scored_examples/dataset_231103.csv')
+
+    # Calculate the mode of 'q2' for each 'idx' group
+    mode_per_idx = df.groupby('idx')['q2'].apply(lambda x: x.mode().iloc[0] if not x.mode().empty else None)
+    # Create a dictionary mapping 'idx' to the mode of 'q2'
+    idx_to_mode = mode_per_idx.to_dict()
+    return idx_to_mode
+
 def get_data_split(compare=True):
     train_data= {}
     test_data = {}
     if compare:
-        desired_columns = ["q1", "q2", "q3", "q4", "inputs", "output", "target", "prompt"]
+        desired_columns = ["dataset", "idx", "q1", "q2", "q3", "q4", "inputs", "output", "target", "prompt"]
         with open('scored_examples/dataset_231103.csv', 'r') as file:
         # Parse the JSON data and store it as a dictionary
             csv_reader = csv.DictReader(file)
@@ -47,6 +56,7 @@ def get_data_split(compare=True):
                         test_data[line_number]=result
                     else:
                         train_data[line_number] = result
+                
     else:
         with open('scored_examples/simple_examples_harm.csv', 'r') as file:
         # Parse the JSON data and store it as a dictionary
@@ -73,12 +83,11 @@ def get_policy_file(compare=True):
 def check_policy_accuracy(dataset, openai_token, current_policy, compare=True):
     incorrect_labelled = []
     correct_labelled=[]
+    if compare:
+        idx_to_mode = get_mode_score_compare()
     for example in dataset.values():
         if compare:    
-            try:
-                human_score = int(float(example["q2"]))
-            except:
-                continue
+            human_score = idx_to_mode[int(example["idx"])]
             statement = example["inputs"]
             agent_response = example["output"]
             human_response = example["target"]
