@@ -13,18 +13,6 @@ DEFAULT_QA_PROMPT = PromptTemplate(
     template=DEFAULT_QA_PROMPT_TMPL,
 )
 
-COMPARE_AGENT_PROMPT_TMPL = (
-    "Human Responses: {human_statement}\n"
-    "Machine Responses: {machine_statement}\n"
-    "Follow this policy to produce a score comparing the human and machine responses: {current_policy}"
-)
-
-COMPARE_AGENT_PROMPT = PromptTemplate(
-    input_variables = ["current_policy", "human_statement", "machine_statement"],
-    template = COMPARE_AGENT_PROMPT_TMPL,
-)
-
-
 # This is the refine template. Meaning, when the model is queried multiple times, and it has previous answers as well as the responses
 # from various agents, it can use it to refine its answers
 DEFAULT_REFINE_PROMPT_TMPL = (
@@ -99,28 +87,54 @@ score_retrieval_character_prompt = "You are an AI system that can read text and 
 prompt_improvement_character_prompt = "You are an AI system that is an expert at prompt engineering and can improve a prompt for large language models so that the model is better able to return the expected results."
 
 
-ITERATIVE_AGENT_IMPROVEMENT_PROMPT_TMPL = (
-    "You are an expert AI agent that is able to adapt policies to ensure optimal conformity from large language models."
-    "A language model was given an original policy and asked to score statements accordingly. Below is the original policy and the list of correctly scored statements.\n"
-    "--------------------------\n"
-    "Original Policy: {original_policy}\n"
-    "--------------------------\n"
-    "Correct Answers: {correct_answers}\n"
-    "--------------------------\n"
-    # "For the correctly scored answers, below are statements that were correctly labelled along with the reasoning for why the agent labelled the response correctly."
-    # "Correct Answers: {correct_answers}\n"
-    "--------------------------\n"
-    "For the incorrectly scored answers, below are statements that were incorrectly labelled, as well as what their correct label should be. The reasoning for why the agent labelled the response incorrectly is also provided."
-    "Incorrect Answers: {incorrect_answers}\n"
-    "--------------------------\n"
-    "Given this information, adjust the original policy so that the model will maintain its accuracy on the correct labelled answers but change its calculated score on the incorrect answers to the provided correct label."
-    "Ensure that any information added to the policy is novel and the policy remains concise, complete, and correct."
+POLICY_MUTATE_PROMPT_TMPL = """\
+You are an expert AI agent that is able to adapt policies to ensure optimal conformity from large language models.
+A language model was given an original policy and asked to label the statements accordingly.
+--------------------------
+ORIGINAL POLICY:
+{original_policy}
+--------------------------
+Below is a list of examples that have been assigned the correct label.
+CORRECT ANSWERS:
+{correct_answers}
+--------------------------
+Below is a list of examples that have been assigned the incorrect label. The correct label is provided.  The reason for why each example is incorrect is also provided. 
+INCORRECT ANSWERS:
+{incorrect_answers}
+--------------------------
+Given this information, adjust the original policy so that the model will maintain its accuracy on the correct labelled examples but change its response on the incorrectly labeled examples so that it will label these examples correctly.
+Ensure that any information added to the policy is novel and the policy remains concise, complete, and correct.
+
+REVISED POLICY:
+"""
+
+POLICY_MUTATE_PROMPT_TEMPLATE = PromptTemplate(
+    input_variables=[
+        "original_policy",
+        "correct_answers",
+        "incorrect_answers",
+    ],
+    template=POLICY_MUTATE_PROMPT_TMPL,
 )
 
-ITERATIVE_AGENT_IMPROVEMENT_PROMPT = PromptTemplate(
-    input_variables=["correct_answers", 
-                     "incorrect_answers", 
-                     "original_policy",
-                    ],
-    template=ITERATIVE_AGENT_IMPROVEMENT_PROMPT_TMPL,
+COMPARE_AGENT_PROMPT_TMPL = (
+    "Source Text: {source}\n"
+    "Summary A: {summary_a}\n"
+    "Summary B: {summary_b}\n"
+    "Follow this policy to produce a score comparing summary A and summary B: {current_policy}"
+)
+
+COMPARE_AGENT_PROMPT = PromptTemplate(
+    input_variables = ["source", "current_policy", "summary_a", "summary_b"],
+    template = COMPARE_AGENT_PROMPT_TMPL,
+)
+
+QA_AGENT_PROMPT_TMPL = (
+    "Statement: {statement}\n"
+    "Follow this policy to produce a score for the above statement: {current_policy}"
+)
+
+QA_AGENT_PROMPT = PromptTemplate(
+    input_variables = ["statement", "current_policy"],
+    template = QA_AGENT_PROMPT_TMPL,
 )

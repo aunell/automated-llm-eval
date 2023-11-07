@@ -9,8 +9,8 @@ from policy_tuning import *
 openai_token = key["open-ai"]
 
 def general_response_experiment():
-    engine_options = ["gpt-3.5-turbo", "gpt-4"]
-    judge_options = ["gpt-3.5-turbo", "gpt-4"]
+    engine_options = ["gpt-3.5-turbo", "gpt-4", "gpt-4-1106-preview"]
+    judge_options = ["gpt-3.5-turbo", "gpt-4", "gpt-4-1106-preview"]
 
     run_test(engine_options, judge_options)
 
@@ -20,9 +20,6 @@ def general_response_experiment():
 
     create_plots(engine_options, judge_options)
 
-def policy_tuning_experiment(agent, openai_token):
-    policy_tuning(agent, openai_token)
-
-policy_tuning_experiment("gpt-4", openai_token)
+policy_tuning("gpt-4", openai_token, compare=True)
 create_accuracy_plot('policy_mutation_track_neg.csv', "Accuracy of Policy by Iteration: Negative COT", "acc_policy_neg_COT.png")
 create_len_of_policy_plot('policy_mutation_track_neg.csv', "Length of Policy by Iteration: Negative COT", "len_policy_neg_COT.png")
