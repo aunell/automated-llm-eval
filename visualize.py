@@ -193,8 +193,9 @@ def create_accuracy_plot(csv_file, title, save_as):
     end_score = df.iloc[-1, 1]
     print(start_score, end_score)
     # Extract the time and value data, and filter out non-integer time values
-    time_data = df.index[:5]
-    value_data = df.iloc[:5,-1].astype(float)
+    value_data = df.iloc[:3,-1].astype(float)
+    # time_data = df.index[:len(value_data)]
+    time_data = df.index[:3]
 
     # Filter out non-integer time values
     time_data = time_data[time_data.str.isnumeric()]
@@ -202,6 +203,10 @@ def create_accuracy_plot(csv_file, title, save_as):
 
     # Create a line plot
     plt.figure(figsize=(10, 6))
+    print(time_data)
+    print(value_data)
+    print('len1', len(value_data))
+    print('len', len(time_data))
     plt.plot(time_data, value_data, marker='o', linestyle='-')
     plt.xlabel("Iteration Number")
     plt.ylabel("Accuracy")
@@ -226,8 +231,8 @@ def create_len_of_policy_plot(csv_file, title, save_as):
     # Transpose the DataFrame to have time data as rows and values as columns
     df = df.transpose()
     # Extract the time and value data, and filter out non-integer time values
-    time_data = df.index[:5]
-    value_data = df.iloc[:5,-2].str.len()
+    time_data = df.index[:3]
+    value_data = df.iloc[:3,-2].str.len()
 
     # Filter out non-integer time values
     time_data = time_data[time_data.str.isnumeric()]

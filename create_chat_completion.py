@@ -33,7 +33,6 @@ def create_chat_completion(engine,
             response = requests.post('https://api.openai.com/v1/chat/completions', 
                                      headers=headers, 
                                      data=json.dumps(data))
-            print('response is', response.json())
             output_text = response.json()['choices'][0]['message']['content']
             return output_text.strip(), user_prompt
         except Exception as e:
