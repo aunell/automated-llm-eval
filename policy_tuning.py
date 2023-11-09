@@ -16,13 +16,13 @@ def create_agent_response(openai_token, current_policy, source_text, compare, st
     gpt_system_prompt = "You are an expert AI agent, possessing an in-depth knowledge and expertise within the healthcare and medical domain."
     if compare:
         compare_gpt_prompt = COMPARE_AGENT_PROMPT.format(source = source_text, current_policy=current_policy, summary_a = statement_a, summary_b = statement_b)
-        gpt_response, _ = create_chat_completion("gpt-4", 
+        gpt_response, _ = create_chat_completion("gpt-3.5-turbo", 
                                                             gpt_system_prompt, 
                                                             compare_gpt_prompt, 
                                                             openai_token)   
     else:
         safety_gpt_prompt = QA_AGENT_PROMPT.format(statement=source_text, current_policy=current_policy)
-        gpt_response, _ = create_chat_completion("gpt-4", 
+        gpt_response, _ = create_chat_completion("gpt-3.5-turbo", 
                                                         gpt_system_prompt, 
                                                         safety_gpt_prompt, 
                                                         openai_token)
@@ -91,7 +91,7 @@ def check_policy_accuracy(dataset, openai_token, current_policy, compare):
     k=0
     for example in dataset.values():
         print('WE ARE ON THE ', k, 'th example')
-        if k>10:
+        if k>50:
             break
         if compare:    
             print('compare', compare)
@@ -106,7 +106,7 @@ def check_policy_accuracy(dataset, openai_token, current_policy, compare):
             agent_response_score = create_agent_response(openai_token, current_policy, statement, compare)
 
         SCORE_RETRIEVAL = SCORE_RETRIEVAL_PROMPT.format(response=agent_response_score) 
-        response_score_string, _ = create_chat_completion("gpt-4",   score_retrieval_character_prompt, SCORE_RETRIEVAL, openai_token) 
+        response_score_string, _ = create_chat_completion("gpt-3.5-turbo",   score_retrieval_character_prompt, SCORE_RETRIEVAL, openai_token) 
         try:
             response_score = int(response_score_string)
             if response_score != human_score:
@@ -127,14 +127,10 @@ def check_policy_accuracy(dataset, openai_token, current_policy, compare):
         
 def policy_tuning(agent, openai_token, output, compare, compare_type='iii'):
     score = 0.0
+    print('COMPARE TYPE IS', compare_type)
     train_data, test_data = get_data_split(compare, compare_type)
     current_policy = get_policy_file(compare)
-
-    print('checking acc')
-    save_as_csv(train_data, f"{compare_type}_train.csv")
-    save_as_csv(test_data, f"{compare_type}_test.csv")
     current_policy_before, score_before, _, _ = check_policy_accuracy(test_data, openai_token, current_policy, compare)
-    print('done check')
     data = {}
     i=0
     
@@ -144,7 +140,6 @@ def policy_tuning(agent, openai_token, output, compare, compare_type='iii'):
         data[i]=[current_policy, score, correct_labelled, incorrect_labelled]
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(original_policy = current_policy, correct_answers = correct_labelled, incorrect_answers = incorrect_labelled)
         current_policy, _ =  create_chat_completion(agent, prompt_improvement_character_prompt, AGENT_IMPROVEMENT, openai_token)
-        print('NEW POLICY for i IS:', i, current_policy)
         save_as_csv(data, 'policy_mutation_snapshot.csv')
         i+=1
 

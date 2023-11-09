@@ -22,10 +22,10 @@ def general_response_experiment():
 
     create_plots(engine_options, judge_options)
 
-# policy_tuning("gpt-4", openai_token, 'policy_mutation_track_neg_pls.csv', compare=True, compare_type = 'pls')
-# create_accuracy_plot('policy_mutation_track_neg_pls.csv', "Accuracy of Policy by Iteration: Negative COT", "acc_policy_neg_COT.png")
-# create_len_of_policy_plot('policy_mutation_track_neg_pls.csv', "Length of Policy by Iteration: Negative COT", "len_policy_neg_COT.png")
+policy_tuning("gpt-3.5-turbo", openai_token, 'results/csv/policy_mutation_track_neg_chq.csv', compare=True, compare_type = 'chq')
+create_accuracy_plot('results/csv/policy_mutation_track_neg_chq.csv', "Accuracy of Policy by Iteration: Negative COT", "acc_policy_neg_COT_chq.png")
+create_len_of_policy_plot('results/csv/policy_mutation_track_neg_chq.csv', "Length of Policy by Iteration: Negative COT", "len_policy_neg_COT_chq.png")
 
-policy_tuning("gpt-4", openai_token, 'policy_mutation_track_neg_pls.csv', compare=False, compare_type = 'pls')
-create_accuracy_plot('policy_mutation_QA_neg.csv', "Accuracy of Policy by Iteration: Negative COT", "acc_policy_neg_COT_QA.png")
-create_len_of_policy_plot('policy_mutation_QA_neg.csv', "Length of Policy by Iteration: Negative COT", "len_policy_neg_COT_QA.png")
+# policy_tuning("gpt-4", openai_token, 'policy_mutation_QA_neg.csv', compare=False, compare_type = 'pls')
+# create_accuracy_plot('results/csv/policy_mutation_QA_neg.csv', "Accuracy of Policy by Iteration: Negative COT", "acc_policy_neg_COT_QA.png")
+# create_len_of_policy_plot('results/csv/policy_mutation_QA_neg.csv', "Length of Policy by Iteration: Negative COT", "len_policy_neg_COT_QA.png")
