@@ -1,6 +1,6 @@
 
 import os
-from model_performance import model_performance
+from automated_llm_eval.model_performance import *
 from private_key import *
 
 openai_token = key["open-ai"]

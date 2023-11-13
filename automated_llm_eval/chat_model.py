@@ -8,7 +8,7 @@ import httpx
 import openai
 from openai.types.chat.chat_completion import ChatCompletion
 
-import private_key
+import private_key as private_key
 from automated_llm_eval.utils import ProgressBar
 
 chat_logger = logging.getLogger(name="ChatLogger")

@@ -1,8 +1,8 @@
 import pandas as pd
 from tqdm import tqdm
-from get_questions import get_questions
-from prompts import *
-from create_chat_completion import create_chat_completion
+from automated_llm_eval.get_questions import get_questions
+from automated_llm_eval.prompts import *
+from automated_llm_eval.create_chat_completion import create_chat_completion
 
 questions =get_questions()
 

@@ -8,7 +8,7 @@ from matplotlib.projections.polar import PolarAxes
 from matplotlib.spines import Spine
 from matplotlib.transforms import Affine2D
 
-from model_analysis import analysis
+from automated_llm_eval.model_analysis import analysis
 import pandas as pd
 from matplotlib.ticker import MultipleLocator
 
@@ -191,7 +191,7 @@ def create_accuracy_plot(csv_file, title, save_as):
     df = df.transpose()
     start_score = df.iloc[-1, 0]
     end_score = df.iloc[-1, 1]
-    example_length= df.shape[1]
+    example_length= df.shape[0]-1
     # Extract the time and value data, and filter out non-integer time values
     value_data = df.iloc[:example_length,-1].astype(float)
     time_data = df.index[:example_length]
@@ -225,7 +225,7 @@ def create_len_of_policy_plot(csv_file, title, save_as):
     # Transpose the DataFrame to have time data as rows and values as columns
     df = df.transpose()
     # Extract the time and value data, and filter out non-integer time values
-    example_length= df.shape[1]
+    example_length= df.shape[0]-1
     time_data = df.index[:example_length]
     value_data = df.iloc[:example_length,-2].str.len()
 

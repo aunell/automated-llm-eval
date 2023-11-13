@@ -1,6 +1,6 @@
 import statistics as stats
 import pandas as pd
-from test import run_number
+from automated_llm_eval.test import run_number
 
 def model_runs_list_creation(engine, engine_judge):
     model_runs_list=[]
