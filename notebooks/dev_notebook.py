@@ -4,7 +4,7 @@
 import pandas as pd
 
 from automated_llm_eval.chat_model import ChatModel, Message
-from automated_llm_eval.utils import ProgressBar
+from automated_llm_eval.utils import ProgressBar, sidethread_event_loop_async_runner
 
 # Instantiate wrapper around OpenAI's API
 model = ChatModel(model="gpt-3.5-turbo-1106")
@@ -197,12 +197,12 @@ response
 # NOTE: we make the 3rd Message with different metadata.  This should cause
 # the `validation_callback_fn` to reject the response for only the 3rd Message in list
 # and retry only the 3rd Message.
-m_list = [m] * 2 + [Message(messages=messages, metadata={"b": 2})]
-m_list
+msg_list = [m] * 2 + [Message(messages=messages, metadata={"b": 2})]
+msg_list
 # %%
 # Use Async Chat Completions, limit to 2 concurrent API calls at any given time & 1 retry
 responses_list = await model.async_chat_completions(  # noqa: F704
-    messages_list=m_list,
+    messages_list=msg_list,
     num_concurrent=2,
     num_retries=1,
     validation_callback=validation_callback_fn,
@@ -214,5 +214,42 @@ responses_list = await model.async_chat_completions(  # noqa: F704
 # - The 3rd response should always be `None` because the metadata cannot pass at
 #   `validation_callback_fn`
 responses_list
+
+# %% [markdown]
+# ### Calling Async function from Sync code
+# %%
+model = ChatModel(model="gpt-3.5-turbo-1106")
+
+system_message = "You are a joke telling machine."
+user_message = "Tell me something about apples."
+messages = [
+    {"role": "system", "content": system_message},
+    {"role": "user", "content": user_message},
+]
+m = Message(messages=messages, metadata={"a": 1})
+msg_list = [m] * 3
+
+# %%
+# Up until now, we have used `await` to call async functions and wait for their completion.
+# However, `await` this can only be used within async functions.
+# we are not allowed to call `await` from a function not defined with `async def`
+responses = await model.async_chat_completions(
+    messages_list=msg_list, num_concurrent=2, output_format="bundle"
+)
+responses
+
+# %%
+# We have created a helper function to address this issue.
+#
+# Call async method from sync function without using `await` keyword.
+# This involves creating an event loop on another thread, then
+# waiting for result on main thread and shutting down the event loop on other thread.
+
+result = sidethread_event_loop_async_runner(
+    async_function=model.async_chat_completions(
+        messages_list=msg_list, num_concurrent=2, output_format="bundle"
+    )
+)
+result
 
 # %%
