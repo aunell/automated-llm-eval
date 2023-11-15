@@ -20,7 +20,7 @@ class Message(NamedTuple):
     metadata: dict[str, Any]
 
 
-class MessageBundle(NamedTuple):
+class Bundle(NamedTuple):
     "Input messages & API call settings bundled with response messages and metadata."
     # ID Created by API Call
     id: str | None = None
@@ -44,7 +44,7 @@ class MessageBundle(NamedTuple):
 
 # Type Aliases
 MessagesType = list[dict[str, str]] | Message
-ChatCompletionResponseType = ChatCompletion | str | MessageBundle | dict[str, Any] | None
+ChatCompletionResponseType = ChatCompletion | str | Bundle | dict[str, Any] | None
 
 
 # Example Function Signature for validation callback function
@@ -101,23 +101,23 @@ class ChatModel:
     def parse_chat_completion_response(
         self,
         cc: ChatCompletion,
-        output_format: str | None = "message_bundle_dict",
+        output_format: str | None = "bundle_dict",
         messages: list[dict[str, str]] | None = None,
         **kwargs,
-    ) -> ChatCompletion | str | MessageBundle | dict:
+    ) -> ChatCompletion | str | Bundle | dict:
         """Parse ChatCompletion object.
 
         Args:
             output_format (str | None, optional): Controls format of output.
                 `None`: return raw ChatCompletion object with no modification.
                 `simple`: return only response message
-                `message_bundle`: return namedtuple with input+output messages and ChatCompletion
+                `bundle`: return namedtuple with input+output messages and ChatCompletion
                     metadata flattened as a namedtuple
-                `message_bundle_dict`: same as `message_bundle`, but returns as a
+                `bundle_dict`: same as `bundle`, but returns as a
                     dictionary.
 
         Returns:
-            Either ChatCompletion, string response message, MessageBundle, or dict depending
+            Either ChatCompletion, string response message, Bundle, or dict depending
             on `output_format`.
         """
         # If given `messages`, split out system_message and user_message to separate fields
@@ -138,8 +138,8 @@ class ChatModel:
             case "simple":
                 chat_completion_message = cc.choices[0].message.content
                 return chat_completion_message
-            case "message_bundle" | "message_bundle_dict":
-                mb = MessageBundle(
+            case "bundle" | "bundle_dict":
+                mb = Bundle(
                     id=cc.id,
                     response_message=cc.choices[0].message.content,
                     created_time=cc.created,
@@ -149,7 +149,7 @@ class ChatModel:
                     completion_tokens=cc.usage.completion_tokens,
                     **kwargs,
                 )
-                if output_format == "message_bundle_dict":
+                if output_format == "bundle_dict":
                     return mb._asdict()
                 else:
                     return mb
@@ -197,7 +197,7 @@ class ChatModel:
                 a ChatCompletion response is acceptable prior to returning the result.
 
         Returns:
-            Either ChatCompletion, string response message, MessageBundle, or dict depending
+            Either ChatCompletion, string response message, Bundle, or dict depending
             on `output_format`.  If API call fails, returns `None`.
         """
         default_kwargs = {
@@ -211,11 +211,11 @@ class ChatModel:
         }
         updated_kwargs = default_kwargs | kwargs
 
-        def attempt_retry():
+        def attempt_retry(num_retries: int) -> ChatCompletionResponseType:
             if num_retries > 0:
                 # Decrement retry counter, recursively call this method
                 return self.chat_completion(
-                    **updated_kwargs, output_format=output_format, num_retries=num_retries - 1
+                    **updated_kwargs, output_format=output_format, num_retries=num_retries
                 )
             else:
                 return None
@@ -236,14 +236,14 @@ class ChatModel:
             if did_pass_validation:
                 return response
             else:
-                attempt_retry()
+                return attempt_retry(num_retries=num_retries - 1)
         except Exception as e:
             warnings.warn(
                 f"Failed to create ChatCompletion with arguments: {updated_kwargs.items()}\n"
                 f"Exception: {e}\n"
                 f"Retries left: {num_retries}"
             )
-            attempt_retry()
+            return attempt_retry(num_retries=num_retries - 1)
 
     def chat_completions(
         self,
@@ -278,11 +278,11 @@ class ChatModel:
         }
         updated_kwargs = default_kwargs | kwargs
 
-        async def attempt_retry():
+        async def attempt_retry(num_retries: int) -> ChatCompletionResponseType:
             if num_retries > 0:
                 # Decrement retry counter, recursively call this method
                 return await self.async_chat_completion(
-                    **updated_kwargs, output_format=output_format, num_retries=num_retries - 1
+                    **updated_kwargs, output_format=output_format, num_retries=num_retries
                 )
             else:
                 return None
@@ -303,14 +303,14 @@ class ChatModel:
             if did_pass_validation:
                 return response
             else:
-                await attempt_retry()
+                return await attempt_retry(num_retries=num_retries - 1)
         except Exception as e:
             warnings.warn(
                 f"Failed to create ChatCompletion with arguments: {updated_kwargs.items()}\n"
                 f"Exception: {e}\n"
                 f"Retries left: {num_retries}"
             )
-            await attempt_retry()
+            return await attempt_retry(num_retries=num_retries - 1)
 
     async def async_chat_completions(
         self,

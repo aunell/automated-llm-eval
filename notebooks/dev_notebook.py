@@ -40,25 +40,25 @@ response = model.create_chat_completion(
 print(response)
 # %%
 # Make API call, get response packaged with input + metadata.
-# Note: `output_format = "message_bundle"`
-message_bundle = model.create_chat_completion(
+# Note: `output_format = "bundle"`
+bundle = model.create_chat_completion(
     system_message="You are a joke telling machine.",
     user_message="Tell me something about apples.",
-    output_format="message_bundle",
+    output_format="bundle",
 )
-print(message_bundle)
+print(bundle)
 # %%
 # Make API call, get MessageBundle as a dict.
-# Note: `output_format = "message_bundle_dict"`
-message_bundle_dict = model.create_chat_completion(
+# Note: `output_format = "bundle_dict"`
+bundle_dict = model.create_chat_completion(
     system_message="You are a joke telling machine.",
     user_message="Tell me something about apples.",
-    output_format="message_bundle_dict",
+    output_format="bundle_dict",
 )
-print(message_bundle_dict)
+print(bundle_dict)
 # %%
 # Message bundle dict can be converted into pandas Series easily
-s = pd.Series(message_bundle_dict)
+s = pd.Series(bundle_dict)
 s
 # %%
 # Multiple message bundle dicts can be converted into pandas DataFrame
@@ -70,7 +70,7 @@ with ProgressBar() as p:
         response = model.create_chat_completion(
             system_message="You are a joke telling machine.",
             user_message="Tell me something about apples.",
-            output_format="message_bundle_dict",
+            output_format="bundle_dict",
             temperature=0.4,
             seed=None,
         )
@@ -81,13 +81,13 @@ df
 # %%
 # If an API call fails, this method will automatically retry and make another API call.
 # By default it will retry 5 times.  We can change this value to 2.
-message_bundle_dict = model.create_chat_completion(
+bundle_dict = model.create_chat_completion(
     system_message="You are a joke telling machine.",
     user_message="Tell me something about apples.",
-    output_format="message_bundle_dict",
+    output_format="bundle_dict",
     num_retries=2,
 )
-print(message_bundle_dict)
+print(bundle_dict)
 # %%
 # The `create_chat_completion` method is syntactic sugar for `chat_completion`.
 # It simply formats the message for us.
@@ -98,12 +98,12 @@ messages = [
     {"role": "user", "content": user_message},
 ]
 
-message_bundle_dict = model.chat_completion(
+bundle_dict = model.chat_completion(
     messages=messages,
-    output_format="message_bundle_dict",
+    output_format="bundle_dict",
     num_retries=2,
 )
-print(message_bundle_dict)
+print(bundle_dict)
 # %% [markdown]
 # ### Making API calls using asynchronous (non-blocking) client
 #
@@ -134,7 +134,7 @@ responses_list = await model.async_chat_completions(  # noqa: F704
     messages_list=messages_list,
     num_concurrent=2,
     num_retries=1,
-    output_format="message_bundle_dict",
+    output_format="bundle_dict",
 )
 
 df = pd.DataFrame(responses_list)
