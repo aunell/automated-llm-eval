@@ -125,8 +125,8 @@ response = await model.async_chat_completion(messages=messages, num_retries=1)  
 response
 
 # %%
-# Duplicate Messages x 10 times so that we can make 10 API calls
-messages_list = [messages] * 10
+# Duplicate Messages x 5 times so that we can make 5 API calls
+messages_list = [messages] * 5
 messages_list
 # %%
 # Use Async Chat Completions, limit to 2 concurrent API calls at any given time
@@ -191,5 +191,28 @@ response = model.chat_completion(
     num_retries=1,
 )
 response
+
+# %%
+# Multiple concurrent async chat completions using Message
+# NOTE: we make the 3rd Message with different metadata.  This should cause
+# the `validation_callback_fn` to reject the response for only the 3rd Message in list
+# and retry only the 3rd Message.
+m_list = [m] * 2 + [Message(messages=messages, metadata={"b": 2})]
+m_list
+# %%
+# Use Async Chat Completions, limit to 2 concurrent API calls at any given time & 1 retry
+responses_list = await model.async_chat_completions(  # noqa: F704
+    messages_list=m_list,
+    num_concurrent=2,
+    num_retries=1,
+    validation_callback=validation_callback_fn,
+    output_format="simple",
+)
+# %%
+# Examine responses.
+# - We should get valid responses for the first 2 responses.
+# - The 3rd response should always be `None` because the metadata cannot pass at
+#   `validation_callback_fn`
+responses_list
 
 # %%

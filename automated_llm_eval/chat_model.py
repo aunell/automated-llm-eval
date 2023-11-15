@@ -42,9 +42,15 @@ class MessageBundle(NamedTuple):
     max_tokens: int | None = None
 
 
+# Type Aliases
+MessagesType = list[dict[str, str]] | Message
+ChatCompletionResponseType = ChatCompletion | str | MessageBundle | dict[str, Any] | None
+
+
+# Example Function Signature for validation callback function
 def validation_callback(
-    messages: list[dict[str, str]] | Message,
-    response: ChatCompletion | str | MessageBundle | dict | None,
+    messages: MessagesType,
+    response: ChatCompletionResponseType,
 ) -> bool:
     """Override/substitute this with user-defined validation of the response.
     Return `True` to accept response and `False` to reject response."""
@@ -77,7 +83,7 @@ class ChatModel:
 
     def create_chat_completion(
         self, system_message: str, user_message: str, **kwargs
-    ) -> ChatCompletion | str | MessageBundle | dict | None:
+    ) -> ChatCompletionResponseType:
         """Simplified Chat Completion call that packages `system_message` and `user_message`
         for us.
 
@@ -154,12 +160,12 @@ class ChatModel:
 
     def chat_completion(
         self,
-        messages: list[dict[str, str]] | Message,
+        messages: MessagesType,
         output_format: str | None = None,
         num_retries: int = 5,
         validation_callback: Callable = validation_callback,
         **kwargs,
-    ) -> ChatCompletion | str | MessageBundle | dict | None:
+    ) -> ChatCompletionResponseType:
         """Calls OpenAI ChatCompletions API.
         https://platform.openai.com/docs/api-reference/chat/create
 
@@ -168,7 +174,7 @@ class ChatModel:
         the default arguments.
 
         Args:
-            messages (list[dict[str, str]] | Message): List of dict message format
+            messages (MessagesType): List of dict message format
                 or a `Message` wrapper for the original `messages` can be accessed
                 at `Message.messages`.
                 ```python
@@ -241,9 +247,9 @@ class ChatModel:
 
     def chat_completions(
         self,
-        messages_list: list[list[dict[str, str]] | Message],
+        messages_list: list[MessagesType],
         **kwargs,
-    ) -> list[ChatCompletion | str | MessageBundle | dict | None]:
+    ) -> list[ChatCompletionResponseType]:
         "Calls `chat_completion` multiple times and returns a list of ChatCompletion objects."
         cc_list = []
         with ProgressBar() as p:
@@ -254,12 +260,12 @@ class ChatModel:
 
     async def async_chat_completion(
         self,
-        messages: list[dict[str, str]] | Message,
+        messages: MessagesType,
         output_format: str | None = None,
         num_retries: int = 5,
         validation_callback: Callable = validation_callback,
         **kwargs,
-    ) -> ChatCompletion | str | MessageBundle | dict | None:
+    ) -> ChatCompletionResponseType:
         "Same as `chat_completion` but using asynchronous (non-blocking) client."
         default_kwargs = {
             "messages": messages,
@@ -308,23 +314,21 @@ class ChatModel:
 
     async def async_chat_completions(
         self,
-        messages_list: list[list[dict[str, str]] | Message],
+        messages_list: list[MessagesType],
         num_concurrent: int = 5,
         timeout: int | None = None,
         **kwargs,
-    ) -> list[ChatCompletion | str | MessageBundle | dict | None]:
+    ) -> list[ChatCompletionResponseType]:
         """Calls `async_chat_completion` multiple times and returns a list of
         ChatCompletion objects. Concurrency is controlled using `num_concurrent`."""
 
-        async def generation_task(
-            semaphore, messages, **kwargs
-        ) -> ChatCompletion | str | MessageBundle | dict | None:
+        async def generation_task(semaphore, messages, **kwargs) -> ChatCompletionResponseType:
             "Wrap ChatCompletion API call with a blocking semaphore to control concurrency."
             async with semaphore:
                 cc = await self.async_chat_completion(messages=messages, **kwargs)
                 return cc
 
-        async def generate_concurrent() -> list[ChatCompletion | str | MessageBundle | dict | None]:
+        async def generate_concurrent() -> list[ChatCompletionResponseType]:
             "Main task to schedule on asyncio event loop."
             # Create the shared semaphore
             semaphore = asyncio.BoundedSemaphore(num_concurrent)
