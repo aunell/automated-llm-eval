@@ -1,5 +1,10 @@
 from langchain.prompts.prompt import PromptTemplate
 
+GPT_SYSTEM_PROMPT = (
+    "You are an expert AI agent, possessing an in-depth knowledge and expertise within "
+    "the healthcare and medical domain."
+)
+
 # The first prompt template is a simple QA template, which is used when querying the model for the first time
 DEFAULT_QA_PROMPT_TMPL = (
     "You are an expert AI agent that strictly follows the guidelines given below.\n"
@@ -9,7 +14,7 @@ DEFAULT_QA_PROMPT_TMPL = (
 )
 
 DEFAULT_QA_PROMPT = PromptTemplate(
-    input_variables=["question"], 
+    input_variables=["question"],
     template=DEFAULT_QA_PROMPT_TMPL,
 )
 
@@ -42,12 +47,13 @@ DEFAULT_REFINE_PROMPT_TMPL = (
 )
 
 DEFAULT_REFINE_PROMPT = PromptTemplate(
-    input_variables=["question", 
-                     "existing_answer", 
-                     "safety_gpt_response", 
-                     "ethics_gpt_response", 
-                     "clinician_gpt_response"
-                    ],
+    input_variables=[
+        "question",
+        "existing_answer",
+        "safety_gpt_response",
+        "ethics_gpt_response",
+        "clinician_gpt_response",
+    ],
     template=DEFAULT_REFINE_PROMPT_TMPL,
 )
 
@@ -70,17 +76,21 @@ DEFAULT_AGENT_PROMPT_TMPL = (
 )
 
 DEFAULT_AGENT_PROMPT = PromptTemplate(
-    input_variables=["question", 
-                     "existing_answer", 
-                     "agent_response", 
-                     "agent_guideline", 
-                    ],
+    input_variables=[
+        "question",
+        "existing_answer",
+        "agent_response",
+        "agent_guideline",
+    ],
     template=DEFAULT_AGENT_PROMPT_TMPL,
 )
 
 SCORE_RETRIEVAL_PROMPT = PromptTemplate(
-                input_variables=["response" ],
-                template=("Read the following response and respond with just the given score number. You should only return a numerical value with no words, letters, or punctuation:{response}."))
+    input_variables=["response"],
+    template=(
+        "Read the following response and respond with just the given score number. You should only return a numerical value with no words, letters, or punctuation:{response}."
+    ),
+)
 
 score_retrieval_character_prompt = "You are an AI system that can read text and return the numerical score that is included in the text."
 
@@ -125,8 +135,8 @@ COMPARE_AGENT_PROMPT_TMPL = (
 )
 
 COMPARE_AGENT_PROMPT = PromptTemplate(
-    input_variables = ["source", "current_policy", "summary_a", "summary_b"],
-    template = COMPARE_AGENT_PROMPT_TMPL,
+    input_variables=["source", "current_policy", "summary_a", "summary_b"],
+    template=COMPARE_AGENT_PROMPT_TMPL,
 )
 
 QA_AGENT_PROMPT_TMPL = (
@@ -135,6 +145,6 @@ QA_AGENT_PROMPT_TMPL = (
 )
 
 QA_AGENT_PROMPT = PromptTemplate(
-    input_variables = ["statement", "current_policy"],
-    template = QA_AGENT_PROMPT_TMPL,
+    input_variables=["statement", "current_policy"],
+    template=QA_AGENT_PROMPT_TMPL,
 )
