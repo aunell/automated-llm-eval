@@ -2,7 +2,7 @@ import asyncio
 import logging
 import warnings
 from dataclasses import dataclass
-from typing import NamedTuple
+from typing import Any, Callable, NamedTuple
 
 import httpx
 import openai
@@ -12,6 +12,12 @@ import private_key as private_key
 from automated_llm_eval.utils import ProgressBar
 
 chat_logger = logging.getLogger(name="ChatLogger")
+
+
+class Message(NamedTuple):
+    "Wrapper around messages that packages metadata with message."
+    messages: list[dict[str, str]]
+    metadata: dict[str, Any]
 
 
 class MessageBundle(NamedTuple):
@@ -34,6 +40,15 @@ class MessageBundle(NamedTuple):
     temperature: float | None = None
     top_p: float | None = None
     max_tokens: int | None = None
+
+
+def validation_callback(
+    messages: list[dict[str, str]] | Message,
+    response: ChatCompletion | str | MessageBundle | dict | None,
+) -> bool:
+    """Override/substitute this with user-defined validation of the response.
+    Return `True` to accept response and `False` to reject response."""
+    return True
 
 
 @dataclass(kw_only=True)
@@ -81,6 +96,7 @@ class ChatModel:
         self,
         cc: ChatCompletion,
         output_format: str | None = "message_bundle_dict",
+        messages: list[dict[str, str]] | None = None,
         **kwargs,
     ) -> ChatCompletion | str | MessageBundle | dict:
         """Parse ChatCompletion object.
@@ -98,9 +114,8 @@ class ChatModel:
             Either ChatCompletion, string response message, MessageBundle, or dict depending
             on `output_format`.
         """
-        # If `messages` key, then split out system_message and user_message to separate fields
-        if "messages" in kwargs:
-            messages = kwargs.pop("messages")
+        # If given `messages`, split out system_message and user_message to separate fields
+        if messages is not None:
             system_message = [m for m in messages if m["role"] == "system"][0]
             user_message = [m for m in messages if m["role"] == "user"][0]
             kwargs |= {
@@ -139,9 +154,10 @@ class ChatModel:
 
     def chat_completion(
         self,
-        messages: list[dict[str, str]],
+        messages: list[dict[str, str]] | Message,
         output_format: str | None = None,
         num_retries: int = 5,
+        validation_callback: Callable = validation_callback,
         **kwargs,
     ) -> ChatCompletion | str | MessageBundle | dict | None:
         """Calls OpenAI ChatCompletions API.
@@ -152,7 +168,9 @@ class ChatModel:
         the default arguments.
 
         Args:
-            messages (list[dict[str, str]]): List of dict message format.
+            messages (list[dict[str, str]] | Message): List of dict message format
+                or a `Message` wrapper for the original `messages` can be accessed
+                at `Message.messages`.
                 ```python
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
@@ -163,6 +181,14 @@ class ChatModel:
                 see method `parse_chat_completion_response`.
             num_retries (int): Number of retries if API call fails.  If still fails,
                 then `None` is returned.
+            validation_callback (Callable | None, optional): A function that accepts
+                the input `messages`, and `response` (the result of formatting the raw
+                ChatCompletion to the selected `output_format`) and returns `True` or `False`.
+                If `True`, will accept ChatCompletion response and proceed.
+                If `False`, ChatCompletion response is rejected and the and will proceed
+                to retry if `num_retries` > 0.
+                This callback should be used to add any logic to check whether or not
+                a ChatCompletion response is acceptable prior to returning the result.
 
         Returns:
             Either ChatCompletion, string response message, MessageBundle, or dict depending
@@ -178,18 +204,8 @@ class ChatModel:
             "seed": self.seed,
         }
         updated_kwargs = default_kwargs | kwargs
-        try:
-            cc = self.sync_client.chat.completions.create(**updated_kwargs)
-            # Format API call response
-            return self.parse_chat_completion_response(
-                cc=cc, output_format=output_format, **updated_kwargs
-            )
-        except Exception as e:
-            warnings.warn(
-                f"Failed to create ChatCompletion with arguments: {updated_kwargs.items()}\n"
-                f"Exception: {e}\n"
-                f"Retries left: {num_retries}"
-            )
+
+        def attempt_retry():
             if num_retries > 0:
                 # Decrement retry counter, recursively call this method
                 return self.chat_completion(
@@ -198,22 +214,50 @@ class ChatModel:
             else:
                 return None
 
+        try:
+            # Format kwargs for API call
+            api_kwargs = updated_kwargs.copy()
+            msgs = api_kwargs.pop("messages")
+            if isinstance(msgs, Message):
+                msgs = msgs.messages
+            cc = self.sync_client.chat.completions.create(messages=msgs, **api_kwargs)
+            # Format API call response
+            response = self.parse_chat_completion_response(
+                cc=cc, output_format=output_format, messages=msgs, **api_kwargs
+            )
+            # Validation Callback
+            did_pass_validation = validation_callback(messages, response)
+            if did_pass_validation:
+                return response
+            else:
+                attempt_retry()
+        except Exception as e:
+            warnings.warn(
+                f"Failed to create ChatCompletion with arguments: {updated_kwargs.items()}\n"
+                f"Exception: {e}\n"
+                f"Retries left: {num_retries}"
+            )
+            attempt_retry()
+
     def chat_completions(
-        self, messages_list: list[list[dict[str, str]]], **kwargs
+        self,
+        messages_list: list[list[dict[str, str]] | Message],
+        **kwargs,
     ) -> list[ChatCompletion | str | MessageBundle | dict | None]:
         "Calls `chat_completion` multiple times and returns a list of ChatCompletion objects."
         cc_list = []
         with ProgressBar() as p:
             for message in p.track(messages_list, description="ChatCompletions"):
-                cc = self.chat_completion(message, **kwargs)
+                cc = self.chat_completion(messages=message, **kwargs)
                 cc_list += [cc]
         return cc_list
 
     async def async_chat_completion(
         self,
-        messages: list[dict[str, str]],
+        messages: list[dict[str, str]] | Message,
         output_format: str | None = None,
         num_retries: int = 5,
+        validation_callback: Callable = validation_callback,
         **kwargs,
     ) -> ChatCompletion | str | MessageBundle | dict | None:
         "Same as `chat_completion` but using asynchronous (non-blocking) client."
@@ -227,29 +271,44 @@ class ChatModel:
             "seed": self.seed,
         }
         updated_kwargs = default_kwargs | kwargs
+
+        async def attempt_retry():
+            if num_retries > 0:
+                # Decrement retry counter, recursively call this method
+                return await self.async_chat_completion(
+                    **updated_kwargs, output_format=output_format, num_retries=num_retries - 1
+                )
+            else:
+                return None
+
         try:
-            cc = await self.async_client.chat.completions.create(**updated_kwargs)
+            # Format kwargs for API call
+            api_kwargs = updated_kwargs.copy()
+            msgs = api_kwargs.pop("messages")
+            if isinstance(msgs, Message):
+                msgs = msgs.messages
+            cc = await self.async_client.chat.completions.create(messages=msgs, **api_kwargs)
             # Format API call response
-            return self.parse_chat_completion_response(
-                cc=cc, output_format=output_format, **updated_kwargs
+            response = self.parse_chat_completion_response(
+                cc=cc, output_format=output_format, messages=msgs, **api_kwargs
             )
+            # Validation Callback
+            did_pass_validation = validation_callback(messages, response)
+            if did_pass_validation:
+                return response
+            else:
+                await attempt_retry()
         except Exception as e:
             warnings.warn(
                 f"Failed to create ChatCompletion with arguments: {updated_kwargs.items()}\n"
                 f"Exception: {e}\n"
                 f"Retries left: {num_retries}"
             )
-            if num_retries > 0:
-                # Decrement retry counter, recursively call this method
-                return self.async_chat_completion(
-                    **updated_kwargs, output_format=output_format, num_retries=num_retries - 1
-                )
-            else:
-                return None
+            await attempt_retry()
 
     async def async_chat_completions(
         self,
-        messages_list: list[list[dict[str, str]]],
+        messages_list: list[list[dict[str, str]] | Message],
         num_concurrent: int = 5,
         timeout: int | None = None,
         **kwargs,

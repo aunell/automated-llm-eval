@@ -3,7 +3,7 @@
 # %%
 import pandas as pd
 
-from automated_llm_eval.chat_model import ChatModel
+from automated_llm_eval.chat_model import ChatModel, Message
 from automated_llm_eval.utils import ProgressBar
 
 # Instantiate wrapper around OpenAI's API
@@ -13,6 +13,10 @@ model
 # %%
 # You can adjust other model settings globally for all API calls
 model2 = ChatModel(model="gpt-3.5-turbo-1106", temperature=0.5, top_p=0.5, max_tokens=300, seed=42)
+model2
+# %%
+# `max_tokens = None` means no max_token limit (this is the default)
+model2 = ChatModel(model="gpt-3.5-turbo-1106", temperature=0.5, top_p=0.5, max_tokens=None, seed=42)
 model2
 # %% [markdown]
 # ### Making API calls using synchronous (blocking) client
@@ -117,7 +121,7 @@ messages = [
     {"role": "user", "content": user_message},
 ]
 
-response = await model.async_chat_completion(messages=messages)  # noqa: F704:
+response = await model.async_chat_completion(messages=messages, num_retries=1)  # noqa: F704:
 response
 
 # %%
@@ -127,9 +131,65 @@ messages_list
 # %%
 # Use Async Chat Completions, limit to 2 concurrent API calls at any given time
 responses_list = await model.async_chat_completions(  # noqa: F704
-    messages_list=messages_list, num_concurrent=2, output_format="message_bundle_dict"
+    messages_list=messages_list,
+    num_concurrent=2,
+    num_retries=1,
+    output_format="message_bundle_dict",
 )
 
 df = pd.DataFrame(responses_list)
 df
+# %% [markdown]
+# ### Example of using `Message` and `validation_callback`
+#
+# The `Message` wrapper allows packaging arbitrary user-defined metadata along with each message
+# which is a good place to put labels, notes, etc.
+#
+# The `validation_callback` argument enables the user to define
+# specific logic to validate the response from each API call to OpenAI
+# for each message.  Passed into the callback function is the original
+# `messages` and the `response`.  If the `messages` is a `Message` object,
+# this will be returned in `validation_callback` for access to all metadata.
+# `response` is the LLM response after being parsed and formated as specified
+# in `output_format`.
+
+# %%
+system_message = "You are a joke telling machine."
+user_message = "Tell me something about apples."
+messages = [
+    {"role": "system", "content": system_message},
+    {"role": "user", "content": user_message},
+]
+m = Message(messages=messages, metadata={"a": 1})
+
+
+def validation_callback_fn(messages, response) -> bool:
+    print(f"In Callback. Messages: {messages}")
+    print(f"In Callback. Response: {response}")
+    print("\n")
+    metadata = messages.metadata
+    if "a" in metadata:
+        return metadata["a"] == 1
+    else:
+        return False
+
+
+# Instantiate wrapper around OpenAI's API
+model = ChatModel(model="gpt-3.5-turbo-1106")
+# Make ChatCompletion with...
+# - using Message wrapper and include metadata (ChatModel automatically unpacks Message.messages)
+# - parse raw OpenAI response into "simple" string format
+# - then call the `validation_callback_fn` that we defined.  ChatModel always passes in
+#   original messages input and parsed response as the 1st and 2nd arguments.  The
+#   `validation_callback_fn` can contain any logic, but ultimately needs to return `True` vs `False`
+#   to accept or reject the response.  If the response is rejected, ChatModel automatically retries.
+# - allow up to 1 retry.  If still fails/rejected after 1 retry, then will return `None`.
+response = model.chat_completion(
+    m,
+    output_format="simple",
+    validation_callback=validation_callback_fn,
+    num_retries=1,
+)
+response
+
 # %%
