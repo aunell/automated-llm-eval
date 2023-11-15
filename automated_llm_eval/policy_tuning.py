@@ -17,6 +17,7 @@ from automated_llm_eval.prompts import (
     score_retrieval_character_prompt,
 )
 from automated_llm_eval.utils import sidethread_event_loop_async_runner
+from automated_llm_eval.bundle_accuracy import BundleAccuracy
 
 
 def create_agent_response(current_policy, source_text, compare, statement_a=None, statement_b=None):
@@ -44,9 +45,9 @@ def create_agent_response(current_policy, source_text, compare, statement_a=None
     return gpt_response
 
 
-def select_batch(dataset: dict, batch_size: int, seed: int = 42) -> list:
+def select_batch(dataset: dict, batch_size: int, compare: bool, seed: int = 42) -> list:
     examples = list(dataset.values())
-    examples = random.Random(seed).shuffle(examples)
+    random.Random(seed).shuffle(examples)
     batch = examples[: len(examples) // batch_size]
     return batch
 
@@ -90,6 +91,7 @@ def construct_message(example: dict, current_policy: str, compare: bool):
 
 def generate_for_dataset(
     dataset: dict,
+    current_policy: str,
     batch_size: int,
     compare: bool,
     model: str = "gpt-3.5-turbo-1106",
@@ -106,13 +108,14 @@ def generate_for_dataset(
     # Create Message Prompts + Metadata
     msg_list = []
     for example in batch:
-        msg = construct_message(example=example, compare=compare)
+        msg = construct_message(example=example, current_policy=current_policy, compare=compare)
         msg_list += [msg]
     # Create ChatModel
     model = ChatModel(
         model=model, temperature=temperature, top_p=top_p, max_tokens=max_tokens, seed=seed
     )
     # Async ChatCompletion on another thread
+    print('entering async')
     result = sidethread_event_loop_async_runner(
         async_function=model.async_chat_completions(
             messages_list=msg_list, num_concurrent=num_concurrent, output_format=output_format
@@ -122,73 +125,75 @@ def generate_for_dataset(
 
 
 def check_policy_accuracy(dataset, current_policy, batchsize, compare):
-    incorrect_labelled = []
-    correct_labelled = []
-    if compare:
-        idx_to_mode = get_mode_score_compare()
-    k = 0
-    shuffled_data = list(dataset.values())
-    random.shuffle(shuffled_data)
-    for example in shuffled_data[: len(shuffled_data) // batchsize]:
-        print("WE ARE ON THE ", k, "th example")
-        if compare:
-            human_score = idx_to_mode[int(example["idx"])]
-            statement = example["inputs"]
-            agent_response = example["output"]
-            human_response = example["target"]
-            agent_response_score = create_agent_response(
-                current_policy, statement, compare, human_response, agent_response
-            )
-        else:
-            statement = example["LLM-Generated Statements"]
-            human_score = int(example["Human Label (Dev)"])
-            agent_response_score = create_agent_response(current_policy, statement, compare)
+    """
+    return numerical accuracy score as well as COT statements
+    score, incorrect statements, correct statements
+    """
+    print('generating results')
+    results = generate_for_dataset(dataset, current_policy=current_policy, batch_size=4, compare=compare)
+    print('results generated')
+    return BundleAccuracy(results).accuracy()
+    # for example in results
+    #     print("WE ARE ON THE ", k, "th example")
+    #     if compare:
+    #         human_score = idx_to_mode[int(example["idx"])]
+    #         statement = example["inputs"]
+    #         agent_response = example["output"]
+    #         human_response = example["target"]
+    #         agent_response_score = create_agent_response(
+    #             current_policy, statement, compare, human_response, agent_response
+    #         )
+    #     else:
+    #         statement = example["LLM-Generated Statements"]
+    #         human_score = int(example["Human Label (Dev)"])
+    #         agent_response_score = create_agent_response(current_policy, statement, compare)
 
-        SCORE_RETRIEVAL = SCORE_RETRIEVAL_PROMPT.format(response=agent_response_score)
-        model_score = ChatModel(
-            model="gpt-3.5-turbo-1106", temperature=0.1, top_p=0.5, max_tokens=700, seed=42
-        )
-        response_score_string = model_score.create_chat_completion(
-            score_retrieval_character_prompt, SCORE_RETRIEVAL, output_format="simple"
-        )
-        try:
-            response_score = int(response_score_string)
-            if response_score != human_score:
-                print("incorrect result from agent")
-                statement_analysis = (
-                    "The following statement: "
-                    + statement
-                    + " was given a score of: "
-                    + str(response_score)
-                    + " by the agent, but the correct score should have been: "
-                    + str(human_score)
-                    + ". The agent's reasoning for this score is as follows: "
-                    + agent_response_score
-                )
-                incorrect_labelled.append(statement_analysis)
-            else:
-                correct_labelled.append(statement)
-        except Exception:
-            print("RESPONSE SCORE STRING ERROR:", response_score_string)
-        k += 1
-    score = len(correct_labelled) / (len(correct_labelled) + len(incorrect_labelled)) or 0
-    return current_policy, score, correct_labelled, incorrect_labelled
+    #     SCORE_RETRIEVAL = SCORE_RETRIEVAL_PROMPT.format(response=agent_response_score)
+    #     model_score = ChatModel(
+    #         model="gpt-3.5-turbo-1106", temperature=0.1, top_p=0.5, max_tokens=700, seed=42
+    #     )
+    #     response_score_string = model_score.create_chat_completion(
+    #         score_retrieval_character_prompt, SCORE_RETRIEVAL, output_format="simple"
+    #     )
+    #     try:
+    #         response_score = int(response_score_string)
+    #         if response_score != human_score:
+    #             print("incorrect result from agent")
+    #             statement_analysis = (
+    #                 "The following statement: "
+    #                 + statement
+    #                 + " was given a score of: "
+    #                 + str(response_score)
+    #                 + " by the agent, but the correct score should have been: "
+    #                 + str(human_score)
+    #                 + ". The agent's reasoning for this score is as follows: "
+    #                 + agent_response_score
+    #             )
+    #             incorrect_labelled.append(statement_analysis)
+    #         else:
+    #             correct_labelled.append(statement)
+    #     except Exception:
+    #         print("RESPONSE SCORE STRING ERROR:", response_score_string)
+    #     k += 1
+    # score = len(correct_labelled) / (len(correct_labelled) + len(incorrect_labelled)) or 0
+    # return current_policy, score, correct_labelled, incorrect_labelled
 
 
 def policy_tuning(output, compare, batch_size, compare_type="iii"):
     score = 0.0
     train_data, test_data = get_data_split(compare, compare_type)
     current_policy = get_policy_file(compare)
-    _, score_before, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, compare)
+    score_before, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, compare)
+    print('test score before', score_before)
     data = {}
     i = 0
 
     while score < 0.9 and i < 10:
-        print("score is", score)
-        current_policy, score, correct_labelled, incorrect_labelled = check_policy_accuracy(
+        print("score is", score, 'and iteration is:', i)
+        score, incorrect_labelled, correct_labelled = check_policy_accuracy(
             train_data, current_policy, batch_size, compare
         )
-        data[i] = [current_policy, score, correct_labelled, incorrect_labelled]
+        data[i] = [current_policy, score]
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(
             original_policy=current_policy,
             correct_answers=correct_labelled,
@@ -210,12 +215,7 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
         )
         i += 1
 
-    (
-        _,
-        score_after,
-        _,
-        _,
-    ) = check_policy_accuracy(test_data, current_policy, batch_size, compare)
+    score_after, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, compare)
     data["final scores"] = [score_before, score_after]
     save_as_csv(data, output)
     return current_policy
