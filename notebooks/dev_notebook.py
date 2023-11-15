@@ -186,7 +186,7 @@ model = ChatModel(model="gpt-3.5-turbo-1106")
 # - allow up to 1 retry.  If still fails/rejected after 1 retry, then will return `None`.
 response = model.chat_completion(
     m,
-    output_format="simple",
+    output_format="bundle_dict",
     validation_callback=validation_callback_fn,
     num_retries=1,
 )
@@ -206,7 +206,7 @@ responses_list = await model.async_chat_completions(  # noqa: F704
     num_concurrent=2,
     num_retries=1,
     validation_callback=validation_callback_fn,
-    output_format="simple",
+    output_format="bundle_dict",
 )
 # %%
 # Examine responses.

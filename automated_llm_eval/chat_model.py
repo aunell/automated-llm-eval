@@ -27,6 +27,8 @@ class Bundle(NamedTuple):
     # Input Messages
     system_message: str | None = None
     user_message: str | None = None
+    # Metadata packaged with Message
+    metadata: dict | None = None
     # Response Message
     response_message: str | None = None
     # Response Metadata
@@ -102,19 +104,21 @@ class ChatModel:
         self,
         cc: ChatCompletion,
         output_format: str | None = "bundle_dict",
-        messages: list[dict[str, str]] | None = None,
+        messages: MessagesType | None = None,
         **kwargs,
     ) -> ChatCompletion | str | Bundle | dict:
         """Parse ChatCompletion object.
 
         Args:
             output_format (str | None, optional): Controls format of output.
-                `None`: return raw ChatCompletion object with no modification.
+                `raw` or `None`: return raw ChatCompletion object with no modification.
                 `simple`: return only response message
-                `bundle`: return namedtuple with input+output messages and ChatCompletion
-                    metadata flattened as a namedtuple
-                `bundle_dict`: same as `bundle`, but returns as a
-                    dictionary.
+                `bundle`: return namedtuple with input+output messages, message metadta,
+                    and ChatCompletion metadata flattened as a namedtuple
+                `bundle_dict`: same as `bundle`, but returns as a dictionary.
+            messages (MessagesType | None, optional): The original input messages.
+                If this is a Message object, the metadata will be unpacked and
+                parsed in the `bundle` and `bundle_dict` output.
 
         Returns:
             Either ChatCompletion, string response message, Bundle, or dict depending
@@ -122,11 +126,18 @@ class ChatModel:
         """
         # If given `messages`, split out system_message and user_message to separate fields
         if messages is not None:
-            system_message = [m for m in messages if m["role"] == "system"][0]
-            user_message = [m for m in messages if m["role"] == "user"][0]
+            if isinstance(messages, Message):  # unpack Message object
+                msgs = messages.messages
+                metadata = messages.metadata
+            else:  # `messages` is the raw list[dict[str, str]] messages
+                msgs = messages
+                metadata = None
+            system_message = [m for m in msgs if m["role"] == "system"][0]
+            user_message = [m for m in msgs if m["role"] == "user"][0]
             kwargs |= {
                 "system_message": system_message["content"],
                 "user_message": user_message["content"],
+                "metadata": metadata,
             }
 
         # Remove from kwargs to avoid duplicate if they are present in ChatCompletion
@@ -136,24 +147,33 @@ class ChatModel:
 
         match output_format:
             case "simple":
-                chat_completion_message = cc.choices[0].message.content
-                return chat_completion_message
-            case "bundle" | "bundle_dict":
-                mb = Bundle(
-                    id=cc.id,
-                    response_message=cc.choices[0].message.content,
-                    created_time=cc.created,
-                    model=cc.model,
-                    total_tokens=cc.usage.total_tokens,
-                    prompt_tokens=cc.usage.prompt_tokens,
-                    completion_tokens=cc.usage.completion_tokens,
-                    **kwargs,
-                )
-                if output_format == "bundle_dict":
-                    return mb._asdict()
+                if cc is None:
+                    return None
                 else:
-                    return mb
-            case None:
+                    chat_completion_message = cc.choices[0].message.content
+                    return chat_completion_message
+            case "bundle" | "bundle_dict":
+                if cc is None:
+                    if output_format == "bundle_dict":
+                        return Bundle()._asdict()
+                    else:
+                        return Bundle()
+                else:
+                    mb = Bundle(
+                        id=cc.id,
+                        response_message=cc.choices[0].message.content,
+                        created_time=cc.created,
+                        model=cc.model,
+                        total_tokens=cc.usage.total_tokens,
+                        prompt_tokens=cc.usage.prompt_tokens,
+                        completion_tokens=cc.usage.completion_tokens,
+                        **kwargs,
+                    )
+                    if output_format == "bundle_dict":
+                        return mb._asdict()
+                    else:
+                        return mb
+            case "raw" | None:
                 return cc
             case _:
                 return cc
@@ -229,7 +249,7 @@ class ChatModel:
             cc = self.sync_client.chat.completions.create(messages=msgs, **api_kwargs)
             # Format API call response
             response = self.parse_chat_completion_response(
-                cc=cc, output_format=output_format, messages=msgs, **api_kwargs
+                cc=cc, output_format=output_format, messages=messages, **api_kwargs
             )
             # Validation Callback
             did_pass_validation = validation_callback(messages, response)
@@ -296,7 +316,7 @@ class ChatModel:
             cc = await self.async_client.chat.completions.create(messages=msgs, **api_kwargs)
             # Format API call response
             response = self.parse_chat_completion_response(
-                cc=cc, output_format=output_format, messages=msgs, **api_kwargs
+                cc=cc, output_format=output_format, messages=messages, **api_kwargs
             )
             # Validation Callback
             did_pass_validation = validation_callback(messages, response)
