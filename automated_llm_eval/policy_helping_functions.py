@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 from automated_llm_eval.prompts import *
+from automated_llm_eval.accuracy_metrics import AccuracyMetrics
 
 def confidence_interval(accuracies, incorrect_samples, correct_samples, confidence_level=0.95):
     """
@@ -104,3 +105,11 @@ def save_as_csv(data_dict, csv_file):
 
         for row in zip(*data_dict.values()):
             writer.writerow(dict(zip(data_dict.keys(), row)))
+
+def compute_metrics(accuracy_metrics_object: AccuracyMetrics):
+    accuracy = accuracy_metrics_object.compute_accuracy()
+    f1 = accuracy_metrics_object.compute_f1_score()
+    precision = accuracy_metrics_object.compute_precision()
+    recall = accuracy_metrics_object.compute_recall()
+    incorrect_COT, correct_COT = accuracy_metrics_object.get_COT()
+    return {"accuracy": accuracy, "f1": f1, "precision": precision, "recall": recall, "COT": [incorrect_COT, correct_COT]}

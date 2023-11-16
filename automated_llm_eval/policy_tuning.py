@@ -7,7 +7,8 @@ from automated_llm_eval.policy_helping_functions import (
     get_mode_score_compare,
     get_policy_file,
     save_as_csv,
-    confidence_interval
+    confidence_interval,
+    compute_metrics
 )
 from automated_llm_eval.prompts import (
     COMPARE_AGENT_PROMPT,
@@ -19,7 +20,7 @@ from automated_llm_eval.prompts import (
     score_retrieval_character_prompt,
 )
 from automated_llm_eval.utils import sidethread_event_loop_async_runner
-from automated_llm_eval.bundle_accuracy import BundleAccuracy
+from automated_llm_eval.accuracy_metrics import AccuracyMetrics
 logger = logging.getLogger("PolicyTuneLogger")
 
 
@@ -51,7 +52,7 @@ def construct_compare_message(example: dict, current_policy: str) -> Message:
             {"role": "user", "content": user_message},
         ],
         metadata={
-            "human_label": human_label,
+            "actual": human_label,
             "statement": statement,
             "human_response": human_response,
             "llm_response": llm_response,
@@ -163,7 +164,7 @@ def generate_for_dataset(
     ):
         updated_msg = example_msg.metadata | {
             "agent_response": agent_response,
-            "agent_label": agent_label,
+            "predicted": agent_label,
             "bundle": bundle,
         }
         updated_msg_list += [updated_msg]
@@ -182,33 +183,37 @@ def check_policy_accuracy(dataset, current_policy, batchsize, task, seed):
     )
     logging.info("results generated")
     # print(results)
-    return BundleAccuracy(results).accuracy()
+    accuracy_object = AccuracyMetrics(results)
+    accuracy_dictionary = compute_metrics(accuracy_object)
+    confidence_interval = accuracy_object.compute_bootstrap_confidence_interval()
+    return accuracy_dictionary["accuracy"], accuracy_dictionary["COT"][0], accuracy_dictionary["COT"][1], confidence_interval
 
-def find_score_and_confidence_interval(train_data, current_policy, batch_size, seed, task):
-    accuracies=[]
-    for _ in range(5):
-        score, incorrect_labelled, correct_labelled = check_policy_accuracy(
-            train_data, current_policy, batch_size, seed=seed, task=task
-        )
-        accuracies.append(score)
-    lower_bound, upper_bound = confidence_interval(accuracies, incorrect_labelled, correct_labelled)
-    return current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled
+# def find_score_and_confidence_interval(train_data, current_policy, batch_size, seed, task):
+#     accuracies=[]
+#     for _ in range(5):
+#         score, incorrect_labelled, correct_labelled, confidence_interval = check_policy_accuracy(
+#             train_data, current_policy, batch_size, seed=seed, task=task
+#         )
+#         accuracies.append(score)
+#     lower_bound, upper_bound = confidence_interval(accuracies, incorrect_labelled, correct_labelled)
+#     return current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled
     
 
 def policy_tuning(output, compare, batch_size, compare_type="iii"):
     score = 0.0
     train_data, test_data = get_data_split(compare, compare_type)
     current_policy = get_policy_file(compare)
-    # score_before, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
-    _, score_before, lower_bound, upper_bound, _, _ = find_score_and_confidence_interval(test_data, current_policy, batch_size, seed=42, task="compare")
-    print("test score before", score_before)
+    score_before, _, _ , confidence_interval_before= check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
+    # _, score_before, lower_bound, upper_bound, _, _ = find_score_and_confidence_interval(test_data, current_policy, batch_size, seed=42, task="compare")
+    print("test score before", score_before, "confidence before", confidence_interval_before)
     data = {}
     i = 0
 
     while score < 0.9 and i < 10:
         print("score is", score, "and iteration is:", i)
-        current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled = find_score_and_confidence_interval(train_data, current_policy, batch_size, seed=i, task="compare")
-        data[i] = [current_policy, score, lower_bound, upper_bound]
+        score, incorrect_labelled, correct_labelled , confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
+        # current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled = find_score_and_confidence_interval(train_data, current_policy, batch_size, seed=i, task="compare")
+        data[i] = [current_policy, score, confidence_interval[0], confidence_interval[1]]
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(
             original_policy=current_policy,
             correct_answers=correct_labelled,
@@ -230,7 +235,7 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
         )
         i += 1
 
-    _, score_after, lower_bound, upper_bound, _, _ = find_score_and_confidence_interval(test_data, current_policy, batch_size, seed=42, task="compare")
-    data["final scores"] = [score_before, score_after, lower_bound, upper_bound]
+    score_after, incorrect_labelled, correct_labelled , confidence_interval_after = check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
+    data["final scores"] = [score_before, score_after, confidence_interval_before, confidence_interval_after]
     save_as_csv(data, output)
     return current_policy
