@@ -1,5 +1,6 @@
 import random
 
+from automated_llm_eval.bundle_accuracy import BundleAccuracy
 from automated_llm_eval.chat_model import ChatModel, Message
 from automated_llm_eval.policy_helping_functions import (
     get_data_split,
@@ -17,14 +18,15 @@ from automated_llm_eval.prompts import (
     score_retrieval_character_prompt,
 )
 from automated_llm_eval.utils import sidethread_event_loop_async_runner
-from automated_llm_eval.bundle_accuracy import BundleAccuracy
 
 
-def create_agent_response(current_policy, source_text, compare, statement_a=None, statement_b=None):
+def create_agent_response_message(
+    current_policy, source_text, compare, statement_a=None, statement_b=None
+):
     gpt_system_prompt = GPT_SYSTEM_PROMPT
-    model = ChatModel(
-        model="gpt-3.5-turbo-1106", temperature=0.5, top_p=0.5, max_tokens=700, seed=42
-    )
+    # model = ChatModel(
+    #     model="gpt-3.5-turbo-1106", temperature=0.5, top_p=0.5, max_tokens=700, seed=42
+    # )
     if compare:
         compare_gpt_prompt = COMPARE_AGENT_PROMPT.format(
             source=source_text,
@@ -32,17 +34,36 @@ def create_agent_response(current_policy, source_text, compare, statement_a=None
             summary_a=statement_a,
             summary_b=statement_b,
         )
-        gpt_response = model.create_chat_completion(
-            gpt_system_prompt, compare_gpt_prompt, output_format="simple"
+        system_message = gpt_system_prompt
+        user_message = compare_gpt_prompt
+        message = Message(
+            messages=[
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": user_message},
+            ]
         )
+        return message
+        # gpt_response = model.async_chat_completion()
+        # gpt_response = model.create_chat_completion(
+        #     gpt_system_prompt, compare_gpt_prompt, output_format="simple"
+        # )
     else:
         safety_gpt_prompt = QA_AGENT_PROMPT.format(
             statement=source_text, current_policy=current_policy
         )
-        gpt_response = model.create_chat_completion(
-            gpt_system_prompt, safety_gpt_prompt, output_format="simple"
+        system_message = gpt_system_prompt
+        user_message = safety_gpt_prompt
+        message = Message(
+            messages=[
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": user_message},
+            ]
         )
-    return gpt_response
+        return message
+        # gpt_response = model.create_chat_completion(
+        #     gpt_system_prompt, safety_gpt_prompt, output_format="simple"
+        # )
+    # return gpt_response
 
 
 def select_batch(dataset: dict, batch_size: int, compare: bool, seed: int = 42) -> list:
@@ -52,41 +73,94 @@ def select_batch(dataset: dict, batch_size: int, compare: bool, seed: int = 42) 
     return batch
 
 
-def construct_message(example: dict, current_policy: str, compare: bool):
-    # Form Agent Response Score & Metadata
-    if compare:
-        idx_to_mode = get_mode_score_compare()
-        statement = example["inputs"]
-        human_response = example["target"]
-        agent_response = example["output"]
-        agent_response_score = create_agent_response(
-            current_policy, statement, compare, human_response, agent_response
-        )
-        metadata = {
-            "human_score": idx_to_mode[int(example["idx"])],
+def construct_compare_message(example: dict, current_policy: str) -> Message:
+    gpt_system_prompt = GPT_SYSTEM_PROMPT
+
+    idx_to_mode = get_mode_score_compare()
+    human_score = idx_to_mode[int(example["idx"])]
+    statement = example["inputs"]
+    human_response = example["target"]
+    llm_response = example["output"]
+
+    compare_gpt_prompt = COMPARE_AGENT_PROMPT.format(
+        source=statement,
+        current_policy=current_policy,
+        summary_a=human_response,
+        summary_b=llm_response,
+    )
+    system_message = gpt_system_prompt
+    user_message = compare_gpt_prompt
+    message = Message(
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message},
+        ],
+        metadata={
+            "human_score": human_score,
             "statement": statement,
             "human_response": human_response,
-            "agent_response": agent_response,
-            "agent_response_score": agent_response_score,
-        }
+            "llm_response": llm_response,
+            # TODO: add agent score after API call
+        },
+    )
+    return message
 
+
+def construct_message(example: dict, current_policy: str, compare: bool):
+    if compare:
+        return construct_compare_message(example, current_policy)
     else:
-        agent_response_score = create_agent_response(current_policy, statement, compare)
-        metadata = {
-            "human_score": int(example["Human Label (Dev)"]),
-            "statement": example["LLM-Generated Statements"],
-            "agent_response_score": agent_response_score,
-        }
+        # TODO: safety message construction
+        return None
 
-    # Create Messages
+
+# def construct_message(example: dict, current_policy: str, compare: bool):
+#     # Form Agent Response Score & Metadata
+#     if compare:
+#         idx_to_mode = get_mode_score_compare()
+#         statement = example["inputs"]
+#         human_response = example["target"]
+#         agent_response = example["output"]
+
+#         agent_response_score = create_agent_response(
+#             current_policy, statement, compare, human_response, agent_response
+#         )
+#         metadata = {
+#             "human_score": idx_to_mode[int(example["idx"])],
+#             "statement": statement,
+#             "human_response": human_response,
+#             "agent_response": agent_response,
+#             "agent_response_score": agent_response_score,
+#         }
+
+#     else:
+#         agent_response_score = create_agent_response(current_policy, statement, compare)
+#         metadata = {
+#             "human_score": int(example["Human Label (Dev)"]),
+#             "statement": example["LLM-Generated Statements"],
+#             "agent_response_score": agent_response_score,
+#         }
+
+#     # Create Messages
+#     system_message = score_retrieval_character_prompt
+#     user_message = SCORE_RETRIEVAL_PROMPT.format(response=agent_response_score)
+#     messages = [
+#         {"role": "system", "content": system_message},
+#         {"role": "user", "content": user_message},
+#     ]
+
+#     return Message(messages=messages, metadata=metadata)
+
+
+def make_message_to_extract_score_from_explanation(explanation: str):
+    # Extract Agent Label from free-text Explanations
     system_message = score_retrieval_character_prompt
-    user_message = SCORE_RETRIEVAL_PROMPT.format(response=agent_response_score)
+    user_message = SCORE_RETRIEVAL_PROMPT.format(response=explanation)
     messages = [
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_message},
     ]
-
-    return Message(messages=messages, metadata=metadata)
+    return Message(messages=messages)
 
 
 def generate_for_dataset(
@@ -110,18 +184,51 @@ def generate_for_dataset(
     for example in batch:
         msg = construct_message(example=example, current_policy=current_policy, compare=compare)
         msg_list += [msg]
+
     # Create ChatModel
     model = ChatModel(
         model=model, temperature=temperature, top_p=top_p, max_tokens=max_tokens, seed=seed
     )
-    # Async ChatCompletion on another thread
-    print('entering async')
+
+    # Generate Agent Label + Explanation on Task for every example in batch
     result = sidethread_event_loop_async_runner(
         async_function=model.async_chat_completions(
-            messages_list=msg_list, num_concurrent=num_concurrent, output_format=output_format
+            messages_list=msg_list, num_concurrent=num_concurrent, output_format="bundle"
         )
     )
-    return result
+    agent_responses = [x.response_message for x in result]
+    # Extract agent label from responses
+    agent_label_extraction_messages = [
+        make_message_to_extract_score_from_explanation(x) for x in agent_responses
+    ]
+    result = sidethread_event_loop_async_runner(
+        async_function=model.async_chat_completions(
+            messages_list=agent_label_extraction_messages,
+            num_concurrent=num_concurrent,
+            output_format="simple",
+        )
+    )
+
+    # Check that the label is an integer
+    def check_agent_label(label_str: str) -> int | None:
+        try:
+            response_int = int(label_str)
+            return response_int
+        except Exception:
+            return None
+
+    agent_labels = [check_agent_label(x) for x in result]
+
+    # metadata = [x.metadata for x in result]
+    updated_msg_list = []
+    for example_msg, agent_response, agent_label in zip(msg_list, agent_responses, agent_labels):
+        updated_msg = example_msg.metadata | {
+            "agent_response": agent_response,
+            "agent_label": agent_label,
+        }
+        updated_msg_list += [updated_msg]
+
+    return updated_msg_list
 
 
 def check_policy_accuracy(dataset, current_policy, batchsize, compare):
@@ -129,9 +236,11 @@ def check_policy_accuracy(dataset, current_policy, batchsize, compare):
     return numerical accuracy score as well as COT statements
     score, incorrect statements, correct statements
     """
-    print('generating results')
-    results = generate_for_dataset(dataset, current_policy=current_policy, batch_size=4, compare=compare)
-    print('results generated')
+    print("generating results")
+    results = generate_for_dataset(
+        dataset, current_policy=current_policy, batch_size=4, compare=compare
+    )
+    print("results generated")
     return BundleAccuracy(results).accuracy()
     # for example in results
     #     print("WE ARE ON THE ", k, "th example")
@@ -184,12 +293,12 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
     train_data, test_data = get_data_split(compare, compare_type)
     current_policy = get_policy_file(compare)
     score_before, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, compare)
-    print('test score before', score_before)
+    print("test score before", score_before)
     data = {}
     i = 0
 
     while score < 0.9 and i < 10:
-        print("score is", score, 'and iteration is:', i)
+        print("score is", score, "and iteration is:", i)
         score, incorrect_labelled, correct_labelled = check_policy_accuracy(
             train_data, current_policy, batch_size, compare
         )
