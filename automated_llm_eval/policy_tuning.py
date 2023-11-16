@@ -7,6 +7,7 @@ from automated_llm_eval.policy_helping_functions import (
     get_mode_score_compare,
     get_policy_file,
     save_as_csv,
+    confidence_interval
 )
 from automated_llm_eval.prompts import (
     COMPARE_AGENT_PROMPT,
@@ -100,23 +101,23 @@ def generate_for_dataset(
     dataset: dict,
     current_policy: str,
     batch_size: int,
-    compare: bool,
+    task: str,
     model: str = "gpt-3.5-turbo-1106",
     temperature: float = 0.1,
     top_p: float = 0.5,
     max_tokens: int = 700,
     seed: int = 42,
-    num_concurrent: int = 5,
+    num_concurrent: int = 20,
 ) -> list[Message]:
     """Selects batch, formats messages, asynchronously makes LLM calls,
     extract label from agent rationale."""
     logger.info("Selecting Batch...")
-    batch = select_batch(dataset=dataset, batch_size=batch_size)
+    batch = select_batch(dataset=dataset, batch_size=batch_size, seed=seed)
 
     logger.info("Create Message Prompts + Metadata")
     msg_list = []
     for example in batch:
-        msg = construct_message(example=example, current_policy=current_policy, task = "compare")
+        msg = construct_message(example=example, current_policy=current_policy, task = task)
         msg_list += [msg]
 
     # Create ChatModel
@@ -170,35 +171,44 @@ def generate_for_dataset(
     return updated_msg_list
 
 
-def check_policy_accuracy(dataset, current_policy, batchsize, compare):
+def check_policy_accuracy(dataset, current_policy, batchsize, task, seed):
     """
     return numerical accuracy score as well as COT statements
     score, incorrect statements, correct statements
     """
     logging.info("generating results")
     results = generate_for_dataset(
-        dataset, current_policy=current_policy, batch_size=batchsize, compare=compare
+        dataset, current_policy=current_policy, batch_size=batchsize, seed=seed, task=task
     )
     logging.info("results generated")
     # print(results)
     return BundleAccuracy(results).accuracy()
 
+def find_score_and_confidence_interval(train_data, current_policy, batch_size, seed, task):
+    accuracies=[]
+    for _ in range(5):
+        score, incorrect_labelled, correct_labelled = check_policy_accuracy(
+            train_data, current_policy, batch_size, seed=seed, task=task
+        )
+        accuracies.append(score)
+    lower_bound, upper_bound = confidence_interval(accuracies, incorrect_labelled, correct_labelled)
+    return current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled
+    
 
 def policy_tuning(output, compare, batch_size, compare_type="iii"):
     score = 0.0
     train_data, test_data = get_data_split(compare, compare_type)
     current_policy = get_policy_file(compare)
-    score_before, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, compare)
+    # score_before, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
+    _, score_before, lower_bound, upper_bound, _, _ = find_score_and_confidence_interval(test_data, current_policy, batch_size, seed=42, task="compare")
     print("test score before", score_before)
     data = {}
     i = 0
 
     while score < 0.9 and i < 10:
         print("score is", score, "and iteration is:", i)
-        score, incorrect_labelled, correct_labelled = check_policy_accuracy(
-            train_data, current_policy, batch_size, compare
-        )
-        data[i] = [current_policy, score]
+        current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled = find_score_and_confidence_interval(train_data, current_policy, batch_size, seed=i, task="compare")
+        data[i] = [current_policy, score, lower_bound, upper_bound]
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(
             original_policy=current_policy,
             correct_answers=correct_labelled,
@@ -220,7 +230,7 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
         )
         i += 1
 
-    score_after, _, _ = check_policy_accuracy(test_data, current_policy, batch_size, compare)
-    data["final scores"] = [score_before, score_after]
+    _, score_after, lower_bound, upper_bound, _, _ = find_score_and_confidence_interval(test_data, current_policy, batch_size, seed=42, task="compare")
+    data["final scores"] = [score_before, score_after, lower_bound, upper_bound]
     save_as_csv(data, output)
     return current_policy

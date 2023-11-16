@@ -1,9 +1,33 @@
 import csv
-
+from scipy import stats
+import numpy as np
 import pandas as pd
 
 from automated_llm_eval.prompts import *
 
+def confidence_interval(accuracies, incorrect_samples, correct_samples, confidence_level=0.95):
+    """
+    Calculate the confidence interval for a list of accuracies.
+
+    Parameters:
+    - accuracies: List of accuracy values.
+    - sample_size: Number of observations in each accuracy calculation.
+    - confidence_level: Desired level of confidence (default is 0.95 for a 95% confidence interval).
+
+    Returns:
+    - Tuple containing the lower and upper bounds of the confidence interval.
+    """
+    print('🥶accuracies are', accuracies)
+    mean_accuracy = np.mean(accuracies)
+    std_dev = np.std(accuracies, ddof=1)  # ddof=1 for sample standard deviation
+    critical_value = stats.norm.ppf((1 + confidence_level) / 2)  # Z-score for normal distribution
+    sample_size = len(incorrect_samples)+len(correct_samples)
+    margin_of_error = critical_value * (std_dev / np.sqrt(sample_size))
+
+    lower_bound = mean_accuracy - margin_of_error
+    upper_bound = mean_accuracy + margin_of_error
+
+    return lower_bound, upper_bound
 
 def get_mode_score_compare():
     df = pd.read_csv("scored_examples/dataset_231103.csv")
