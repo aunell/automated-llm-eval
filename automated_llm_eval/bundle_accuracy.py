@@ -23,10 +23,9 @@ class BundleAccuracy:
         correct=0
         incorrect_COT = []
         correct_COT = []
-        for bundle in self.data:
-            metadata= bundle.metadata
-            human_score =metadata['human_score']
-            agent_score = get_score(metadata['agent_response_score'])
+        for metadata in self.data:
+            human_score =metadata['human_label']
+            agent_score = metadata['agent_label']
             if not agent_score:
                 pass
             if int(human_score)==agent_score:
@@ -39,11 +38,11 @@ class BundleAccuracy:
                     + " was summarized in the following two ways. Summary A: "
                     + metadata["human_response"]
                     + "and summary B:"
-                    + metadata["agent_response"]
+                    + metadata["llm_response"]
                     + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
-                    + str(metadata["human_score"])
+                    + str(metadata["human_label"])
                     + ". The agent's incorrect reasoning for this score is as follows: "
-                    + metadata["agent_response_score"]
+                    + metadata["agent_response"]
                 )
                 incorrect_COT.append(statement_analysis)
         return correct/(len(incorrect_COT)+correct) or 0, incorrect_COT, correct_COT

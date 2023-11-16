@@ -23,7 +23,7 @@ def general_response_experiment():
     create_plots(engine_options, judge_options)
 
 def run_compare(compare_type):
-    policy_tuning(f"results/csv/policy_mutation_track_neg_{compare_type}.csv", compare=True, batch_size = 4, compare_type=compare_type)
+    policy_tuning(f"results/csv/policy_mutation_track_neg_{compare_type}.csv", compare=True, batch_size = 10, compare_type=compare_type)
     create_accuracy_plot(f"results/csv/policy_mutation_track_neg_{compare_type}.csv", "Accuracy of Policy by Iteration: Negative COT", f"results/visualizations/acc_policy_neg_COT_{compare_type}.png")
     create_len_of_policy_plot(f"results/csv/policy_mutation_track_neg_{compare_type}.csv", "Length of Policy by Iteration: Negative COT", f"results/visualizations/len_policy_neg_COT_{compare_type}.png")
 

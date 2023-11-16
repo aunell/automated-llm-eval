@@ -18,7 +18,7 @@ from automated_llm_eval.prompts import (
     score_retrieval_character_prompt,
 )
 from automated_llm_eval.utils import sidethread_event_loop_async_runner
-
+from automated_llm_eval.bundle_accuracy import BundleAccuracy
 logger = logging.getLogger("PolicyTuneLogger")
 
 
@@ -91,7 +91,8 @@ def construct_label_extraction_message(explanation: str) -> Message:
         messages=[
             {"role": "system", "content": system_message},
             {"role": "user", "content": user_message},
-        ]
+        ],
+        metadata={}
     )
 
 
@@ -110,12 +111,12 @@ def generate_for_dataset(
     """Selects batch, formats messages, asynchronously makes LLM calls,
     extract label from agent rationale."""
     logger.info("Selecting Batch...")
-    batch = select_batch(dataset=dataset, batch_size=batch_size, compare=compare)
+    batch = select_batch(dataset=dataset, batch_size=batch_size)
 
     logger.info("Create Message Prompts + Metadata")
     msg_list = []
     for example in batch:
-        msg = construct_message(example=example, current_policy=current_policy, compare=compare)
+        msg = construct_message(example=example, current_policy=current_policy, task = "compare")
         msg_list += [msg]
 
     # Create ChatModel
@@ -176,9 +177,10 @@ def check_policy_accuracy(dataset, current_policy, batchsize, compare):
     """
     logging.info("generating results")
     results = generate_for_dataset(
-        dataset, current_policy=current_policy, batch_size=4, compare=compare
+        dataset, current_policy=current_policy, batch_size=batchsize, compare=compare
     )
     logging.info("results generated")
+    # print(results)
     return BundleAccuracy(results).accuracy()
 
 
