@@ -1,7 +1,6 @@
 import logging
 import random
 
-from automated_llm_eval.bundle_accuracy import BundleAccuracy
 from automated_llm_eval.chat_model import ChatModel, Message
 from automated_llm_eval.policy_helping_functions import (
     get_data_split,
@@ -125,12 +124,12 @@ def generate_for_dataset(
     )
 
     logger.info("Generate Agent Response (Label + CoT Explanation) for every example in batch")
-    result = sidethread_event_loop_async_runner(
+    result_bundles = sidethread_event_loop_async_runner(
         async_function=model.async_chat_completions(
             messages_list=msg_list, num_concurrent=num_concurrent, output_format="bundle"
         )
     )
-    agent_responses = [bundle.response_message for bundle in result]
+    agent_responses = [bundle.response_message for bundle in result_bundles]
 
     logger.info("Use LLM to Extract agent label from responses")
     agent_label_extraction_messages = [
@@ -157,10 +156,13 @@ def generate_for_dataset(
 
     logger.info("Update Messages metadata with the Generated Agent Response + Extracted Label")
     updated_msg_list = []
-    for example_msg, agent_response, agent_label in zip(msg_list, agent_responses, agent_labels):
+    for example_msg, agent_response, agent_label, bundle in zip(
+        msg_list, agent_responses, agent_labels, result_bundles
+    ):
         updated_msg = example_msg.metadata | {
             "agent_response": agent_response,
             "agent_label": agent_label,
+            "bundle": bundle,
         }
         updated_msg_list += [updated_msg]
     # Return all original messages with uppdated metadata
