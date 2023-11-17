@@ -1,5 +1,5 @@
 from automated_llm_eval.chat_model import ChatModel, Message, Bundle
-# from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 import numpy as np
 
 from automated_llm_eval.prompts import (
@@ -19,50 +19,25 @@ class AccuracyMetrics:
         """
         self.data = data
         self.actual = [d.get('actual') for d in self.data]
-        self.predicted = [d.get('predicted') for d in self.data]
+        # self.predicted = [d.get('predicted') for d in self.data]
+        #TODO NEED to check why data has None values, these messages should be discarded
+        self.predicted = [5 if d.get('predicted') is None else d.get('predicted') for d in self.data]
+
 
 ##SKLEARN NOT WORKING
-    # def compute_accuracy(self):
-    #     return accuracy_score(self.actual, self.predicted)
-
-    # def compute_f1_score(self):
-    #     return f1_score(self.actual, self.predicted)
-
-    # def compute_precision(self):
-    #     return precision_score(self.actual, self.predicted)
-
-    # def compute_recall(self):
-    #     return recall_score(self.actual, self.predicted)
-    
     def compute_accuracy(self):
-        correct_predictions = sum(1 for a, p in zip(self.actual, self.predicted) if a == p)
-        total_predictions = len(self.actual)
-        return correct_predictions / total_predictions
+        print(self.actual)
+        print(self.predicted)
+        return accuracy_score(self.actual, self.predicted)
 
     def compute_f1_score(self):
-        true_positives = sum(1 for a, p in zip(self.actual, self.predicted) if a == p == 1)
-        false_positives = sum(1 for a, p in zip(self.actual, self.predicted) if a == 0 and p == 1)
-        false_negatives = sum(1 for a, p in zip(self.actual, self.predicted) if a == 1 and p == 0)
-
-        precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
-        recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
-
-        f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
-        return f1
+        return f1_score(self.actual, self.predicted, average='micro')
 
     def compute_precision(self):
-        true_positives = sum(1 for a, p in zip(self.actual, self.predicted) if a == p == 1)
-        false_positives = sum(1 for a, p in zip(self.actual, self.predicted) if a == 0 and p == 1)
-
-        precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
-        return precision
+        return precision_score(self.actual, self.predicted, average='micro')
 
     def compute_recall(self):
-        true_positives = sum(1 for a, p in zip(self.actual, self.predicted) if a == p == 1)
-        false_negatives = sum(1 for a, p in zip(self.actual, self.predicted) if a == 1 and p == 0)
-
-        recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
-        return recall
+        return recall_score(self.actual, self.predicted, average='micro')
 
     def get_COT(self):
         """
@@ -120,17 +95,3 @@ class AccuracyMetrics:
         lower_bound = np.percentile(bootstrap_metrics, lower_percentile)
         upper_bound = np.percentile(bootstrap_metrics, upper_percentile)
         return [lower_bound, upper_bound]
-
-# def get_score(agent_response: str):
-#     SCORE_RETRIEVAL = SCORE_RETRIEVAL_PROMPT.format(response=agent_response)
-#     model_score = ChatModel(
-#             model="gpt-3.5-turbo-1106", temperature=0.1, top_p=0.5, max_tokens=700, seed=42
-#         )
-#     response_score_string = model_score.create_chat_completion(
-#             score_retrieval_character_prompt, SCORE_RETRIEVAL, output_format="simple"
-#         )
-#     try:
-#         response_int = int(response_score_string)
-#         return response_int
-#     except:
-#         return None

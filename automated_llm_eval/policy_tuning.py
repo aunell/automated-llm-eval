@@ -104,7 +104,7 @@ def generate_for_dataset(
     batch_size: int,
     task: str,
     model: str = "gpt-3.5-turbo-1106",
-    temperature: float = 0.1,
+    temperature: float = 0,
     top_p: float = 0.5,
     max_tokens: int = 700,
     seed: int = 42,

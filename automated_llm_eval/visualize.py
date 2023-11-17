@@ -12,6 +12,7 @@ from automated_llm_eval.model_analysis import analysis
 import pandas as pd
 from matplotlib.ticker import MultipleLocator
 
+from difflib import unified_diff
 
 def radar_factory(num_vars, frame='circle'):
     """
