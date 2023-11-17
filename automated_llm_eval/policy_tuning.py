@@ -1,5 +1,6 @@
 import logging
 import random
+from sklearn.metrics import accuracy_score
 
 from automated_llm_eval.chat_model import ChatModel, Message
 from automated_llm_eval.policy_helping_functions import (
@@ -185,19 +186,9 @@ def check_policy_accuracy(dataset, current_policy, batchsize, task, seed):
     # print(results)
     accuracy_object = AccuracyMetrics(results)
     accuracy_dictionary = compute_metrics(accuracy_object)
-    confidence_interval = accuracy_object.compute_bootstrap_confidence_interval()
+    confidence_interval = accuracy_object.compute_bootstrap_confidence_interval(accuracy_score)
     return accuracy_dictionary["accuracy"], accuracy_dictionary["COT"][0], accuracy_dictionary["COT"][1], confidence_interval
 
-# def find_score_and_confidence_interval(train_data, current_policy, batch_size, seed, task):
-#     accuracies=[]
-#     for _ in range(5):
-#         score, incorrect_labelled, correct_labelled, confidence_interval = check_policy_accuracy(
-#             train_data, current_policy, batch_size, seed=seed, task=task
-#         )
-#         accuracies.append(score)
-#     lower_bound, upper_bound = confidence_interval(accuracies, incorrect_labelled, correct_labelled)
-#     return current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled
-    
 
 def policy_tuning(output, compare, batch_size, compare_type="iii"):
     score = 0.0
@@ -211,7 +202,7 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
 
     while score < 0.9 and i < 10:
         print("score is", score, "and iteration is:", i)
-        score, incorrect_labelled, correct_labelled , confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
+        score, incorrect_labelled, correct_labelled , confidence_interval = check_policy_accuracy(train_data, current_policy, batch_size, seed=42, task="compare")
         # current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled = find_score_and_confidence_interval(train_data, current_policy, batch_size, seed=i, task="compare")
         data[i] = [current_policy, score, confidence_interval[0], confidence_interval[1]]
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(

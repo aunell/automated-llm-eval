@@ -12,8 +12,6 @@ from automated_llm_eval.model_analysis import analysis
 import pandas as pd
 from matplotlib.ticker import MultipleLocator
 
-from difflib import unified_diff
-
 def radar_factory(num_vars, frame='circle'):
     """
     Create a radar chart with `num_vars` axes.
@@ -210,7 +208,8 @@ def create_accuracy_plot(csv_file, title, save_as):
     plt.tight_layout()
     ax = plt.gca()
     ax.xaxis.set_major_locator(MultipleLocator(1))
-    legend_text = f"Starting Test Accuracy: {start_score:.3f}, Ending Test Accuracy: {end_score:.3f}"
+    print(start_score, end_score)
+    legend_text = f"Starting Test Accuracy: {start_score}, Ending Test Accuracy: {end_score}"
     plt.legend([legend_text])
     # print('plotting')
     plt.savefig(save_as)

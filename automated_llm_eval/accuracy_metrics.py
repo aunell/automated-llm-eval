@@ -17,14 +17,11 @@ class AccuracyMetrics:
         Initialize the AccuracyCalculator with a dictionary containing predicted and actual values.
         The dictionary should have keys 'predicted' and 'actual'.
         """
-        self.data = data
+        self.data_unfiltered = data
+        self.data = [d for d in self.data_unfiltered if d.get('predicted') is not None]
         self.actual = [d.get('actual') for d in self.data]
-        # self.predicted = [d.get('predicted') for d in self.data]
-        #TODO NEED to check why data has None values, these messages should be discarded
-        self.predicted = [5 if d.get('predicted') is None else d.get('predicted') for d in self.data]
+        self.predicted = [d.get('predicted') for d in self.data]
 
-
-##SKLEARN NOT WORKING
     def compute_accuracy(self):
         print(self.actual)
         print(self.predicted)
@@ -70,26 +67,21 @@ class AccuracyMetrics:
                 incorrect_COT.append(statement_analysis)
         return incorrect_COT, correct_COT
     
-    def _bootstrap_metric(self, num_samples=1000, sample_percent=0.8):
+    def _bootstrap_metric(self, accuracy_fn, num_samples=1000, sample_percent=0.8):
         num_examples = len(self.actual)
         metrics = []
-
-        def accuracy_bootstrap(actual, predicted):
-            correct_predictions = sum(1 for a, p in zip(actual, predicted) if a == p)
-            total_predictions = len(actual)
-            return correct_predictions / total_predictions
 
         for _ in range(num_samples):
             sample_indices = np.random.choice(num_examples, size=int(num_examples * sample_percent), replace=True)
             sample_actual = np.take(self.actual, sample_indices)
             sample_predicted = np.take(self.predicted, sample_indices)
-            metric_value = accuracy_bootstrap(sample_actual, sample_predicted)
+            metric_value = accuracy_fn(sample_actual, sample_predicted)
             metrics.append(metric_value)
 
         return metrics
 
-    def compute_bootstrap_confidence_interval(self, confidence_level=0.9):
-        bootstrap_metrics = self._bootstrap_metric()
+    def compute_bootstrap_confidence_interval(self, accuracy_fn, confidence_level=0.9):
+        bootstrap_metrics = self._bootstrap_metric(accuracy_fn)
         lower_percentile = (1 - confidence_level) / 2 * 100
         upper_percentile = (1 + confidence_level) / 2 * 100
         lower_bound = np.percentile(bootstrap_metrics, lower_percentile)
