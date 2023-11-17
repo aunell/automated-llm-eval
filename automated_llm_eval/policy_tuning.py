@@ -195,16 +195,17 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
     train_data, test_data = get_data_split(compare, compare_type)
     current_policy = get_policy_file(compare)
     score_before, _, _ , confidence_interval_before= check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
-    # _, score_before, lower_bound, upper_bound, _, _ = find_score_and_confidence_interval(test_data, current_policy, batch_size, seed=42, task="compare")
     print("test score before", score_before, "confidence before", confidence_interval_before)
     data = {}
     i = 0
 
     while score < 0.9 and i < 10:
         print("score is", score, "and iteration is:", i)
-        score, incorrect_labelled, correct_labelled , confidence_interval = check_policy_accuracy(train_data, current_policy, batch_size, seed=42, task="compare")
+        _, incorrect_labelled, correct_labelled , _ = check_policy_accuracy(train_data, current_policy, batch_size, seed=i, task="compare")
+        val_score, _,_ , val_confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size, seed=0, task="compare")
+
         # current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled = find_score_and_confidence_interval(train_data, current_policy, batch_size, seed=i, task="compare")
-        data[i] = [current_policy, score, confidence_interval[0], confidence_interval[1]]
+        data[i] = [current_policy, val_score, val_confidence_interval[0], val_confidence_interval[1]]
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(
             original_policy=current_policy,
             correct_answers=correct_labelled,
