@@ -10,7 +10,8 @@ from automated_llm_eval.policy_helping_functions import (
     get_policy_file,
     save_as_csv,
     confidence_interval,
-    compute_metrics
+    compute_metrics,
+    calculate_fleiss_kappa
 )
 from automated_llm_eval.prompts import (
     COMPARE_AGENT_PROMPT,
@@ -36,7 +37,7 @@ def select_batch(dataset: dict, batch_size: int, seed: int = 42) -> list:
 
 
 def construct_compare_message(example: dict, current_policy: str) -> Message:
-    idx_to_mode, percentage_match_per_index = get_mode_score_compare()
+    idx_to_mode = get_mode_score_compare()
     # result_df = pd.DataFrame(list(percentage_match_per_index.items()), columns=["idx", "percentage_match"])
     # Save the DataFrame to a CSV file
     # print('average concordance', result_df['percentage_match'].mean())
@@ -198,6 +199,7 @@ def check_policy_accuracy(dataset, current_policy, batch_size, task, seed):
 
 
 def policy_tuning(output, compare, batch_size, compare_type="iii"):
+    print('😶‍🌫️FLEISS', calculate_fleiss_kappa("scored_examples/dataset_231103.csv", "q2"))
     logging.basicConfig(level=logging.INFO, filename=f'{output}.log', filemode='w')
     score = 0.0
     train_data, test_data = get_data_split(compare, compare_type)
