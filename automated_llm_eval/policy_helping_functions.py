@@ -2,6 +2,8 @@ import csv
 from scipy import stats
 import numpy as np
 import pandas as pd
+import difflib
+from IPython.display import display, HTML
 
 from automated_llm_eval.prompts import *
 from automated_llm_eval.accuracy_metrics import AccuracyMetrics
@@ -18,7 +20,6 @@ def confidence_interval(accuracies, incorrect_samples, correct_samples, confiden
     Returns:
     - Tuple containing the lower and upper bounds of the confidence interval.
     """
-    print('🥶accuracies are', accuracies)
     mean_accuracy = np.mean(accuracies)
     std_dev = np.std(accuracies, ddof=1)  # ddof=1 for sample standard deviation
     critical_value = stats.norm.ppf((1 + confidence_level) / 2)  # Z-score for normal distribution
@@ -38,7 +39,14 @@ def get_mode_score_compare():
     )
     # Create a dictionary mapping 'idx' to the mode of 'q2'
     idx_to_mode = mode_per_idx.to_dict()
-    return idx_to_mode
+
+        # Calculate the percentage of answers that match the mode for every index
+    percentage_match_per_idx = (
+        df.groupby("idx")["q2"]
+        .apply(lambda x: (x == idx_to_mode[x.name]).mean() * 100)
+        .to_dict()
+    )
+    return idx_to_mode, percentage_match_per_idx
 
 
 def get_data_split(compare=True, compare_type="iii"):
@@ -113,3 +121,27 @@ def compute_metrics(accuracy_metrics_object: AccuracyMetrics):
     recall = accuracy_metrics_object.compute_recall()
     incorrect_COT, correct_COT = accuracy_metrics_object.get_COT()
     return {"accuracy": accuracy, "f1": f1, "precision": precision, "recall": recall, "COT": [incorrect_COT, correct_COT]}
+
+def compare_responses(previous_response: str, response: str):
+    d = difflib.Differ()
+    diff = d.compare(previous_response.splitlines(), response.splitlines())
+
+    diff_table = "<table>"
+    diff_exists = False
+
+    for line in diff:
+        if line.startswith("- "):
+            diff_table += f"<tr style='color: red;'><td>{line}</td></tr>"
+            diff_exists = True
+        elif line.startswith("+ "):
+            diff_table += f"<tr style='color: green;'><td>{line}</td></tr>"
+            diff_exists = True
+        else:
+            diff_table += f"<tr><td>{line}</td></tr>"
+
+    diff_table += "</table>"
+
+    if diff_exists:
+        display(HTML(diff_table))
+    else:
+        print("No differences found.")

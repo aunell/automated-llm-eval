@@ -1,5 +1,6 @@
 import logging
 import random
+import pandas as pd
 from sklearn.metrics import accuracy_score
 
 from automated_llm_eval.chat_model import ChatModel, Message
@@ -23,6 +24,8 @@ from automated_llm_eval.prompts import (
 from automated_llm_eval.utils import sidethread_event_loop_async_runner
 from automated_llm_eval.accuracy_metrics import AccuracyMetrics
 logger = logging.getLogger("PolicyTuneLogger")
+logging.basicConfig(level=logging.INFO, filename='example.log', filemode='w')
+
 
 
 def select_batch(dataset: dict, batch_size: int, seed: int = 42) -> list:
@@ -33,7 +36,11 @@ def select_batch(dataset: dict, batch_size: int, seed: int = 42) -> list:
 
 
 def construct_compare_message(example: dict, current_policy: str) -> Message:
-    idx_to_mode = get_mode_score_compare()
+    idx_to_mode, percentage_match_per_index = get_mode_score_compare()
+    # result_df = pd.DataFrame(list(percentage_match_per_index.items()), columns=["idx", "percentage_match"])
+    # Save the DataFrame to a CSV file
+    # print('average concordance', result_df['percentage_match'].mean())
+    # result_df.to_csv("percentage_match_per_idx.csv", index=False)
     human_label = idx_to_mode[int(example["idx"])]
     statement = example["inputs"]
     human_response = example["target"]
@@ -173,14 +180,14 @@ def generate_for_dataset(
     return updated_msg_list
 
 
-def check_policy_accuracy(dataset, current_policy, batchsize, task, seed):
+def check_policy_accuracy(dataset, current_policy, batch_size, task, seed):
     """
     return numerical accuracy score as well as COT statements
     score, incorrect statements, correct statements
     """
     logging.info("generating results")
     results = generate_for_dataset(
-        dataset, current_policy=current_policy, batch_size=batchsize, seed=seed, task=task
+        dataset, current_policy=current_policy, batch_size=batch_size, seed=seed, task=task
     )
     logging.info("results generated")
     # print(results)
@@ -191,18 +198,19 @@ def check_policy_accuracy(dataset, current_policy, batchsize, task, seed):
 
 
 def policy_tuning(output, compare, batch_size, compare_type="iii"):
+    logging.basicConfig(level=logging.INFO, filename=f'{output}.log', filemode='w')
     score = 0.0
     train_data, test_data = get_data_split(compare, compare_type)
     current_policy = get_policy_file(compare)
-    score_before, _, _ , confidence_interval_before= check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
+    score_before, _, _ , confidence_interval_before= check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task="compare")
     print("test score before", score_before, "confidence before", confidence_interval_before)
     data = {}
     i = 0
 
     while score < 0.9 and i < 10:
         print("score is", score, "and iteration is:", i)
-        _, incorrect_labelled, correct_labelled , _ = check_policy_accuracy(train_data, current_policy, batch_size, seed=i, task="compare")
-        val_score, _,_ , val_confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size, seed=0, task="compare")
+        _, incorrect_labelled, correct_labelled , _ = check_policy_accuracy(train_data, current_policy, batch_size, seed=0, task="compare")
+        val_score, _,_ , val_confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=0, task="compare")
 
         # current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled = find_score_and_confidence_interval(train_data, current_policy, batch_size, seed=i, task="compare")
         data[i] = [current_policy, val_score, val_confidence_interval[0], val_confidence_interval[1]]
@@ -220,14 +228,15 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
             )
             if current_policyNew is not None:
                 current_policy = current_policyNew
-        except Exception:
-            pass
+        except Exception as e:
+            print('😡')
+            logger.info("An error occurred: %s", str(e))
         save_as_csv(
             data, f"results/csv/policy_mutation_snapshot_{compare_type}_compare{compare}.csv"
         )
         i += 1
 
-    score_after, incorrect_labelled, correct_labelled , confidence_interval_after = check_policy_accuracy(test_data, current_policy, batch_size, seed=42, task="compare")
+    score_after, incorrect_labelled, correct_labelled , confidence_interval_after = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task="compare")
     data["final scores"] = [score_before, score_after, confidence_interval_before, confidence_interval_after]
     save_as_csv(data, output)
     return current_policy

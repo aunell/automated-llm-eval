@@ -5,6 +5,7 @@ from automated_llm_eval.test import run_test
 from automated_llm_eval.model_analysis import analysis
 from automated_llm_eval.visualize import *
 from automated_llm_eval.policy_tuning import *
+import os
 
 import sys
    
@@ -22,10 +23,14 @@ def general_response_experiment():
 
     create_plots(engine_options, judge_options)
 
-def run_compare(compare_type):
-    policy_tuning(f"results/csv/policy_mutation_track_neg_{compare_type}.csv", compare=True, batch_size = 10, compare_type=compare_type)
-    create_accuracy_plot(f"results/csv/policy_mutation_track_neg_{compare_type}.csv", "Accuracy of Policy by Iteration: Negative COT", f"results/visualizations/acc_policy_neg_COT_{compare_type}.png")
-    create_len_of_policy_plot(f"results/csv/policy_mutation_track_neg_{compare_type}.csv", "Length of Policy by Iteration: Negative COT", f"results/visualizations/len_policy_neg_COT_{compare_type}.png")
+def run_compare(compare_type, experiment_name):
+    if not os.path.exists('results/'+experiment_name):
+        os.makedirs('results/'+experiment_name)
+    else:
+        pass
+    policy_tuning(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", compare=True, batch_size = 3, compare_type=compare_type)
+    create_accuracy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Accuracy of Policy by Iteration: Negative COT", f"results/{experiment_name}/acc_policy_neg_COT_{experiment_name}_{compare_type}.png")
+    create_len_of_policy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Length of Policy by Iteration: Negative COT", f"results/{experiment_name}/len_policy_neg_COT_{experiment_name}_{compare_type}.png")
 
 def run_QA():
     policy_tuning('results/csv/policy_mutation_QA_neg.csv', compare=False, batch_size = 1, compare_type = 'pls')
@@ -35,7 +40,7 @@ def run_QA():
 def main():
     if sys.argv[1]=='compare':
         print('running compare')
-        run_compare(sys.argv[2])
+        run_compare(sys.argv[2], "noCOT_overfitting_on_training_metric")
     else:
         print('running QA')
         run_QA()

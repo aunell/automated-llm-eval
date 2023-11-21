@@ -197,10 +197,14 @@ def create_accuracy_plot(csv_file, title, save_as):
     # Filter out non-integer time values
     time_data = time_data[time_data.str.isnumeric()]
     time_data = time_data.astype(int)
+    print(df.iloc[:-1, -2])
+    lower_limits = df.iloc[:-1, -2].astype(float)
+    upper_limits = df.iloc[:-1, -1].astype(float)
 
     # Create a line plot
     plt.figure(figsize=(10, 6))
     plt.plot(time_data, value_data, marker='o', linestyle='-')
+    plt.fill_between(time_data, lower_limits, upper_limits, color='gray', alpha=0.2, label='Confidence Interval')
     plt.xlabel("Iteration Number")
     plt.ylabel("Accuracy")
     plt.title(title)

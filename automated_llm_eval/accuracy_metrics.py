@@ -44,11 +44,11 @@ class AccuracyMetrics:
         incorrect_COT = []
         correct_COT = []
         for metadata in self.data:
-            human_score =metadata['actual']
+            human_score =int(metadata['actual'])
             agent_score = metadata['predicted']
             if not agent_score:
                 pass
-            if int(human_score)==agent_score:
+            if (human_score==agent_score) or human_score == 0: #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
                 correct+=1
                 correct_COT.append(metadata['statement'])
             else:
@@ -61,8 +61,8 @@ class AccuracyMetrics:
                     + metadata["llm_response"]
                     + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
                     + str(metadata["actual"])
-                    + ". The agent's incorrect reasoning for this score is as follows: "
-                    + metadata["agent_response"]
+                    # + ". The agent's incorrect reasoning for this score is as follows: "
+                    # + metadata["agent_response"]
                 )
                 incorrect_COT.append(statement_analysis)
         return incorrect_COT, correct_COT
