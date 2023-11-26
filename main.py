@@ -23,12 +23,12 @@ def general_response_experiment():
 
     create_plots(engine_options, judge_options)
 
-def run_compare(compare_type, experiment_name):
+def run_compare(compare_type, experiment_name, reliability_type):
     if not os.path.exists('results/'+experiment_name):
         os.makedirs('results/'+experiment_name)
     else:
         pass
-    policy_tuning(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", compare=True, batch_size = 3, compare_type=compare_type)
+    policy_tuning(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", compare=True, batch_size = 1, compare_type=compare_type, reliability_type =reliability_type)
     create_accuracy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Accuracy of Policy by Iteration: Negative COT", f"results/{experiment_name}/acc_policy_neg_COT_{experiment_name}_{compare_type}.png")
     create_len_of_policy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Length of Policy by Iteration: Negative COT", f"results/{experiment_name}/len_policy_neg_COT_{experiment_name}_{compare_type}.png")
 
@@ -38,9 +38,9 @@ def run_QA():
     create_len_of_policy_plot('results/csv/policy_mutation_QA_neg.csv', "Length of Policy by Iteration: Negative COT", "results/visualizations/len_policy_neg_COT_QA.png")
 
 def main():
+    datasets = ['iii', 'chq', 'pls']
     if sys.argv[1]=='compare':
-        print('running compare')
-        run_compare(sys.argv[2], "noCOT_overfitting_on_training_metric")
+        run_compare(sys.argv[2], "noCOT_overfitting_on_training_metric", sys.argv[3])
     else:
         print('running QA')
         run_QA()

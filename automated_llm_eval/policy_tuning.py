@@ -11,7 +11,8 @@ from automated_llm_eval.policy_helping_functions import (
     save_as_csv,
     confidence_interval,
     compute_metrics,
-    calculate_fleiss_kappa
+    add_fleiss_column,
+    compare_responses
 )
 from automated_llm_eval.prompts import (
     COMPARE_AGENT_PROMPT,
@@ -198,11 +199,11 @@ def check_policy_accuracy(dataset, current_policy, batch_size, task, seed):
     return accuracy_dictionary["accuracy"], accuracy_dictionary["COT"][0], accuracy_dictionary["COT"][1], confidence_interval
 
 
-def policy_tuning(output, compare, batch_size, compare_type="iii"):
-    print('😶‍🌫️FLEISS', calculate_fleiss_kappa("scored_examples/dataset_231103.csv", "q2"))
+def policy_tuning(output, compare, batch_size, compare_type="iii", reliability_type = "high"):
+    # add_fleiss_column()
     logging.basicConfig(level=logging.INFO, filename=f'{output}.log', filemode='w')
     score = 0.0
-    train_data, test_data = get_data_split(compare, compare_type)
+    train_data, test_data = get_data_split(compare, compare_type, reliability_type)
     current_policy = get_policy_file(compare)
     score_before, _, _ , confidence_interval_before= check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task="compare")
     print("test score before", score_before, "confidence before", confidence_interval_before)
@@ -222,13 +223,14 @@ def policy_tuning(output, compare, batch_size, compare_type="iii"):
             incorrect_answers=incorrect_labelled,
         )
         model = ChatModel(
-            model="gpt-3.5-turbo-1106", temperature=0.5, top_p=0.5, max_tokens=700, seed=42
+            model="gpt-3.5-turbo-1106", temperature=0.1, top_p=0.5, max_tokens=700, seed=42
         )
         try:
             current_policyNew = model.create_chat_completion(
                 prompt_improvement_character_prompt, AGENT_IMPROVEMENT, output_format="simple"
             )
             if current_policyNew is not None:
+                compare_responses(current_policy, current_policyNew)
                 current_policy = current_policyNew
         except Exception as e:
             print('😡')

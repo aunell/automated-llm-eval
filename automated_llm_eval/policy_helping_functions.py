@@ -5,6 +5,7 @@ import pandas as pd
 import difflib
 from IPython.display import display, HTML
 import math
+import random
 
 from automated_llm_eval.prompts import *
 from automated_llm_eval.accuracy_metrics import AccuracyMetrics
@@ -86,7 +87,7 @@ def confidence_interval(accuracies, incorrect_samples, correct_samples, confiden
     return lower_bound, upper_bound
 
 def get_mode_score_compare():
-    df = pd.read_csv("scored_examples/dataset_231103.csv")
+    df = pd.read_csv("scored_examples/dataset_231103.csv", engine= "python")
     # Calculate the mode of 'q2' for each 'idx' group
     mode_per_idx = df.groupby("idx")["q2"].apply(
         lambda x: x.mode().iloc[0] if not x.mode().empty else None
@@ -94,6 +95,12 @@ def get_mode_score_compare():
     # Create a dictionary mapping 'idx' to the mode of 'q2'
     idx_to_mode = mode_per_idx.to_dict()
     return idx_to_mode
+
+def add_fleiss_column():
+     df = pd.read_csv("scored_examples/dataset_231103.csv")
+     index_to_scores = calculate_fleiss_kappa("scored_examples/dataset_231103.csv")
+     df['Scores'] = df['idx'].map(index_to_scores)
+     df.to_csv("VanDeen_updated.csv", index=False)
 
 def calculate_fleiss_kappa(dataset):
     """
@@ -138,9 +145,12 @@ def calculate_fleiss_kappa(dataset):
 
     return kappa_values
 
-def get_data_split(compare=True, compare_type="iii"):
+def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
     train_data = {}
-    test_data = {}
+    test_data= {}
+    high_reliable_data = {}
+    medium_reliable_data = {}
+    low_reliable_data = {}
     if compare:
         desired_columns = [
             "dataset",
@@ -154,7 +164,7 @@ def get_data_split(compare=True, compare_type="iii"):
             "target",
             "prompt",
         ]
-        with open("scored_examples/dataset_231103.csv", "r") as file:
+        with open("scored_examples/VanDeen_updated.csv", "r") as file:
             # Parse the JSON data and store it as a dictionary
             csv_reader = csv.DictReader(file)
             # Iterate through each row in the CSV
@@ -162,12 +172,38 @@ def get_data_split(compare=True, compare_type="iii"):
                 result = {}
                 if type(row) == list or row["dataset"] != compare_type:
                     continue
-                for col in desired_columns:
-                    result[col] = row[col]
-                    if line_number % 5 == 0:
-                        test_data[line_number] = result
-                    else:
-                        train_data[line_number] = result
+                fleiss_score = row["Scores"]
+                try:
+                    fleiss_score=int(fleiss_score)
+                except:
+                    fleiss_score=round(float(fleiss_score), 2)
+                if fleiss_score>-.26: #chose -.26 because there are three potential fleiss scores and this chooses top two as high reliability
+                    for col in desired_columns:
+                        result[col] = row[col]
+                        high_reliable_data[line_number] = result
+                # if fleiss_score==-.25:
+                #     for col in desired_columns:
+                #         result[col] = row[col]
+                #         medium_reliable_data[line_number] = result
+                else:
+                    for col in desired_columns:
+                        result[col] = row[col]
+                        low_reliable_data[line_number] = result
+        keys = list(high_reliable_data.keys())
+        random.shuffle(keys)
+
+        split_point = int(len(keys) * .8)
+        # print([high_reliable_data[key]['q2'] for key in keys])
+        # print(len(set([high_reliable_data[key]['idx'] for key in keys])))
+        train_data = {key: high_reliable_data[key] for key in keys[:split_point]}
+        high_reliable_data_test = {key: high_reliable_data[key] for key in keys[split_point:]}
+        if reliability_type == "high":
+            test_data = high_reliable_data_test
+        # elif reliability_type == "medium":
+        #     test_data = medium_reliable_data
+        elif reliability_type == "low":
+            test_data = low_reliable_data
+        return train_data, test_data
 
     else:
         with open("scored_examples/harm_QA.csv", "r") as file:
