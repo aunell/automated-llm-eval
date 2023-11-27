@@ -209,14 +209,16 @@ def policy_tuning(output, compare, batch_size, compare_type="iii", reliability_t
     print("test score before", score_before, "confidence before", confidence_interval_before)
     data = {}
     i = 0
+    responses = []
+    diff_tables = []
 
-    while score < 0.9 and i < 10:
+    while score < 0.9 and i < 3:
         print("score is", score, "and iteration is:", i)
         _, incorrect_labelled, correct_labelled , _ = check_policy_accuracy(train_data, current_policy, batch_size, seed=0, task="compare")
-        val_score, _,_ , val_confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=0, task="compare")
+        score, _,_ , val_confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=0, task="compare")
 
         # current_policy, score, lower_bound, upper_bound, correct_labelled, incorrect_labelled = find_score_and_confidence_interval(train_data, current_policy, batch_size, seed=i, task="compare")
-        data[i] = [current_policy, val_score, val_confidence_interval[0], val_confidence_interval[1]]
+        data[i] = [current_policy, score, val_confidence_interval[0], val_confidence_interval[1]]
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(
             original_policy=current_policy,
             correct_answers=correct_labelled,
@@ -230,15 +232,22 @@ def policy_tuning(output, compare, batch_size, compare_type="iii", reliability_t
                 prompt_improvement_character_prompt, AGENT_IMPROVEMENT, output_format="simple"
             )
             if current_policyNew is not None:
-                compare_responses(current_policy, current_policyNew)
+                responses.append((current_policy, current_policyNew))
                 current_policy = current_policyNew
         except Exception as e:
-            print('😡')
             logger.info("An error occurred: %s", str(e))
         save_as_csv(
             data, f"results/csv/policy_mutation_snapshot_{compare_type}_compare{compare}.csv"
         )
         i += 1
+
+    for previous_response, response in responses:
+        result = compare_responses(previous_response, response)
+        diff_tables.append(result)
+        diff_tables.append("<hr>")
+    combined_html = "".join(diff_tables)
+    with open(f"{output}.html", "w") as html_file:
+        html_file.write(combined_html)
 
     score_after, incorrect_labelled, correct_labelled , confidence_interval_after = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task="compare")
     data["final scores"] = [score_before, score_after, confidence_interval_before, confidence_interval_after]

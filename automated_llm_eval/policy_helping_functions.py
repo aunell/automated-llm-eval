@@ -248,6 +248,7 @@ def compute_metrics(accuracy_metrics_object: AccuracyMetrics):
     return {"accuracy": accuracy, "f1": f1, "precision": precision, "recall": recall, "COT": [incorrect_COT, correct_COT]}
 
 def compare_responses(previous_response: str, response: str):
+    print('COMPARING')
     d = difflib.Differ()
     diff = d.compare(previous_response.splitlines(), response.splitlines())
 
@@ -266,7 +267,9 @@ def compare_responses(previous_response: str, response: str):
 
     diff_table += "</table>"
 
-    if diff_exists:
-        display(HTML(diff_table))
-    else:
-        print("No differences found.")
+    return diff_table
+    # if diff_exists:
+    #     display(HTML(diff_table))
+    #     return(diff_table)
+    # else:
+    #     print("No differences found.")

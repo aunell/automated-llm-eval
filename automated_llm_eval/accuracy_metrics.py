@@ -23,8 +23,6 @@ class AccuracyMetrics:
         self.predicted = [d.get('predicted') for d in self.data]
 
     def compute_accuracy(self):
-        print(self.actual)
-        print(self.predicted)
         return accuracy_score(self.actual, self.predicted)
 
     def compute_f1_score(self):
