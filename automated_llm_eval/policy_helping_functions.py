@@ -3,7 +3,6 @@ from scipy import stats
 import numpy as np
 import pandas as pd
 import difflib
-from IPython.display import display, HTML
 import math
 import random
 
@@ -161,8 +160,7 @@ def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
             "q4",
             "inputs",
             "output",
-            "target",
-            "prompt",
+            "target"
         ]
         with open("scored_examples/VanDeen_updated.csv", "r") as file:
             # Parse the JSON data and store it as a dictionary
@@ -203,6 +201,17 @@ def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
         #     test_data = medium_reliable_data
         elif reliability_type == "low":
             test_data = low_reliable_data
+            
+        unique_values_count = {}
+        for inner_dict in test_data.values():
+            if 'q2' in inner_dict:
+                q2_value = inner_dict['q2']
+                unique_values_count[q2_value] = unique_values_count.get(q2_value, 0) + 1
+
+        # Print unique values and their occurrences
+        for value, count in unique_values_count.items():
+            print(f"Value: {value}, Occurrences: {count}")
+        
         return train_data, test_data
 
     else:
@@ -248,7 +257,6 @@ def compute_metrics(accuracy_metrics_object: AccuracyMetrics):
     return {"accuracy": accuracy, "f1": f1, "precision": precision, "recall": recall, "COT": [incorrect_COT, correct_COT]}
 
 def compare_responses(previous_response: str, response: str):
-    print('COMPARING')
     d = difflib.Differ()
     diff = d.compare(previous_response.splitlines(), response.splitlines())
 
@@ -268,8 +276,3 @@ def compare_responses(previous_response: str, response: str):
     diff_table += "</table>"
 
     return diff_table
-    # if diff_exists:
-    #     display(HTML(diff_table))
-    #     return(diff_table)
-    # else:
-    #     print("No differences found.")

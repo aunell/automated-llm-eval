@@ -48,7 +48,20 @@ class AccuracyMetrics:
                 pass
             if (human_score==agent_score) or human_score == 0: #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
                 correct+=1
-                correct_COT.append(metadata['statement'])
+                # correct_COT.append(metadata['statement'])
+                correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
+            elif len(metadata["statement"])>1000:
+                statement_analysis = (
+                    "A statement was summarized in the following two ways. Summary A: "
+                    + metadata["human_response"]
+                    + "and summary B:"
+                    + metadata["llm_response"]
+                    + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
+                    + str(metadata["actual"])
+                    + ". The agent's incorrect reasoning for this score is as follows: "
+                    + metadata["agent_response"]
+                )
+                incorrect_COT.append(statement_analysis)
             else:
                 statement_analysis = (
                     "The following statement: "
@@ -59,8 +72,8 @@ class AccuracyMetrics:
                     + metadata["llm_response"]
                     + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
                     + str(metadata["actual"])
-                    # + ". The agent's incorrect reasoning for this score is as follows: "
-                    # + metadata["agent_response"]
+                    + ". The agent's incorrect reasoning for this score is as follows: "
+                    + metadata["agent_response"]
                 )
                 incorrect_COT.append(statement_analysis)
         return incorrect_COT, correct_COT

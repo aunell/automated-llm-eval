@@ -325,12 +325,12 @@ class ChatModel:
             else:
                 return await attempt_retry(num_retries=num_retries - 1)
         except Exception as e:
-            # warnings.warn(
-            #     f"Failed to create ChatCompletion with arguments: {updated_kwargs.items()}\n"
-            #     f"Exception: {e}\n"
-            #     f"Retries left: {num_retries}"
-            # )
-            print( f"Retries left: {num_retries}")
+            warnings.warn(
+                f"Failed to create ChatCompletion with arguments: {updated_kwargs.items()}\n"
+                f"Exception: {e}\n"
+                f"Retries left: {num_retries}"
+            )
+            # print( f"Retries left: {num_retries}")
             return await attempt_retry(num_retries=num_retries - 1)
 
     async def async_chat_completions(
