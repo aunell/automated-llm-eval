@@ -68,12 +68,12 @@ class ChatModel:
     sync_client: openai.OpenAI = openai.OpenAI(
         api_key=private_key.key["open-ai"],
         max_retries=10,
-        timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=10.0),
+        timeout=httpx.Timeout(100.0, read=5.0, write=10.0, connect=10.0),
     )
     async_client: openai.AsyncOpenAI = openai.AsyncOpenAI(
         api_key=private_key.key["open-ai"],
         max_retries=10,
-        timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=10.0),
+        timeout=httpx.Timeout(100.0, read=5.0, write=10.0, connect=10.0),
     )
     # Model Config
     model: str = "gpt-3.5-turbo"

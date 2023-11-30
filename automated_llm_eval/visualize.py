@@ -11,6 +11,7 @@ from matplotlib.transforms import Affine2D
 from automated_llm_eval.model_analysis import analysis
 import pandas as pd
 from matplotlib.ticker import MultipleLocator
+import seaborn as sns
 
 def radar_factory(num_vars, frame='circle'):
     """
@@ -183,28 +184,63 @@ def create_plots(engine_options, judge_options):
     create_bar_plots(iteration_number, names, error_iteration, 'iteration_number')
     create_bar_plots(number_answered, names, error_answered, 'number_answered') 
 
+# def create_accuracy_plot(csv_file, title, save_as):
+#     df = pd.read_csv(csv_file)
+
+# # Transpose the DataFrame to have time data as rows and values as columns
+#     df = df.transpose()
+#     start_score = df.iloc[-1, 0]
+#     end_score = df.iloc[-1, 1]
+#     example_length= df.shape[0]-1
+#     # Extract the time and value data, and filter out non-integer time values
+#     value_data = df.iloc[:example_length,1].astype(float)
+#     time_data = df.index[:example_length]
+#     # Filter out non-integer time values
+#     time_data = time_data[time_data.str.isnumeric()]
+#     time_data = time_data.astype(int)
+#     print(df.iloc[:-1, -2])
+#     lower_limits = df.iloc[:-1, -2].astype(float)
+#     upper_limits = df.iloc[:-1, -1].astype(float)
+
+#     # Create a line plot
+#     plt.figure(figsize=(10, 6))
+#     plt.plot(time_data, value_data, marker='o', linestyle='-')
+#     plt.fill_between(time_data, lower_limits, upper_limits, color='gray', alpha=0.2, label='Confidence Interval')
+#     plt.xlabel("Iteration Number")
+#     plt.ylabel("Accuracy")
+#     plt.title(title)
+#     plt.grid(True)
+#     plt.tight_layout()
+#     ax = plt.gca()
+#     ax.xaxis.set_major_locator(MultipleLocator(1))
+#     print(start_score, end_score)
+#     legend_text = f"Starting Test Accuracy: {start_score}, Ending Test Accuracy: {end_score}"
+#     plt.legend([legend_text])
+#     # print('plotting')
+#     plt.savefig(save_as)
+
+#     # Show the plot or save it to a file
+#     plt.show()
+
 def create_accuracy_plot(csv_file, title, save_as):
     df = pd.read_csv(csv_file)
+    df=df.transpose()
+    df.columns = df.iloc[0]
+    df = df.drop("Unnamed: 0")
+    time_data = list(range(len(df['score'])))
+    accuracy_data = df['score'].astype(float).tolist()
 
-# Transpose the DataFrame to have time data as rows and values as columns
-    df = df.transpose()
-    start_score = df.iloc[-1, 0]
-    end_score = df.iloc[-1, 1]
-    example_length= df.shape[0]-1
-    # Extract the time and value data, and filter out non-integer time values
-    value_data = df.iloc[:example_length,1].astype(float)
-    time_data = df.index[:example_length]
-    # Filter out non-integer time values
-    time_data = time_data[time_data.str.isnumeric()]
-    time_data = time_data.astype(int)
-    print(df.iloc[:-1, -2])
-    lower_limits = df.iloc[:-1, -2].astype(float)
-    upper_limits = df.iloc[:-1, -1].astype(float)
+    # Extract lower and upper limits for confidence interval (if available)
+    lower_limits = df['lower_limit'].astype(float).tolist()
+    upper_limits = df['upper_limit'].astype(float).tolist()
 
     # Create a line plot
     plt.figure(figsize=(10, 6))
-    plt.plot(time_data, value_data, marker='o', linestyle='-')
+    plt.plot(time_data, accuracy_data, marker='o', linestyle='-', label='Accuracy')
+    
+    # If confidence interval data is available, plot it
     plt.fill_between(time_data, lower_limits, upper_limits, color='gray', alpha=0.2, label='Confidence Interval')
+
     plt.xlabel("Iteration Number")
     plt.ylabel("Accuracy")
     plt.title(title)
@@ -212,34 +248,30 @@ def create_accuracy_plot(csv_file, title, save_as):
     plt.tight_layout()
     ax = plt.gca()
     ax.xaxis.set_major_locator(MultipleLocator(1))
-    print(start_score, end_score)
-    legend_text = f"Starting Test Accuracy: {start_score}, Ending Test Accuracy: {end_score}"
-    plt.legend([legend_text])
-    # print('plotting')
+
+    # Add legend
+    plt.legend()
+
+    # Save the plot to a file
     plt.savefig(save_as)
 
-    # Show the plot or save it to a file
+    # Show the plot (optional)
     plt.show()
-
 
 
 def create_len_of_policy_plot(csv_file, title, save_as):
     df = pd.read_csv(csv_file)
-
-    # Transpose the DataFrame to have time data as rows and values as columns
-    df = df.transpose()
-    # Extract the time and value data, and filter out non-integer time values
-    example_length= df.shape[0]-1
-    time_data = df.index[:example_length]
-    value_data = df.iloc[:example_length,0].str.len()
-
-    # Filter out non-integer time values
-    time_data = time_data[time_data.str.isnumeric()]
-    time_data = time_data.astype(int)
+    df=df.transpose()
+    df.columns = df.iloc[0]
+    # Drop the first row (optional, if you want to remove the row used as column names)
+    df = df.drop("Unnamed: 0")
+    # Extract the time and accuracy data
+    time_data = list(range(len(df['score'])))
+    policy_length_data = df["current_policy"].astype(str).apply(len)
 
     # Create a line plot
     plt.figure(figsize=(10, 6))
-    plt.plot(time_data, value_data, marker='o', linestyle='-')
+    plt.plot(time_data, policy_length_data, marker='o', linestyle='-')
     plt.xlabel("Iteration Number")
     plt.ylabel("Length of Policy in Characters")
     plt.title(title)
@@ -247,8 +279,50 @@ def create_len_of_policy_plot(csv_file, title, save_as):
     plt.tight_layout()
     ax = plt.gca()
     ax.xaxis.set_major_locator(MultipleLocator(1))
-    # print('plotting')
+
+    # Save the plot to a file
     plt.savefig(save_as)
 
-    # Show the plot or save it to a file
+    # Show the plot (optional)
+    plt.show()
+
+def fleiss_visualize(fleiss_file, save_as):
+
+    # Read the CSV file
+    df = pd.read_csv(fleiss_file)
+    df['Scores'] = df['Scores'].round(3)
+    for dataset, subset in df.groupby('dataset'):
+        subset = subset.drop_duplicates('idx')
+        value_counts = subset['Scores'].value_counts()
+        print(f"\nValue counts for {dataset}:")
+        print(value_counts)
+
+    # Create a figure and axis
+    fig, ax = plt.subplots()
+
+    # Plot KDEs for each dataset
+    for dataset, data in df.groupby('dataset'):
+        sns.kdeplot(data['Scores'], label=dataset, fill=True)
+
+    # Calculate statistics for each dataset
+    result_df = df.groupby('dataset')['Scores'].agg(['mean', 'median', lambda x: x.mode().iloc[0]]).reset_index()
+    result_df.columns = ['', 'mean', 'median', 'mode']
+    result_df['mean'] = result_df['mean'].round(3)
+
+    # Display the statistics on the plot
+    ax.text(0.95, 0.95, result_df, transform=ax.transAxes, fontsize=10,
+            verticalalignment='top', horizontalalignment='right',
+            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+
+    # Customize the plot
+    plt.title('Kernel Density Estimate of Scores for Each Dataset')
+    plt.xlabel('Scores')
+    plt.ylabel('Density')
+    plt.legend(title='Dataset', bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+
+    # Save the figure
+    plt.savefig(save_as)
+    
+    # Show the plot
     plt.show()

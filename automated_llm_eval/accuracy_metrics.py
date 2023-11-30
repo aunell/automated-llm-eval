@@ -19,8 +19,8 @@ class AccuracyMetrics:
         """
         self.data_unfiltered = data
         self.data = [d for d in self.data_unfiltered if d.get('predicted') is not None]
-        self.actual = [d.get('actual') for d in self.data]
-        self.predicted = [d.get('predicted') for d in self.data]
+        self.actual = [int(d.get('actual')) for d in self.data]
+        self.predicted = [int(d.get('predicted')) if int(d.get('actual')) != 0 else 0 for d in self.data] #[int(d.get('predicted')) for d in self.data]
 
     def compute_accuracy(self):
         return accuracy_score(self.actual, self.predicted)
@@ -46,10 +46,12 @@ class AccuracyMetrics:
             agent_score = metadata['predicted']
             if not agent_score:
                 pass
-            if (human_score==agent_score) or human_score == 0: #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
+            if (human_score==agent_score): #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
                 correct+=1
                 # correct_COT.append(metadata['statement'])
                 correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
+            elif human_score == 0:
+                pass
             elif len(metadata["statement"])>1000:
                 statement_analysis = (
                     "A statement was summarized in the following two ways. Summary A: "
@@ -92,6 +94,7 @@ class AccuracyMetrics:
         return metrics
 
     def compute_bootstrap_confidence_interval(self, accuracy_fn, confidence_level=0.9):
+
         bootstrap_metrics = self._bootstrap_metric(accuracy_fn)
         lower_percentile = (1 - confidence_level) / 2 * 100
         upper_percentile = (1 + confidence_level) / 2 * 100

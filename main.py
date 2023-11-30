@@ -29,7 +29,7 @@ def run_compare(compare_type, experiment_name, reliability_type):
         os.makedirs('results/'+experiment_name)
     else:
         pass
-    policy_tuning(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", compare=True, batch_size = 8, compare_type=compare_type, reliability_type =reliability_type)
+    policy_tuning(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", compare=True, batch_size = 5, compare_type=compare_type, reliability_type =reliability_type)
     create_accuracy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Accuracy of Policy by Iteration: Negative COT", f"results/{experiment_name}/acc_policy_neg_COT_{experiment_name}_{compare_type}.png")
     create_len_of_policy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Length of Policy by Iteration: Negative COT", f"results/{experiment_name}/len_policy_neg_COT_{experiment_name}_{compare_type}.png")
     writer_html(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", f"results/{experiment_name}/policy_mutation_{compare_type}.html")
@@ -39,9 +39,10 @@ def run_QA():
     create_len_of_policy_plot('results/csv/policy_mutation_QA_neg.csv', "Length of Policy by Iteration: Negative COT", "results/visualizations/len_policy_neg_COT_QA.png")
 
 def main():
+    # fleiss_visualize('scored_examples/VanDeen_updated.csv', 'results/vanDeen_fleiss_distribution.png')
     datasets = ['iii', 'chq', 'pls']
     if sys.argv[1]=='compare':
-        run_compare(sys.argv[2], "pos_COT_overfitting_on_training_metric_high", sys.argv[3])
+        run_compare(sys.argv[2], "dual_COT_overfitting_on_training_metric_high", sys.argv[3])
     else:
         print('running QA')
         run_QA()
