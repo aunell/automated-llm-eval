@@ -86,6 +86,37 @@ def construct_safety_message(example: dict, current_policy: str) -> Message:
     )
     return message
 
+def construct_QA_message(example: dict, current_policy: str) -> Message:
+    idx_to_mode = get_mode_score_compare()
+    # result_df = pd.DataFrame(list(percentage_match_per_index.items()), columns=["idx", "percentage_match"])
+    # Save the DataFrame to a CSV file
+    # print('average concordance', result_df['percentage_match'].mean())
+    # result_df.to_csv("percentage_match_per_idx.csv", index=False)
+    human_label = example["Label"]
+    question = example["Prompt text"]
+    answer = example["Response"]
+
+    QA_gpt_prompt = QA_AGENT_PROMPT.format(
+        question=question,
+        answer=answer,
+        current_policy=current_policy
+    )
+    system_message = GPT_SYSTEM_PROMPT
+    user_message = QA_gpt_prompt
+    message = Message(
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message},
+        ],
+        metadata={
+            "actual": human_label,
+            "question": question,
+            "answer": answer,
+            "id": example["id"]
+        },
+    )
+    return message
+
 
 def construct_message(example: dict, current_policy: str, task: str):
     match task:
@@ -93,6 +124,8 @@ def construct_message(example: dict, current_policy: str, task: str):
             return construct_compare_message(example, current_policy)
         case "safety":
             return construct_safety_message(example, current_policy)
+        case "QA":
+            return construct_QA_message(example, current_policy)
         case _:
             return None
 
@@ -131,6 +164,7 @@ def generate_for_dataset(
     for example in batch:
         msg = construct_message(example=example, current_policy=current_policy, task = task)
         msg_list += [msg]
+    
     # Create ChatModel
     model = ChatModel(
         model=model, temperature=temperature, top_p=top_p, max_tokens=max_tokens, seed=seed
@@ -173,10 +207,11 @@ def generate_for_dataset(
         updated_msg = example_msg.metadata | {
             "agent_response": agent_response,
             "predicted": agent_label,
-            "bundle": bundle,
+            "bundle": bundle
         }
         updated_msg_list += [updated_msg]
     # Return all original messages with uppdated metadata
+    print('MSG', updated_msg_list[0])
     return updated_msg_list
 
 
@@ -192,15 +227,15 @@ def check_policy_accuracy(dataset, current_policy, batch_size, task, seed):
     )
     logging.info("results generated")
     print('ending checking')
-    # print(results)
-    accuracy_object = AccuracyMetrics(results)
+    accuracy_object = AccuracyMetrics(results, task)
     accuracy_dictionary = compute_metrics(accuracy_object)
+    incorrect_classified_tuple = accuracy_object.return_incorrect()
     confidence_interval = accuracy_object.compute_bootstrap_confidence_interval(accuracy_score)
-    return accuracy_dictionary["accuracy"], accuracy_dictionary["COT"][0], accuracy_dictionary["COT"][1], confidence_interval
+    return accuracy_dictionary["accuracy"], accuracy_dictionary["COT"][0], accuracy_dictionary["COT"][1], confidence_interval, incorrect_classified_tuple
 
 
 def policy_tuning(output, compare, batch_size, compare_type="iii", reliability_type = "high"):
-    # add_fleiss_column()
+    # add_fleiss_column("scored_examples/vanDeenCollapsed.csv")
     # print('added')
     logging.basicConfig(level=logging.INFO, filename=f'{output}.log', filemode='w')
     score = 0.0
@@ -215,11 +250,10 @@ def policy_tuning(output, compare, batch_size, compare_type="iii", reliability_t
     convergence = False
     score_list = []
     epsilon = .03
-    while (score < 1 and i < 20 and not convergence):
+    while (score < 1 and i < 10 and not convergence):
         print("score is", score, "and iteration is:", i)
-        _, incorrect_labelled, correct_labelled , _ = check_policy_accuracy(train_data, current_policy, batch_size, seed=0, task="compare")
-        COT_length = len(incorrect_labelled)+len(correct_labelled)
-        score, _,_ , val_confidence_interval = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=0, task="compare")
+        _, incorrect_labelled, correct_labelled , _, _ = check_policy_accuracy(train_data, current_policy, batch_size, seed=0, task="QA")
+        score, _,_ , val_confidence_interval, incorrect_classified_tuple = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=0, task="QA")
         if len(score_list)==3:
             if abs(find_average(score_list)-score)<epsilon:
                 convergence=True
@@ -228,7 +262,7 @@ def policy_tuning(output, compare, batch_size, compare_type="iii", reliability_t
                 score_list.append(score)
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(
             original_policy=current_policy,
-            correct_answers=correct_labelled,
+            # correct_answers=correct_labelled,
             incorrect_answers=incorrect_labelled,
         )
         model = ChatModel(
@@ -238,7 +272,7 @@ def policy_tuning(output, compare, batch_size, compare_type="iii", reliability_t
             distance=0
         else:
             distance = editDistance(current_policy, data[i-1]["current_policy"])
-        data[i] = {"current_policy": current_policy, "score": score, "lower_limit": val_confidence_interval[0], "upper_limit" :val_confidence_interval[1], "distance": distance}
+        data[i] = {"current_policy": current_policy, "score": score, "lower_limit": val_confidence_interval[0], "upper_limit" :val_confidence_interval[1], "distance": distance, "missed statements": incorrect_classified_tuple}
 
         try:
             current_policyNew = model.create_chat_completion(

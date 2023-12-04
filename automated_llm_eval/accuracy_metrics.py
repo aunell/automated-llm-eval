@@ -12,18 +12,24 @@ from automated_llm_eval.prompts import (
     score_retrieval_character_prompt,
 )
 class AccuracyMetrics:
-    def __init__(self, data):
+    def __init__(self, data, task):
         """
         Initialize the AccuracyCalculator with a dictionary containing predicted and actual values.
         The dictionary should have keys 'predicted' and 'actual'.
         """
         self.data_unfiltered = data
+        self.task=task
         self.data = [d for d in self.data_unfiltered if d.get('predicted') is not None]
         self.actual = [int(d.get('actual')) for d in self.data]
-        self.predicted = [int(d.get('predicted')) if int(d.get('actual')) != 0 else 0 for d in self.data] #[int(d.get('predicted')) for d in self.data]
+        # self.id = [int(d.get('id')) for d in self.data]
+        # print(self.data[0])
+        self.predicted = [int(d.get('predicted')) for d in self.data] #[int(d.get('predicted')) if int(d.get('actual')) != 0 else 0 for d in self.data]
 
     def compute_accuracy(self):
         return accuracy_score(self.actual, self.predicted)
+    
+    def return_incorrect(self):
+        return [(d.get('id'), d.get('predicted'), d.get('actual')) for d in self.data_unfiltered if (d.get('predicted') is not None and d.get('actual') is not None and int(d.get('predicted'))!=int(d.get('actual')))]
 
     def compute_f1_score(self):
         return f1_score(self.actual, self.predicted, average='micro')
@@ -41,43 +47,77 @@ class AccuracyMetrics:
         correct=0
         incorrect_COT = []
         correct_COT = []
-        for metadata in self.data:
-            human_score =int(metadata['actual'])
-            agent_score = metadata['predicted']
-            if not agent_score:
-                pass
-            if (human_score==agent_score): #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
-                correct+=1
-                # correct_COT.append(metadata['statement'])
-                correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
-            elif human_score == 0:
-                pass
-            elif len(metadata["statement"])>1000:
-                statement_analysis = (
-                    "A statement was summarized in the following two ways. Summary A: "
-                    + metadata["human_response"]
-                    + "and summary B:"
-                    + metadata["llm_response"]
-                    + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
-                    + str(metadata["actual"])
-                    + ". The agent's incorrect reasoning for this score is as follows: "
-                    + metadata["agent_response"]
-                )
-                incorrect_COT.append(statement_analysis)
-            else:
-                statement_analysis = (
-                    "The following statement: "
-                    + metadata["statement"]
-                    + " was summarized in the following two ways. Summary A: "
-                    + metadata["human_response"]
-                    + "and summary B:"
-                    + metadata["llm_response"]
-                    + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
-                    + str(metadata["actual"])
-                    + ". The agent's incorrect reasoning for this score is as follows: "
-                    + metadata["agent_response"]
-                )
-                incorrect_COT.append(statement_analysis)
+        if self.task=="compare":
+            for metadata in self.data:
+                human_score =int(metadata['actual'])
+                agent_score = metadata['predicted']
+                if not agent_score:
+                    pass
+                if (human_score==agent_score): #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
+                    correct+=1
+                    # correct_COT.append(metadata['statement'])
+                    correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
+                # elif human_score == 0:
+                #     pass
+                elif len(metadata["statement"])>1000:
+                    statement_analysis = (
+                        "A statement was summarized in the following two ways. Summary A: "
+                        + metadata["human_response"]
+                        + "and summary B:"
+                        + metadata["llm_response"]
+                        + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
+                        + str(metadata["actual"])
+                        + ". The agent's incorrect reasoning for this score is as follows: "
+                        + metadata["agent_response"]
+                    )
+                    incorrect_COT.append(statement_analysis)
+                else:
+                    statement_analysis = (
+                        "The following statement: "
+                        + metadata["statement"]
+                        + " was summarized in the following two ways. Summary A: "
+                        + metadata["human_response"]
+                        + "and summary B:"
+                        + metadata["llm_response"]
+                        + " The summaries were compared and scored incorrectly by the agent, and the correct score should have been: "
+                        + str(metadata["actual"])
+                        + ". The agent's incorrect reasoning for this score is as follows: "
+                        + metadata["agent_response"]
+                    )
+                    incorrect_COT.append(statement_analysis)
+        elif self.task=="QA":
+            for metadata in self.data:
+                human_score =int(metadata['actual'])
+                agent_score = metadata['predicted']
+                if not agent_score:
+                    pass
+                if (human_score==agent_score): #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
+                    correct+=1
+                    # correct_COT.append(metadata['statement'])
+                    # correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
+                elif len(metadata["question"])>1000:
+                    print('LONG ADJUSTMENT')
+                    statement_analysis = (
+                        "A question was answered in the following way: "
+                        + metadata["answer"]
+                        + "The appropriateness was scored incorrectly by the agent, and the correct score should have been: "
+                        + str(metadata["actual"])
+                        + ". The agent's incorrect reasoning for this score is as follows: "
+                        + metadata["agent_response"]
+                    )
+                    incorrect_COT.append(statement_analysis)
+                else:
+                    statement_analysis = (
+                        "The following question: "
+                        + metadata["question"]
+                        + " was answered in the following way: "
+                             + metadata["answer"]
+                        + "The appropriateness was scored incorrectly by the agent, and the correct score should have been: "
+                        + str(metadata["actual"])
+                        + ". The agent's incorrect reasoning for this score is as follows: "
+                        + metadata["agent_response"]
+                    )
+                    incorrect_COT.append(statement_analysis)
         return incorrect_COT, correct_COT
     
     def _bootstrap_metric(self, accuracy_fn, num_samples=1000, sample_percent=0.8):

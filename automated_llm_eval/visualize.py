@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 from matplotlib.patches import Circle, RegularPolygon
 from matplotlib.path import Path
@@ -237,6 +238,7 @@ def create_accuracy_plot(csv_file, title, save_as):
     # Create a line plot
     plt.figure(figsize=(10, 6))
     plt.plot(time_data, accuracy_data, marker='o', linestyle='-', label='Accuracy')
+
     
     # If confidence interval data is available, plot it
     plt.fill_between(time_data, lower_limits, upper_limits, color='gray', alpha=0.2, label='Confidence Interval')
@@ -325,4 +327,39 @@ def fleiss_visualize(fleiss_file, save_as):
     plt.savefig(save_as)
     
     # Show the plot
+    plt.show()
+
+def visualize_overlap(csv_file, save_as):
+    df = pd.read_csv(csv_file)
+    df=df.transpose()
+    df.columns = df.iloc[0]
+    df = df.drop("Unnamed: 0")
+    time_data = list(range(len(df['score'])))
+    missed_points = df['missed statements'].tolist()
+    # Initialize dictionaries to store results
+    overlap_counts = []
+    set1_not_set2_counts = []
+    set2_not_set1_counts = []
+
+    # Calculate counts for each pair of sets
+    for i in range(len(missed_points) - 1):
+        set1 = set(missed_points[i])
+        set2 = set(missed_points[i + 1])
+        
+        overlap_counts.append(len(set1.intersection(set2)))
+        set1_not_set2_counts.append(len(set1.difference(set2)))
+        set2_not_set1_counts.append(len(set2.difference(set1)))
+
+    # Plot the results
+    x_values = [f"Set{i+1} - Set{i+2}" for i in range(len(missed_points) - 1)]
+
+    plt.plot(x_values, overlap_counts, label='Missed Consecutively', marker='o')
+    plt.plot(x_values, set1_not_set2_counts, label='Corrected', marker='o')
+    plt.plot(x_values, set2_not_set1_counts, label='Worsened', marker='o')
+
+    plt.title('Shared and Unique Values Between Consecutive Sets')
+    plt.xlabel('Set Pairs')
+    plt.ylabel('Count')
+    plt.legend()
+    plt.savefig(save_as)
     plt.show()

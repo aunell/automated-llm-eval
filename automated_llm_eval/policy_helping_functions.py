@@ -86,7 +86,7 @@ def confidence_interval(accuracies, incorrect_samples, correct_samples, confiden
     return lower_bound, upper_bound
 
 def get_mode_score_compare():
-    df = pd.read_csv("scored_examples/dataset_231103.csv", engine= "python")
+    df = pd.read_csv('scored_examples/VanDeenCollapsed_updated.csv', engine= "python")
     # Calculate the mode of 'q2' for each 'idx' group
     mode_per_idx = df.groupby("idx")["q2"].apply(
         lambda x: x.mode().iloc[0] if not x.mode().empty else None
@@ -95,11 +95,11 @@ def get_mode_score_compare():
     idx_to_mode = mode_per_idx.to_dict()
     return idx_to_mode
 
-def add_fleiss_column():
-     df = pd.read_csv("scored_examples/dataset_231103.csv")
-     index_to_scores = calculate_fleiss_kappa("scored_examples/dataset_231103.csv")
+def add_fleiss_column(file):
+     df = pd.read_csv(file)
+     index_to_scores = calculate_fleiss_kappa(file)
      df['Scores'] = df['idx'].map(index_to_scores)
-     df.to_csv("VanDeen_updated.csv", index=False)
+     df.to_csv("VanDeenCollapsed_updated.csv", index=False)
 
 def calculate_fleiss_kappa(dataset):
     """
@@ -148,7 +148,6 @@ def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
     train_data = {}
     test_data= {}
     high_reliable_data = {}
-    medium_reliable_data = {}
     low_reliable_data = {}
     if compare:
         desired_columns = [
@@ -162,7 +161,7 @@ def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
             "output",
             "target"
         ]
-        with open("scored_examples/VanDeen_updated.csv", "r") as file:
+        with open('scored_examples/VanDeenCollapsed_updated.csv', "r") as file:
             # Parse the JSON data and store it as a dictionary
             csv_reader = csv.DictReader(file)
             # Iterate through each row in the CSV
@@ -215,18 +214,32 @@ def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
         return train_data, test_data
 
     else:
-        with open("scored_examples/harm_QA.csv", "r") as file:
-            desired_columns = ["LLM-Generated Statements", "Human Label (Dev)"]
+        # with open("scored_examples/harm_QA.csv", "r") as file:
+        #     desired_columns = ["LLM-Generated Statements", "Human Label (Dev)"]
+        with open("scored_examples/redteaming.csv", "r") as file:
+            desired_columns = ["Label", "Response", "Prompt text"]
             csv_reader = csv.DictReader(file)
-            # Iterate through each row in the CSV
-            for line_number, row in enumerate(csv_reader, start=1):
-                result = {}
+            filtered_rows = [row for row in csv_reader if row["Label"] != "Unsure"]
+            for line_number, row in enumerate(filtered_rows, start=1):
+                if line_number<2:
+                    continue
+                result = {"id": line_number}
                 for col in desired_columns:
-                    result[col] = row[col]
+                    if row[col]=="Appropriate":
+                        result[col] = 1
+                    elif row[col]=="Inappropriate":
+                        result[col]=0
+                    else:
+                        result[col] = row[col]
                     if line_number % 5 == 0:
                         test_data[line_number] = result
                     else:
                         train_data[line_number] = result
+        # mapping = {"Appropriate": 1, "Inappropriate": 0}
+        # # Create a new dictionary based on the mapping
+        # print(train_data.items())
+        # train_data = {key: [mapping[label]] + values[1:] for key, (label, *values) in train_data.items()}
+        # test_data = {key: [mapping[label]] + values[1:] for key, (label, *values) in test_data.items()}
     return train_data, test_data
 
 
@@ -235,7 +248,7 @@ def get_policy_file(compare=True):
         with open("policies/summary_compare_correctness_policy.txt", "r") as file:
             current_policy = file.read()
     else:
-        with open("policies/safety_policy.txt", "r") as file:
+        with open("policies/redteaming_policy.txt", "r") as file:
             current_policy = file.read()
     return current_policy
 

@@ -33,19 +33,33 @@ def run_compare(compare_type, experiment_name, reliability_type):
     create_accuracy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Accuracy of Policy by Iteration: Negative COT", f"results/{experiment_name}/acc_policy_neg_COT_{experiment_name}_{compare_type}.png")
     create_len_of_policy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Length of Policy by Iteration: Negative COT", f"results/{experiment_name}/len_policy_neg_COT_{experiment_name}_{compare_type}.png")
     writer_html(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", f"results/{experiment_name}/policy_mutation_{compare_type}.html")
-def run_QA():
-    policy_tuning('results/csv/policy_mutation_QA_neg.csv', compare=False, batch_size = 1, compare_type = 'pls')
-    create_accuracy_plot('results/csv/policy_mutation_QA_neg.csv', "Accuracy of Policy by Iteration: Negative COT", "results/visualizations/acc_policy_neg_COT_QA.png")
-    create_len_of_policy_plot('results/csv/policy_mutation_QA_neg.csv', "Length of Policy by Iteration: Negative COT", "results/visualizations/len_policy_neg_COT_QA.png")
-
+def run_QA(compare_type, experiment_name, reliability_type):
+    if not os.path.exists('results/'+experiment_name):
+        os.makedirs('results/'+experiment_name)
+    else:
+        pass
+    policy_tuning(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", compare=False, batch_size = 5, compare_type=compare_type, reliability_type =reliability_type)
+    create_accuracy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Accuracy of Policy by Iteration: Negative COT", f"results/{experiment_name}/acc_policy_neg_COT_{experiment_name}_{compare_type}.png")
+    create_len_of_policy_plot(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", "Length of Policy by Iteration: Negative COT", f"results/{experiment_name}/len_policy_neg_COT_{experiment_name}_{compare_type}.png")
+    writer_html(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", f"results/{experiment_name}/policy_mutation_{compare_type}.html")
+    visualize_overlap(f"results/{experiment_name}/policy_mutation_{compare_type}.csv", f"results/{experiment_name}/overlap_{compare_type}.png")
 def main():
-    # fleiss_visualize('scored_examples/VanDeen_updated.csv', 'results/vanDeen_fleiss_distribution.png')
-    datasets = ['iii', 'chq', 'pls']
+    # fleiss_visualize('scored_examples/VanDeenCollapsed_updated.csv', 'results/vanDeenUpdated_fleiss_distribution.png')
+    # # Read the CSV file into a DataFrame
+    # df = pd.read_csv("scored_examples/dataset_231103.csv")
+
+    # # Update values where df['q2'] == -2 to -1
+    # df.loc[df['q2'] == -2, 'q2'] = -1
+    # df.loc[df['q2'] == 2, 'q2'] = 1
+
+    # # Save the updated DataFrame back to a CSV file if needed
+    # df.to_csv("vanDeenCollapsed.csv", index=False)
+
     if sys.argv[1]=='compare':
-        run_compare(sys.argv[2], "dual_COT_overfitting_on_training_metric_high", sys.argv[3])
+        run_compare(sys.argv[2], "collapsed_vanDeen_dual_COT", sys.argv[3])
     else:
         print('running QA')
-        run_QA()
+        run_QA(sys.argv[2], "QA_test_neg_COT", sys.argv[3])
 
 if __name__ == '__main__':
     main()
