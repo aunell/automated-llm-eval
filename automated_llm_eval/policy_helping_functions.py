@@ -9,6 +9,13 @@ import random
 from automated_llm_eval.prompts import *
 from automated_llm_eval.accuracy_metrics import AccuracyMetrics
 
+def select_batch(dataset: dict, batch_size: int, seed: int = 42) -> list:
+    examples = list(dataset.values())
+    random.Random(seed).shuffle(examples)
+    batch = examples[: len(examples) // batch_size]
+    return batch
+
+
 def fleiss_kappa(mat):
     """ Computes the Kappa value
         @param n Number of rating per subjects (number of human raters)
@@ -144,12 +151,12 @@ def calculate_fleiss_kappa(dataset):
 
     return kappa_values
 
-def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
+def get_data_split(task:str, compare_type="iii", reliability_type="high"):
     train_data = {}
     test_data= {}
     high_reliable_data = {}
     low_reliable_data = {}
-    if compare:
+    if task=='compare':
         desired_columns = [
             "dataset",
             "idx",
@@ -166,7 +173,7 @@ def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
             csv_reader = csv.DictReader(file)
             # Iterate through each row in the CSV
             for line_number, row in enumerate(csv_reader, start=1):
-                result = {}
+                result = {"id": line_number}
                 if type(row) == list or row["dataset"] != compare_type:
                     continue
                 fleiss_score = row["Scores"]
@@ -243,8 +250,8 @@ def get_data_split(compare=True, compare_type="iii", reliability_type="high"):
     return train_data, test_data
 
 
-def get_policy_file(compare=True):
-    if compare:
+def get_policy_file(task:str):
+    if task=='compare':
         with open("policies/summary_compare_correctness_policy.txt", "r") as file:
             current_policy = file.read()
     else:

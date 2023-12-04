@@ -7,9 +7,7 @@ from automated_llm_eval.prompts import (
     GPT_SYSTEM_PROMPT,
     POLICY_MUTATE_PROMPT_TEMPLATE,
     QA_AGENT_PROMPT,
-    SCORE_RETRIEVAL_PROMPT,
-    prompt_improvement_character_prompt,
-    score_retrieval_character_prompt,
+    SCORE_RETRIEVAL_PROMPT
 )
 class AccuracyMetrics:
     def __init__(self, data, task):
@@ -21,9 +19,7 @@ class AccuracyMetrics:
         self.task=task
         self.data = [d for d in self.data_unfiltered if d.get('predicted') is not None]
         self.actual = [int(d.get('actual')) for d in self.data]
-        # self.id = [int(d.get('id')) for d in self.data]
-        # print(self.data[0])
-        self.predicted = [int(d.get('predicted')) for d in self.data] #[int(d.get('predicted')) if int(d.get('actual')) != 0 else 0 for d in self.data]
+        self.predicted = [int(d.get('predicted')) for d in self.data]
 
     def compute_accuracy(self):
         return accuracy_score(self.actual, self.predicted)
@@ -42,7 +38,7 @@ class AccuracyMetrics:
 
     def get_COT(self):
         """
-        Compute accuracy.
+        Compute chain of thought responses
         """
         correct=0
         incorrect_COT = []
@@ -51,14 +47,12 @@ class AccuracyMetrics:
             for metadata in self.data:
                 human_score =int(metadata['actual'])
                 agent_score = metadata['predicted']
-                if not agent_score:
-                    pass
-                if (human_score==agent_score): #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
+                # if not agent_score:
+                #     pass
+                if (human_score==agent_score): 
                     correct+=1
                     # correct_COT.append(metadata['statement'])
                     correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
-                # elif human_score == 0:
-                #     pass
                 elif len(metadata["statement"])>1000:
                     statement_analysis = (
                         "A statement was summarized in the following two ways. Summary A: "
@@ -89,9 +83,7 @@ class AccuracyMetrics:
             for metadata in self.data:
                 human_score =int(metadata['actual'])
                 agent_score = metadata['predicted']
-                if not agent_score:
-                    pass
-                if (human_score==agent_score): #(human_score<=0 and agent_score<=0) or (human_score>=0 and agent_score>=0):
+                if (human_score==agent_score):
                     correct+=1
                     # correct_COT.append(metadata['statement'])
                     # correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
