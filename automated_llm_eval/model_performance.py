@@ -1,6 +1,6 @@
 import pandas as pd
 from tqdm import tqdm
-from automated_llm_eval.get_questions import get_questions
+from automated_llm_eval.old_code.get_questions import get_questions
 from automated_llm_eval.prompts import *
 from automated_llm_eval.create_chat_completion import create_chat_completion
 

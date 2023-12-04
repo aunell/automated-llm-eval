@@ -3,6 +3,7 @@ private_key.py
 results/*
 scored_examples/*
 results_old/*
+automated_llm_eval/old_code/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/**

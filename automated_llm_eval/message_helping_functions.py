@@ -1,4 +1,4 @@
-from automated_llm_eval.policy_helping_functions import get_mode_score_compare
+from automated_llm_eval.get_data_helping_functions import get_mode_score_compare
 from automated_llm_eval.chat_model import Message
 
 from automated_llm_eval.prompts import (

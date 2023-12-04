@@ -4,24 +4,21 @@ import pandas as pd
 from sklearn.metrics import accuracy_score
 
 from automated_llm_eval.chat_model import ChatModel, Message
-from automated_llm_eval.policy_helping_functions import (
-    get_data_split,
-    get_policy_file,
+from automated_llm_eval.general_helping_functions import (
     save_dict_as_csv,
     compute_metrics,
-    add_fleiss_column,
     compare_responses,
     find_average,
     editDistance,
     select_batch
 )
+from automated_llm_eval.get_data_helping_functions import get_data_split, get_policy_file
 from automated_llm_eval.message_helping_functions import construct_message, construct_label_extraction_message
 
 from automated_llm_eval.prompts import (
     POLICY_MUTATE_PROMPT_TEMPLATE,
     SCORE_RETRIEVAL_PROMPT,
-    prompt_improvement_character_prompt,
-    score_retrieval_character_prompt,
+    prompt_improvement_character_prompt
 )
 from automated_llm_eval.utils import sidethread_event_loop_async_runner
 from automated_llm_eval.accuracy_metrics import AccuracyMetrics
@@ -153,7 +150,6 @@ def policy_tuning(output: str, task: str, batch_size: int, compare_type, reliabi
                 responses.append((current_policy, current_policyNew))
                 current_policy = current_policyNew
         except Exception as e:
-            logger.info("An error occurred: %s", str(e))
             print(e)
         save_dict_as_csv(data, output)
         i += 1
