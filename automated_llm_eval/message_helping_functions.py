@@ -10,17 +10,20 @@ from automated_llm_eval.prompts import (
     prompt_improvement_character_prompt,
     score_retrieval_character_prompt,
 )
+idx_to_mode = get_mode_score_compare()
 def construct_message(example: dict, current_policy: str, task: str):
     match task:
         case "compare":
             return construct_compare_message(example, current_policy)
-        case "QA":
+        case "qa":
             return construct_QA_message(example, current_policy)
+        case "harm":
+            return construct_harm_message(example, current_policy)
         case _:
             return None
 
 def construct_compare_message(example: dict, current_policy: str) -> Message:
-    idx_to_mode = get_mode_score_compare()
+    # idx_to_mode = get_mode_score_compare()
     human_label = idx_to_mode[int(example["idx"])]
     statement = example["inputs"]
     human_response = example["target"]
@@ -53,6 +56,32 @@ def construct_QA_message(example: dict, current_policy: str) -> Message:
     human_label = example["Label"]
     question = example["Prompt text"]
     answer = example["Response"]
+
+    QA_gpt_prompt = QA_AGENT_PROMPT.format(
+        question=question,
+        answer=answer,
+        current_policy=current_policy
+    )
+    system_message = GPT_SYSTEM_PROMPT
+    user_message = QA_gpt_prompt
+    message = Message(
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message},
+        ],
+        metadata={
+            "actual": human_label,
+            "question": question,
+            "answer": answer,
+            "id": example["id"]
+        },
+    )
+    return message
+
+def construct_harm_message(example: dict, current_policy: str) -> Message:
+    human_label = example["Final label"]
+    question = example["Question"]
+    answer = example["Correct Answer"] if len(example["Correct Answer"])>5 else example["Erroneous Answer"]
 
     QA_gpt_prompt = QA_AGENT_PROMPT.format(
         question=question,

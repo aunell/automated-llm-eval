@@ -23,18 +23,18 @@ from automated_llm_eval.prompts import (
 from automated_llm_eval.utils import sidethread_event_loop_async_runner
 from automated_llm_eval.accuracy_metrics import AccuracyMetrics
 
-
+model_choice =  "gpt-3.5-turbo-1106" #"gpt-4-1106-preview" #
 def generate_for_dataset(
     dataset: dict,
     current_policy: str,
     batch_size: int,
     task: str,
-    model: str = "gpt-3.5-turbo-1106",
+    model: str = model_choice,
     temperature: float = 0,
     top_p: float = 0.5,
     max_tokens: int = 700,
     seed: int = 42,
-    num_concurrent: int = 20,
+    num_concurrent: int = 5 #20,
 ) -> list[Message]:
     """Selects batch, formats messages, asynchronously makes LLM calls,
     extract label from agent rationale."""
@@ -98,19 +98,15 @@ def check_policy_accuracy(dataset, current_policy, batch_size, task, seed):
     accuracy_object = AccuracyMetrics(results, task)
     accuracy_dictionary = compute_metrics(accuracy_object)
     incorrect_classified_tuple = accuracy_object.return_incorrect()
-    print('NUMBER WRONG', len(incorrect_classified_tuple))
     confidence_interval = accuracy_object.compute_bootstrap_confidence_interval(accuracy_score)
     return accuracy_dictionary["accuracy"], accuracy_dictionary["COT"][0], accuracy_dictionary["COT"][1], confidence_interval, incorrect_classified_tuple
 
 
 def policy_tuning(output: str, task: str, batch_size: int, compare_type, reliability_type):
-    # add_fleiss_column("scored_examples/vanDeenCollapsed.csv")
     logging.basicConfig(level=logging.INFO, filename=f'{output}.log', filemode='w')
     score = 0.0
     train_data, test_data = get_data_split(task, compare_type, reliability_type)
     current_policy = get_policy_file(task)
-    # score_before, _, _ , confidence_interval_before= check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task="compare")
-    # print("test score before", score_before, "confidence before", confidence_interval_before)
     data = {}
     i = 0
     responses = []
@@ -118,39 +114,49 @@ def policy_tuning(output: str, task: str, batch_size: int, compare_type, reliabi
     convergence = False
     score_list = []
     epsilon = .03
-    while (score < 1 and i < 5 and not convergence):
-        print("score is", score, "and iteration is:", i)
-        _, incorrect_labelled, correct_labelled , _, _ = check_policy_accuracy(train_data, current_policy, batch_size, seed=0, task=task)
-        score, _,_ , val_confidence_interval, incorrect_classified_tuple = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=0, task=task)
+    total_examples_seen =0
+    test_score_before, incorrect_examples, _ , val_confidence_interval, incorrect_classified_tuple_test = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task=task)
+    while ((score < 1 or total_examples_seen>10) and i < 10 and not convergence):
+        print("score is", score, "and iteration is:", i, "and total examples seen are", total_examples_seen)
+        score, incorrect_labelled, correct_labelled, val_confidence_interval, incorrect_classified_tuple  = check_policy_accuracy(train_data, current_policy, batch_size, seed=0, task=task)
+        total_examples_seen = len(incorrect_labelled)+len(correct_labelled)
+        # score, _,_ , val_confidence_interval, incorrect_classified_tuple = check_policy_accuracy(test_data, current_policy, batch_size=10, seed=0, task=task)
         if len(score_list)==3:
             if abs(find_average(score_list)-score)<epsilon:
                 convergence=True
             else:
                 score_list.pop(0)
                 score_list.append(score)
+        if total_examples_seen<2:
+            continue
         AGENT_IMPROVEMENT = POLICY_MUTATE_PROMPT_TEMPLATE.format(
             original_policy=current_policy,
             # correct_answers=correct_labelled,
             incorrect_answers=incorrect_labelled,
         )
+        print('after agent prompt')
         model = ChatModel(
-            model="gpt-3.5-turbo-1106", temperature=0.1, top_p=0.5, max_tokens=700, seed=42
+            model=model_choice, temperature=0.1, top_p=0.5, max_tokens=700, seed=42
         )
+        print('before edit distance')
         if i==0:
             distance=0
         else:
             distance = editDistance(current_policy, data[i-1]["current_policy"])
-        data[i] = {"current_policy": current_policy, "score": score, "lower_limit": val_confidence_interval[0], "upper_limit" :val_confidence_interval[1], "distance": distance, "missed statements": incorrect_classified_tuple}
-
+        data[i] = {"current_policy": current_policy, "incorrect examples": incorrect_labelled, "score": score, "lower_limit": val_confidence_interval[0], "upper_limit" :val_confidence_interval[1], "distance": distance, "missed statements": incorrect_classified_tuple, "test values" : []}
+        print('after edit distance')
         try:
+            print('before new policy')
             current_policyNew = model.create_chat_completion(
                 prompt_improvement_character_prompt, AGENT_IMPROVEMENT, output_format="simple"
             )
+            print('after new policy')
             if current_policyNew is not None:
                 responses.append((current_policy, current_policyNew))
                 current_policy = current_policyNew
         except Exception as e:
-            print(e)
+            # print(e)
+            pass
         save_dict_as_csv(data, output)
         i += 1
 
@@ -162,7 +168,7 @@ def policy_tuning(output: str, task: str, batch_size: int, compare_type, reliabi
     with open(f"{output}.html", "w") as html_file:
         html_file.write(combined_html)
 
-    # score_after, incorrect_labelled, correct_labelled , confidence_interval_after = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task="compare")
-    # data["final scores"] = [score_before, score_after, confidence_interval_before, confidence_interval_after]
+    score_after, incorrect_labelled, correct_labelled , confidence_interval_after, incorrect_classified_tuple_test_after = check_policy_accuracy(test_data, current_policy, batch_size=1, seed=42, task=task)
+    data[i] = {"current_policy": [], "incorrect examples": [], "score": [], "lower_limit": [], "upper_limit" : [], "distance": [], "missed statements": [], "test values": [test_score_before, score_after, incorrect_classified_tuple_test, incorrect_classified_tuple_test_after]}
     save_dict_as_csv(data, output)
     return current_policy

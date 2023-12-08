@@ -8,6 +8,8 @@ import ast
 def create_accuracy_plot(csv_file, title, save_as):
     df = pd.read_csv(csv_file)
     df=df.transpose()
+    test=ast.literal_eval(df.iloc[-1].iloc[-1])
+    df = df.drop(df.index[-1])
     df.columns = df.iloc[0]
     df = df.drop("Unnamed: 0")
     time_data = list(range(len(df['score'])))
@@ -34,7 +36,11 @@ def create_accuracy_plot(csv_file, title, save_as):
     ax.xaxis.set_major_locator(MultipleLocator(1))
 
     # Add legend
-    plt.legend()
+    start_score =test[0]
+    end_score = test[1]
+    legend_text = f"Starting Test Accuracy: {start_score:.3f}, Ending Test Accuracy: {end_score:.3f}"
+    
+    plt.legend([legend_text])
 
     # Save the plot to a file
     plt.savefig(save_as)
@@ -49,6 +55,7 @@ def create_len_of_policy_plot(csv_file, title, save_as):
     df.columns = df.iloc[0]
     # Drop the first row (optional, if you want to remove the row used as column names)
     df = df.drop("Unnamed: 0")
+    df = df.drop(df.index[-1])
     # Extract the time and accuracy data
     time_data = list(range(len(df['score'])))
     policy_length_data = df["current_policy"].astype(str).apply(len)
@@ -116,6 +123,7 @@ def visualize_overlap(csv_file, save_as):
     df=df.transpose()
     df.columns = df.iloc[0]
     df = df.drop("Unnamed: 0")
+    df = df.drop(df.index[-1])
     time_data = list(range(len(df['score'])))
     missed_points = [ast.literal_eval(point) if isinstance(point, str) else point for point in df['missed statements'].tolist()] #df['missed statements'].tolist()
     print(missed_points[0])

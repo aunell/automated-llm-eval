@@ -7,6 +7,7 @@ from automated_llm_eval.prompts import *
 from automated_llm_eval.accuracy_metrics import AccuracyMetrics
 
 def get_mode_score_compare():
+    print('STASRT INDEXING')
     df = pd.read_csv('scored_examples/VanDeenCollapsed_updated.csv', engine= "python")
     # Calculate the mode of 'q2' for each 'idx' group
     mode_per_idx = df.groupby("idx")["q2"].apply(
@@ -14,6 +15,7 @@ def get_mode_score_compare():
     )
     # Create a dictionary mapping 'idx' to the mode of 'q2'
     idx_to_mode = mode_per_idx.to_dict()
+    print('ENDING INDEX')
     return idx_to_mode
 
 def get_data_split(task:str, compare_type, reliability_type):
@@ -85,7 +87,7 @@ def get_data_split(task:str, compare_type, reliability_type):
         
         return train_data, test_data
 
-    else:
+    elif task=="qa":
         with open("scored_examples/redteaming.csv", "r") as file:
             desired_columns = ["Label", "Response", "Prompt text"]
             csv_reader = csv.DictReader(file)
@@ -105,6 +107,21 @@ def get_data_split(task:str, compare_type, reliability_type):
                         test_data[line_number] = result
                     else:
                         train_data[line_number] = result
+    elif task=="harm":
+        with open("scored_examples/harm.csv", "r") as file:
+            desired_columns = ["Correct Answer", "Question", "Erroneous Answer", "Final label"]
+            csv_reader = csv.DictReader(file)
+            for line_number, row in enumerate(csv_reader, start=1):
+                if line_number<1:
+                    continue
+                result = {"id": line_number}
+                for col in desired_columns:
+                    result[col] = row[col]
+                    if line_number % 5 == 0:
+                        test_data[line_number] = result
+                    else:
+                        train_data[line_number] = result
+        print('train data is', train_data)
     return train_data, test_data
 
 
@@ -112,7 +129,10 @@ def get_policy_file(task:str):
     if task=='compare':
         with open("policies/summary_compare_correctness_policy.txt", "r") as file:
             current_policy = file.read()
-    else:
+    elif task == 'qa':
         with open("policies/redteaming_policy.txt", "r") as file:
+            current_policy = file.read()
+    elif task == 'harm':
+        with open("policies/safety_policy.txt", "r") as file:
             current_policy = file.read()
     return current_policy

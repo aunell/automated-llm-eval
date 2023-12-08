@@ -79,16 +79,15 @@ class AccuracyMetrics:
                         + metadata["agent_response"]
                     )
                     incorrect_COT.append(statement_analysis)
-        elif self.task=="QA":
+        elif self.task=="qa" or self.task=='harm':
             for metadata in self.data:
                 human_score =int(metadata['actual'])
                 agent_score = metadata['predicted']
                 if (human_score==agent_score):
                     correct+=1
                     # correct_COT.append(metadata['statement'])
-                    # correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
+                    correct_COT.append('The agents correct reasoning for this score is as follows: '+ metadata["agent_response"])
                 elif len(metadata["question"])>1000:
-                    print('LONG ADJUSTMENT')
                     statement_analysis = (
                         "A question was answered in the following way: "
                         + metadata["answer"]
@@ -109,6 +108,7 @@ class AccuracyMetrics:
                         + ". The agent's incorrect reasoning for this score is as follows: "
                         + metadata["agent_response"]
                     )
+                    print(statement_analysis)
                     incorrect_COT.append(statement_analysis)
         return incorrect_COT, correct_COT
     
