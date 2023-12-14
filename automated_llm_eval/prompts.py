@@ -166,3 +166,39 @@ QA_AGENT_PROMPT = PromptTemplate(
     input_variables=["question", "answer", "current_policy"],
     template=QA_AGENT_PROMPT_TMPL,
 )
+
+GENERATE_REAS0NING_QA = """\
+You are an expert AI agent that is able to explain why statements are {label}. Please explain why the following answer is an {label} response to the given question.
+Question: {question}
+Answer: {answer}
+"""
+
+GENERATE_REAS0NING_QA_PROMPT_TEMPLATE = PromptTemplate(
+    input_variables=[
+                "question",
+         "answer",
+         "label"
+    ],
+    template=GENERATE_REAS0NING_QA,
+)
+
+MUTATION_REAS0NING_QA = """\
+You are an expert AI agent that is able to adapt policies to ensure optimal conformity from large language models.
+Please adjust the following policy to account for the following reasoning. Policy: {original_policy}
+--------------------------
+The current policy is flawed and labels the following question-answer pair incorrectly. Question: {question}. Answer: {answer}
+--------------------------
+Please use this reasoning to adjust the original policy. Reasoning: {reasoning}
+
+REVISED POLICY:
+"""
+
+MUTATION_REAS0NING_QA_PROMPT_TEMPLATE = PromptTemplate(
+    input_variables=[
+        "original_policy",
+        "question",
+        "answer",
+        "reasoning"
+    ],
+    template=MUTATION_REAS0NING_QA,
+)

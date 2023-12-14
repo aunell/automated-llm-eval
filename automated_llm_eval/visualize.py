@@ -38,7 +38,8 @@ def create_accuracy_plot(csv_file, title, save_as):
     # Add legend
     start_score =test[0]
     end_score = test[1]
-    legend_text = f"Starting Test Accuracy: {start_score:.3f}, Ending Test Accuracy: {end_score:.3f}"
+    best_score = test[2]
+    legend_text = f"Starting Test Accuracy: {start_score:.3f}, Ending Test Accuracy: {end_score:.3f}, Best Policy Test Accuracy: {best_score:.3f}"
     
     plt.legend([legend_text])
 
@@ -134,10 +135,8 @@ def visualize_overlap(csv_file, save_as):
 
     # Calculate counts for each pair of sets
     for i in range(len(missed_points) - 1):
-        set1 = set(missed_points[i])
-        set2 = set(missed_points[i + 1])
-        print('set1', len(set1), 'expected 40')
-        print('set2', len(set2), 'expected 59')
+        set1 = set(tuple(missed_points[i]))
+        set2 = set(tuple(missed_points[i + 1]))
         
         overlap_counts.append(len(set1.intersection(set2)))
         set1_not_set2_counts.append(len(set1.difference(set2)))

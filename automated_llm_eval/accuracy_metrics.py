@@ -1,6 +1,7 @@
 from automated_llm_eval.chat_model import ChatModel, Message, Bundle
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 import numpy as np
+import random
 
 from automated_llm_eval.prompts import (
     COMPARE_AGENT_PROMPT,
@@ -24,8 +25,13 @@ class AccuracyMetrics:
     def compute_accuracy(self):
         return accuracy_score(self.actual, self.predicted)
     
+    def get_correction_qa(self):
+        all_data_points = [[d.get('id'), d.get('question'), d.get('answer'), d.get('actual')] for d in self.data_unfiltered if (d.get('predicted') is not None and d.get('actual') is not None and int(d.get('predicted'))!=int(d.get('actual')))]
+        id, question, answer, actual = all_data_points[random.randint(0, len(all_data_points)-1)]
+        return id, question, answer, actual
+    
     def return_incorrect(self):
-        return [(d.get('id'), d.get('predicted'), d.get('actual')) for d in self.data_unfiltered if (d.get('predicted') is not None and d.get('actual') is not None and int(d.get('predicted'))!=int(d.get('actual')))]
+        return [[d.get('id'), d.get('predicted'), d.get('actual')] for d in self.data_unfiltered if (d.get('predicted') is not None and d.get('actual') is not None and int(d.get('predicted'))!=int(d.get('actual')))]
 
     def compute_f1_score(self):
         return f1_score(self.actual, self.predicted, average='micro')
@@ -108,7 +114,6 @@ class AccuracyMetrics:
                         + ". The agent's incorrect reasoning for this score is as follows: "
                         + metadata["agent_response"]
                     )
-                    print(statement_analysis)
                     incorrect_COT.append(statement_analysis)
         return incorrect_COT, correct_COT
     
