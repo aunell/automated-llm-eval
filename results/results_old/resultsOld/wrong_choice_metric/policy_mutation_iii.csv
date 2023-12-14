@@ -1,0 +1,154 @@
+0,1,2,3,4,5,6,7,8,9,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Additional Instructions for Model Improvement
+In addition to the original policy, the model should be trained to identify and correct mislabeled examples from the provided correct and incorrect answers. The model should be guided to reevaluate its predictions on the incorrect examples and adjust its labeling based on the correct label provided. This will help the model learn from its mistakes and improve its accuracy in labeling similar examples in the future.","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Additional Instructions for Model Improvement
+In addition to the original policy, the model should be trained to identify and correct mislabeled examples from the provided correct and incorrect answers. The model should be guided to reevaluate its predictions on the incorrect examples and adjust its labeling based on the correct label provided. This will help the model learn from its mistakes and improve its accuracy in labeling similar examples in the future. The model should focus on capturing the key findings accurately and comprehensively, ensuring that both summaries are evaluated thoroughly for any discrepancies in information.","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Additional Instructions for Model Improvement
+In addition to the original policy, the model should be trained to identify and correct mislabeled examples from the provided correct and incorrect answers. The model should be guided to reevaluate its predictions on the incorrect examples and adjust its labeling based on the correct label provided. This will help the model learn from its mistakes and improve its accuracy in labeling similar examples in the future. The model should focus on capturing the key findings accurately and comprehensively, ensuring that both summaries are evaluated thoroughly for any discrepancies in information. The model should also consider the context and specific details provided in the reference text to make accurate assessments.","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Additional Instructions for Model Improvement
+In addition to the original policy, the model should be trained to identify and correct mislabeled examples from the provided correct and incorrect answers. The model should be guided to reevaluate its predictions on the incorrect examples and adjust its labeling based on the correct label provided. This will help the model learn from its mistakes and improve its accuracy in labeling similar examples in the future. The model should focus on capturing the key findings accurately and comprehensively, ensuring that both summaries are evaluated thoroughly for any discrepancies in information. The model should also consider the context and specific details provided in the reference text to make accurate assessments.","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Additional Instructions for Model Improvement
+In addition to the original policy, the model should be trained to identify and correct mislabeled examples from the provided correct and incorrect answers. The model should be guided to reevaluate its predictions on the incorrect examples and adjust its labeling based on the correct label provided. This will help the model learn from its mistakes and improve its accuracy in labeling similar examples in the future. The model should focus on capturing the key findings accurately and comprehensively, ensuring that both summaries are evaluated thoroughly for any discrepancies in information. The model should also be trained to pay attention to the context and specific details provided in the reference text to make accurate assessments. Additionally, the model should be encouraged to consider the potential impact of any mislabeled examples on the overall assessment of the summaries.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A accurately represents the information from the reference text (Score: 2)
+Both A and B accurately represent the information from the reference text (Score: 1)
+Neither A nor B accurately represents the information from the reference text (Score: 0)
+B accurately represents the information from the reference text (Score: -2)
+
+Additional Instructions for Model Improvement
+In addition to the original policy, the model should be trained to identify and correct mislabeled examples from the provided correct and incorrect answers. The model should be guided to reevaluate its predictions on the incorrect examples and adjust its labeling based on the correct label provided. This will help the model learn from its mistakes and improve its accuracy in labeling similar examples in the future. The model should focus on capturing the key findings accurately and comprehensively, ensuring that both summaries are evaluated thoroughly for any discrepancies in information. The model should also be trained to pay attention to the context and specific details provided in the reference text to make accurate assessments.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A accurately represents the information from the reference text (Score: 2)
+Both A and B accurately represent the information from the reference text (Score: 1)
+Neither A nor B accurately represents the information from the reference text (Score: 0)
+B accurately represents the information from the reference text (Score: -2)
+
+Additional Instructions for Model Improvement
+In addition to the original policy, the model should be trained to identify and correct mislabeled examples from the provided correct and incorrect answers. The model should be guided to reevaluate its predictions on the incorrect examples and adjust its labeling based on the correct label provided. This will help the model learn from its mistakes and improve its accuracy in labeling similar examples in the future. The model should focus on capturing the key findings accurately and comprehensively, ensuring that both summaries are evaluated thoroughly for any discrepancies in information. The model should also be trained to pay attention to the context and specific details provided in the reference text to make accurate assessments. The model should be encouraged to consider the overall context and content of the reference text when making its evaluations.",0.5930232558139535
+0.627906976744186,0.6190476190476191,0.6395348837209303,0.6710526315789473,0.7671232876712328,0.759493670886076,0.7530864197530864,0.7023809523809523,0.08433734939759036,0.0875,0.08641975308641975
+0.5294117647058824,0.5223880597014925,0.5441176470588235,0.5666666666666667,0.6724137931034483,0.6666666666666666,0.65625,0.6119402985074627,0.030303030303030304,0.03125,"[0.5, 0.6911764705882353]"
+0.7205882352941176,0.7164179104477612,0.7352941176470589,0.7666666666666667,0.8620689655172413,0.8412698412698413,0.84375,0.7910447761194029,0.15151515151515152,0.140625,"[0.03125, 0.15625]"

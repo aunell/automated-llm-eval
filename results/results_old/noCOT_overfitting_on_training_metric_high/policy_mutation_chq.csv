@@ -1,0 +1,164 @@
+0,1,2,3,4,5,6,7,8,9,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries. The relevance of the information to the original query should also be considered when assigning scores.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries. The relevance of the information to the original query should also be considered when assigning scores. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries. The relevance of the information to the original query should also be considered when assigning scores. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Note: The model should carefully consider the content of the summaries and ensure that the accuracy of the labeling is prioritized. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries. The relevance of the information to the original query should also be considered when assigning scores.
+
+Note: The model should carefully consider the content of the summaries and ensure that the accuracy of the labeling is prioritized. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the model has incorrectly labeled examples, it should reevaluate the content and context of the statements to ensure accurate labeling.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries. The relevance of the information to the original query should also be considered when assigning scores.
+
+Note: The model should carefully consider the content of the summaries and ensure that the accuracy of the labeling is prioritized. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the model has incorrectly labeled examples, it should reevaluate the content and context of the statements to ensure accurate labeling. If the model has previously mislabeled examples, it should reassess the summaries and provide the correct label based on the relevance and accuracy of the information presented.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries. The relevance of the information to the original query should also be considered when assigning scores.
+
+Note: The model should carefully consider the content of the summaries and ensure that the accuracy of the labeling is prioritized. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the model has incorrectly labeled examples, it should reevaluate the content and context of the statements to ensure accurate labeling. If the model has previously mislabeled examples, it should reassess the summaries and provide the correct label based on the relevance and accuracy of the information presented. It should also consider the context and specific details of the original query to accurately label the statements.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: Ensure that the accuracy of the labeling is prioritized in addition to evaluating the content of the summaries. The relevance of the information to the original query should also be considered when assigning scores.
+
+Note: The model should carefully consider the content of the summaries and ensure that the accuracy of the labeling is prioritized. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented. If the model has incorrectly labeled examples, it should reassess the summaries and provide the correct label based on the relevance and accuracy of the information presented. It should also consider the context and specific details of the original query to accurately label the statements. If the model has previously mislabeled examples, it should reassess the summaries and provide the correct label based on the relevance and accuracy of the information presented.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately label the statements based on relevance to the original query. If the summaries do not accurately represent the original query, provide a score based on the relevance and accuracy of the information presented.
+
+Scoring Criteria
+A significantly better than B and accurately labeled (Score: -2)
+A slightly better than B and accurately labeled (Score: -1)
+Neither A or B is better than the other and accurately labeled (Score: 0)
+B slightly better than A and accurately labeled (Score: 1)
+B significantly better than A and accurately labeled (Score 2)
+
+Note: The accuracy of the labeling should be prioritized, and the relevance of the information to the original query should also be considered when assigning scores. If the model has incorrectly labeled examples, it should reassess the summaries and provide the correct label based on the relevance and accuracy of the information presented. It should also consider the context and specific details of the original query to accurately label the statements. If the model has previously mislabeled examples, it should reassess the summaries and provide the correct label based on the relevance and accuracy of the information presented.",0.4177215189873418
+0.4567901234567901,0.45,0.36619718309859156,0.5,0.5,0.5542168674698795,0.45121951219512196,0.5121951219512195,0.5609756097560976,0.4578313253012048,0.5375
+0.359375,0.3333333333333333,0.26785714285714285,0.4,0.4,0.45454545454545453,0.35384615384615387,0.4153846153846154,0.4461538461538462,0.36363636363636365,"[0.31746031746031744, 0.5079365079365079]"
+0.5625,0.5625,0.48214285714285715,0.6,0.6,0.6515151515151515,0.5538461538461539,0.6153846153846154,0.6615384615384615,0.5606060606060606,"[0.4375, 0.640625]"

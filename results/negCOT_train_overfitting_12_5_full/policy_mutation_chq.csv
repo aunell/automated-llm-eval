@@ -1,0 +1,209 @@
+,0,1,2,3,4,5,6,7,8,9,10
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary provides the most relevant and comprehensive information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and comprehensive information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive manner.
+
+By incorporating additional guidance and emphasizing the relevance and comprehensiveness of the information provided in each summary, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+In evaluating the summaries, prioritize addressing the individual's specific questions and needs while also considering the emotional and practical aspects of their situation. The language model should focus on providing information that directly aligns with the individual's inquiries and concerns, demonstrating empathy and understanding of their unique circumstances.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+In evaluating the summaries, prioritize addressing the individual's specific questions and needs while also considering the emotional and practical aspects of their situation. The language model should focus on providing information that directly aligns with the individual's inquiries and concerns, demonstrating empathy and understanding of their unique circumstances.
+
+To improve accuracy, it's essential to ensure that the language model accurately assesses the relevance and specificity of the information provided in each summary. The model should consider the individual's emotional and practical needs, and focus on providing information that directly aligns with their inquiries and concerns. It should avoid favoring one summary over the other based on subjective interpretations and instead focus on the factual alignment with the individual's specific questions and needs.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+In evaluating the summaries, prioritize addressing the individual's specific questions and needs while also considering the emotional and practical aspects of their situation. The language model should focus on providing information that directly aligns with the individual's inquiries and concerns, demonstrating empathy and understanding of their unique circumstances.
+
+To improve accuracy, it's essential to ensure that the language model accurately assesses the relevance and specificity of the information provided in each summary. The model should consider the individual's emotional and practical needs, and focus on providing information that directly aligns with their inquiries and concerns. It should avoid favoring one summary over the other based on subjective interpretations and instead focus on the factual alignment with the individual's specific questions and needs.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+In evaluating the summaries, prioritize addressing the individual's specific questions and needs while also considering the emotional and practical aspects of their situation. The language model should focus on providing information that directly aligns with the individual's inquiries and concerns, demonstrating empathy and understanding of their unique circumstances.
+
+To improve accuracy, it's essential to ensure that the language model accurately assesses the relevance and specificity of the information provided in each summary. The model should consider the individual's emotional and practical needs, and focus on providing information that directly aligns with their inquiries and concerns. It should avoid favoring one summary over the other based on subjective interpretations and instead focus on the factual alignment with the individual's specific questions and needs.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+In evaluating the summaries, prioritize addressing the individual's specific questions and needs while also considering the emotional and practical aspects of their situation. The language model should focus on providing information that directly aligns with the individual's inquiries and concerns, demonstrating empathy and understanding of their unique circumstances.
+
+To improve accuracy, it's essential to ensure that the language model accurately assesses the relevance and specificity of the information provided in each summary. The model should consider the individual's emotional and practical needs, and focus on providing information that directly aligns with their inquiries and concerns. It should avoid favoring one summary over the other based on subjective interpretations and instead focus on the factual alignment with the individual's specific questions and needs.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+In evaluating the summaries, prioritize addressing the individual's specific questions and needs while also considering the emotional and practical aspects of their situation. The language model should focus on providing information that directly aligns with the individual's inquiries and concerns, demonstrating empathy and understanding of their unique circumstances.
+
+To improve accuracy, it's essential to ensure that the language model accurately assesses the relevance and specificity of the information provided in each summary. The model should consider the individual's emotional and practical needs, and focus on providing information that directly aligns with their inquiries and concerns. It should avoid favoring one summary over the other based on subjective interpretations and instead focus on the factual alignment with the individual's specific questions and needs.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.","Title: Summary comparison - relevance and specificity policy
+
+Objective
+Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most relevant and specific information based on the individual's concerns.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Additional Guidance
+Consider the specificity and relevance of the information provided in each summary to the individual's concerns. Focus on addressing the individual's specific questions and needs in the most comprehensive and empathetic manner. Acknowledge the emotional and practical aspects of the individual's situation and ensure that the summaries directly align with their specific needs and concerns.
+
+In evaluating the summaries, prioritize addressing the individual's specific questions and needs while also considering the emotional and practical aspects of their situation. The language model should focus on providing information that directly aligns with the individual's inquiries and concerns, demonstrating empathy and understanding of their unique circumstances.
+
+To improve accuracy, it's essential to ensure that the language model accurately assesses the relevance and specificity of the information provided in each summary. The model should consider the individual's emotional and practical needs, and focus on providing information that directly aligns with their inquiries and concerns. It should avoid favoring one summary over the other based on subjective interpretations and instead focus on the factual alignment with the individual's specific questions and needs.
+
+By emphasizing the relevance and specificity of the information provided in each summary and incorporating empathy towards the individual's situation, the revised policy aims to improve the language model's accuracy in evaluating the summaries. This will help ensure that the model correctly labels the examples based on the relevance and specificity of the information provided in each summary, taking into account the individual's emotional and practical needs.",[]
+score,0.4,0.3,0.1111111111111111,0.16666666666666666,0.5,0.42857142857142855,0.0,0.25,0.4,0.6,[]
+lower_limit,0.125,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.25,[]
+upper_limit,0.625,0.625,0.2857142857142857,0.5,1.0,0.8,0.0,0.6666666666666666,0.75,1.0,[]
+distance,0,1271,2144,374,516,0,0,0,0,0,[]
+missed statements,"[(509, -1, 0.0), (484, -2, 0.0), (801, -2, 0.0), (728, -2, 0.0), (507, -1, 0.0), (662, 1, 0.0)]","[(509, -1, 0.0), (484, -2, 0.0), (801, -1, 0.0), (476, -1, 0.0), (513, 1, 0.0), (507, -1, 0.0), (662, 1, 0.0)]","[(509, -2, 0.0), (801, -2, 0.0), (682, 1, 0.0), (763, 1, 0.0), (476, -2, 0.0), (728, -2, 0.0), (507, -2, 0.0), (662, 2, 0.0)]","[(509, -2, 0.0), (763, -1, 0.0), (476, -1, 0.0), (513, 1, 0.0), (507, -1, 0.0)]","[(513, 1, 0.0), (507, -1, 0.0)]","[(509, -1, 0.0), (484, -2, 0.0), (801, -2, 0.0), (513, 1, 0.0)]","[(509, -2, 0.0), (484, -2, 0.0), (682, 1, 0.0), (476, -1, 0.0), (513, 1, 0.0)]","[(509, -1, 0.0), (801, -2, 0.0), (513, 1, 0.0)]","[(801, -2, 0.0), (513, 1, 0.0), (507, -1, 0.0)]","[(801, -2, 0.0), (507, -1, 0.0)]",[]
+test values,[],[],[],[],[],[],[],[],[],[],"[0.4050632911392405, 0.3787878787878788, [(773, -2, 1.0), (521, 1, 0.0), (660, 1, 0.0), (645, -2, 0.0), (847, 1, 0.0), (696, -2, 1.0), (725, -1, 0.0), (523, 1, 0.0), (598, -2, 0.0), (542, 1, 0.0), (647, -2, 0.0), (730, -2, 0.0), (738, -2, 0.0), (804, -2, 0.0), (676, 0, -1.0), (726, -2, 0.0), (809, 2, 0.0), (667, -2, 0.0), (482, -2, 0.0), (787, 1, -1.0), (691, 2, 0.0), (541, 1, 0.0), (574, 1, 0.0), (729, -1, 0.0), (788, 1, -1.0), (591, -2, 0.0), (754, -1, 1.0), (711, 2, 1.0), (799, -2, 1.0), (683, -1, 0.0), (753, -1, 1.0), (597, -2, 0.0), (706, -2, 0.0), (503, 0, 1.0), (553, -2, 0.0), (562, 1, 0.0), (751, -1, 1.0), (451, -2, 0.0), (546, 1, 0.0), (783, -2, 1.0), (617, 0, 1.0), (679, 0, -1.0), (652, -2, -1.0), (831, 2, 0.0), (648, -2, 0.0), (566, -2, 0.0), (665, -2, 0.0)], [(582, 1, 0.0), (773, -2, 1.0), (645, -2, 0.0), (576, -2, 0.0), (578, 1, 0.0), (847, 1, 0.0), (598, -2, 0.0), (542, -2, 0.0), (647, -2, 0.0), (730, 1, 0.0), (738, 1, 0.0), (804, -2, 0.0), (746, 1, -1.0), (636, -1, 0.0), (809, 1, 0.0), (667, -2, 0.0), (482, -2, 0.0), (461, -2, 0.0), (691, -2, 0.0), (758, -2, 0.0), (471, 1, 0.0), (514, 1, 0.0), (541, -2, 0.0), (574, -2, 0.0), (788, 0, -1.0), (754, -1, 1.0), (597, 1, 0.0), (706, -2, 0.0), (503, -2, 1.0), (553, -2, 0.0), (756, -2, 0.0), (751, -1, 1.0), (451, -2, 0.0), (546, -2, 0.0), (610, 1, 0.0), (679, 1, -1.0), (458, -2, 1.0), (831, -2, 0.0), (648, -2, 0.0), (566, 1, 0.0), (665, -2, 0.0)]]"

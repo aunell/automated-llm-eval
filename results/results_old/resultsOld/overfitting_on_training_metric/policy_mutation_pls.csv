@@ -1,0 +1,135 @@
+0,1,2,3,4,5,6,7,8,9,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)",0.5473684210526316
+0.5444444444444444,0.5483870967741935,0.5454545454545454,0.5340909090909091,0.5444444444444444,0.5416666666666666,0.5106382978723404,0.5168539325842697,0.4725274725274725,0.46153846153846156,0.5494505494505495
+0.4444444444444444,0.4594594594594595,0.44285714285714284,0.44285714285714284,0.4444444444444444,0.4473684210526316,0.41333333333333333,0.4225352112676056,0.375,0.375,"[0.4605263157894737, 0.631578947368421]"
+0.6388888888888888,0.6486486486486487,0.6428571428571429,0.6285714285714286,0.6388888888888888,0.6322368421052625,0.6,0.6063380281690134,0.5694444444444444,0.5694444444444444,"[0.4583333333333333, 0.6388888888888888]"

@@ -1,0 +1,303 @@
+,0,1,2,3,4,5,6,7,8,9,10
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Enhanced Summary Comparison - Correctness Policy
+
+Objective
+To accurately evaluate which summary contains the least amount of false information when compared to a reference text.
+
+Instructions
+You are presented with two summaries (A, B) derived from a reference text. Your task is to assess which summary is more accurate by containing fewer inaccuracies or false information relative to the reference text.
+
+Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is clearly more accurate, with all information supported by the reference text, while Summary B contains multiple significant errors not supported by the reference text.
+- A slightly better than B (Score: -1): Summary A is more accurate, with most information supported by the reference text, and any inaccuracies are minor. Summary B contains one or more errors that are not critical but still inaccurately represent the reference text.
+- Neither A nor B is better than the other (Score: 0): Both summaries contain a similar level of accuracy and number of inaccuracies when compared to the reference text.
+- B slightly better than A (Score: 1): Summary B is more accurate, with most information supported by the reference text, and any inaccuracies are minor. Summary A contains one or more errors that are not critical but still inaccurately represent the reference text.
+- B significantly better than A (Score 2): Summary B is clearly more accurate, with all information supported by the reference text, while Summary A contains multiple significant errors not supported by the reference text.
+
+Additional Guidance
+- False information is defined as any statement in the summaries that is not corroborated by the reference text or contradicts it.
+- Minor inaccuracies refer to details that are not central to the main points of the reference text or do not significantly alter the overall accuracy of the summary.
+- Significant errors are inaccuracies that change the fundamental understanding of the reference text or introduce concepts, conditions, or events that are not present in the reference text.
+- When evaluating the summaries, consider the context and relevance of the information provided. A summary that omits a critical piece of information from the reference text may be less accurate than one that includes a minor inaccuracy.
+- If a summary includes additional details not found in the reference text but does not contradict it, and these details are clinically relevant or typically associated with the presented conditions, the summary should not be penalized unless the additional details lead to a misunderstanding of the reference text.
+- Use the examples of incorrect answers provided to understand common pitfalls in the evaluation process and avoid repeating these mistakes.
+
+By following these revised instructions and criteria, the model should improve its accuracy in labeling the examples correctly, ensuring that the summaries are evaluated fairly and consistently against the reference text.","Title: Enhanced Summary Comparison - Correctness Policy (Revised)
+
+Objective
+To improve the evaluation of summaries (A, B) by ensuring they are assessed for accuracy based on the presence of corroborated information and the absence of significant errors when compared to a reference text.
+
+Revised Instructions
+1. Review the reference text thoroughly before evaluating the summaries.
+2. Identify and cross-reference each piece of information in the summaries with the reference text.
+3. Classify the information as either corroborated, minor inaccuracy, or significant error based on the definitions provided.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is entirely accurate with no significant errors, while Summary B contains multiple significant errors.
+- A slightly better than B (Score: -1): Summary A is mostly accurate with possible minor inaccuracies, while Summary B contains at least one significant error or several minor inaccuracies that collectively impact the summary's accuracy.
+- Neither A nor B is better than the other (Score: 0): Both summaries are equally accurate/inaccurate, with a similar number and severity of errors.
+- B slightly better than A (Score: 1): Summary B is mostly accurate with possible minor inaccuracies, while Summary A contains at least one significant error or several minor inaccuracies that collectively impact the summary's accuracy.
+- B significantly better than A (Score: 2): Summary B is entirely accurate with no significant errors, while Summary A contains multiple significant errors.
+
+Revised Definitions
+- Corroborated Information: Statements that are directly supported by the reference text.
+- Minor Inaccuracy: Information that is not central to the main points or does not significantly alter the overall message of the reference text.
+- Significant Error: Information that changes the fundamental understanding or introduces concepts, conditions, or events not present in the reference text.
+
+Additional Guidance
+- Omissions of critical information should be considered significant errors.
+- Inaccuracies should be weighed by their impact on the overall accuracy of the summary.
+- When a summary includes plausible clinical assumptions or common knowledge that does not contradict the reference text, it should not be penalized unless it leads to a misunderstanding.
+- Use specific examples from the incorrect answers provided to illustrate common errors and guide the evaluation process.
+
+Examples of Incorrect Answers and Revisions:
+1. If a summary incorrectly specifies a condition (e.g., ""R BKA"" when the side is not mentioned), it should be considered a significant error if the side is a critical detail.
+2. When a summary includes a condition that could be inferred from the patient's overall clinical picture (e.g., ""CONFUSION altered MENTAL STATUS""), it should not be penalized unless the reference text explicitly contradicts this.
+3. If a summary omits a condition that is a key element of the patient's current clinical picture (e.g., omitting ""sepsis"" when hypotension and infection are present), it should be scored as less accurate.
+
+By adhering to the revised policy, the model is expected to label the examples more accurately, ensuring that the summaries are evaluated with a consistent and precise approach against the reference text.","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Updated)
+
+Objective
+To refine the evaluation process of summaries (A, B) by ensuring they are assessed for accuracy with greater precision, based on the presence of corroborated information and the absence of significant errors when compared to a reference text.
+
+Updated Instructions
+1. Review the reference text meticulously to establish a comprehensive understanding of the patient's clinical picture.
+2. Cross-reference each piece of information in the summaries with the reference text, verifying the accuracy of each detail.
+3. Classify the information as either corroborated, minor inaccuracy, or significant error, using the updated definitions and examples provided.
+
+Updated Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is entirely accurate with no significant errors, while Summary B contains multiple significant errors or omissions that critically impact the summary's accuracy.
+- A slightly better than B (Score: -1): Summary A is mostly accurate with possible minor inaccuracies, while Summary B contains at least one significant error or several minor inaccuracies that collectively impact the summary's accuracy more than those in Summary A.
+- Neither A nor B is better than the other (Score: 0): Both summaries are equally accurate/inaccurate, with a similar number and severity of errors or omissions.
+- B slightly better than A (Score: 1): Summary B is mostly accurate with possible minor inaccuracies, while Summary A contains at least one significant error or several minor inaccuracies that collectively impact the summary's accuracy more than those in Summary B.
+- B significantly better than A (Score: 2): Summary B is entirely accurate with no significant errors, while Summary A contains multiple significant errors or omissions that critically impact the summary's accuracy.
+
+Updated Definitions
+- Corroborated Information: Statements that are directly supported by the reference text without extrapolation.
+- Minor Inaccuracy: Information that is slightly off from the reference text but does not alter the fundamental understanding of the patient's condition.
+- Significant Error: Information that is incorrect or missing and changes the fundamental understanding of the patient's condition, or introduces concepts, conditions, or events not present in the reference text.
+
+Additional Guidance
+- Omissions of critical information should be considered significant errors, especially if they pertain to the patient's current clinical status or recent changes in condition.
+- Inaccuracies and omissions should be weighed by their impact on the overall accuracy and completeness of the summary.
+- Summaries should not be penalized for plausible clinical assumptions or common knowledge that align with the reference text, unless they introduce inaccuracies or lead to misunderstanding.
+- Use specific examples from the incorrect answers provided to illustrate common errors and guide the evaluation process.
+
+Clarifications Based on Incorrect Answers:
+1. When evaluating the presence of conditions such as ""ESRD"" or ""hypertension,"" ensure that they are explicitly mentioned in the reference text or can be conclusively inferred from the provided data. Avoid introducing conditions based on general medical knowledge that is not supported by the reference text.
+2. The omission of a condition or treatment that is a key element of the patient's current clinical picture, such as ""NSTEMI"" or ongoing ""insulin"" treatment, should be scored as a significant error, as it omits critical information necessary for understanding the patient's status.
+3. When a summary includes a specific detail such as ""R BKA"" (right below-knee amputation), verify that","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Refined)
+
+Objective
+To enhance the precision of accuracy assessments for summaries (A, B) by meticulously comparing them to a reference text, ensuring that each summary is evaluated based on corroborated information, minor inaccuracies, and significant errors.
+
+Revised Instructions
+1. Thoroughly familiarize yourself with the reference text to understand the patient's clinical situation in detail.
+2. Compare each detail in the summaries to the reference text, verifying the accuracy and relevance of the information.
+3. Assign classifications to the information as corroborated, minor inaccuracy, or significant error, adhering to the refined definitions and examples provided.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is fully accurate with no significant errors, while Summary B has multiple significant errors or omissions that critically affect its accuracy.
+- A slightly better than B (Score: -1): Summary A is largely accurate with minor inaccuracies at most, while Summary B has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary A.
+- Neither A nor B is better (Score: 0): Both summaries have a comparable number and severity of errors or omissions, neither outweighing the other in terms of accuracy.
+- B slightly better than A (Score: 1): Summary B is largely accurate with minor inaccuracies at most, while Summary A has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary B.
+- B significantly better than A (Score: 2): Summary B is fully accurate with no significant errors, while Summary A has multiple significant errors or omissions that critically affect its accuracy.
+
+Revised Definitions
+- Corroborated Information: Statements directly supported by the reference text without extrapolation or assumption.
+- Minor Inaccuracy: Slight deviations from the reference text that do not fundamentally alter the understanding of the patient's condition.
+- Significant Error: Incorrect or missing information that fundamentally changes the understanding of the patient's condition or introduces unsupported concepts, conditions, or events.
+
+Additional Guidance
+- Critical omissions should be scored as significant errors, particularly if they relate to the patient's current clinical status or recent changes.
+- The impact of inaccuracies and omissions on the overall summary's accuracy and completeness should be considered.
+- Summaries should not be penalized for plausible clinical assumptions or common knowledge that is consistent with the reference text, unless they introduce inaccuracies or misunderstandings.
+- Provide specific examples from the incorrect answers to illustrate common errors and guide the evaluation process.
+
+Clarifications Based on Incorrect Answers:
+1. Conditions such as ""ESRD"" or ""hypertension"" must be explicitly mentioned in the reference text or conclusively inferred from the provided data. Do not introduce conditions based on general medical knowledge not supported by the reference text.
+2. The omission of a key element of the patient's current clinical picture, such as ""NSTEMI"" or ongoing ""insulin"" treatment, should be scored as a significant error due to the omission of critical information.
+3. Verify specific details like ""R BKA"" against the reference text. If not present, score as a significant error.
+
+Policy Adjustments for Improved Accuracy:
+- Emphasize the importance of not inferring conditions or treatments not explicitly supported by the reference text, to avoid introducing significant errors.
+-","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Refined)
+
+Objective
+To improve the precision of accuracy assessments for summaries (A, B) by comparing them to a reference text, ensuring that each summary is evaluated for accuracy based on corroborated information, minor inaccuracies, and significant errors.
+
+Revised Instructions
+1. Familiarize yourself with the reference text to understand the patient's clinical situation comprehensively.
+2. Compare each detail in the summaries to the reference text, verifying the accuracy and relevance of the information.
+3. Assign classifications to the information as corroborated, minor inaccuracy, or significant error, using the refined definitions and examples provided.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is fully accurate with no significant errors, while Summary B has multiple significant errors or omissions that critically affect its accuracy.
+- A slightly better than B (Score: -1): Summary A is largely accurate with minor inaccuracies at most, while Summary B has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary A.
+- Neither A nor B is better (Score: 0): Both summaries have a comparable number and severity of errors or omissions, neither outweighing the other in terms of accuracy.
+- B slightly better than A (Score: 1): Summary B is largely accurate with minor inaccuracies at most, while Summary A has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary B.
+- B significantly better than A (Score: 2): Summary B is fully accurate with no significant errors, while Summary A has multiple significant errors or omissions that critically affect its accuracy.
+
+Revised Definitions
+- Corroborated Information: Statements directly supported by the reference text without extrapolation or assumption.
+- Minor Inaccuracy: Slight deviations from the reference text that do not fundamentally alter the understanding of the patient's condition.
+- Significant Error: Incorrect or missing information that fundamentally changes the understanding of the patient's condition or introduces unsupported concepts, conditions, or events.
+
+Additional Guidance
+- Critical omissions should be scored as significant errors, particularly if they relate to the patient's current clinical status or recent changes.
+- The impact of inaccuracies and omissions on the overall summary's accuracy and completeness should be considered.
+- Summaries should not be penalized for plausible clinical assumptions or common knowledge that is consistent with the reference text, unless they introduce inaccuracies or misunderstandings.
+- Provide specific examples from the incorrect answers to illustrate common errors and guide the evaluation process.
+
+Clarifications Based on Incorrect Answers:
+1. Conditions such as ""ESRD"" or ""hypertension"" must be explicitly mentioned in the reference text or conclusively inferred from the provided data. Do not introduce conditions based on general medical knowledge not supported by the reference text.
+2. The omission of a key element of the patient's current clinical picture, such as ""NSTEMI"" or ongoing ""insulin"" treatment, should be scored as a significant error due to the omission of critical information.
+3. Verify specific details like ""R BKA"" against the reference text. If not present, score as a significant error.
+4. When evaluating the presence of conditions such as ""hypertension"" or ""diabetes mellitus,"" ensure that the reference text provides explicit evidence or clear clinical indicators that support these diagnoses","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Refined)
+
+Objective
+To enhance the precision of accuracy assessments for summaries (A, B) by comparing them to a reference text, ensuring that each summary is evaluated for accuracy based on corroborated information, minor inaccuracies, and significant errors.
+
+Revised Instructions
+1. Familiarize yourself with the reference text to understand the patient's clinical situation comprehensively.
+2. Compare each detail in the summaries to the reference text, verifying the accuracy and relevance of the information.
+3. Assign classifications to the information as corroborated, minor inaccuracy, or significant error, using the refined definitions and examples provided.
+4. Pay special attention to the presence of conditions, treatments, and clinical status indicators. Ensure that each is explicitly supported by the reference text or can be conclusively inferred from the provided data without assumption.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is fully accurate with no significant errors, while Summary B has multiple significant errors or omissions that critically affect its accuracy.
+- A slightly better than B (Score: -1): Summary A is largely accurate with minor inaccuracies at most, while Summary B has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary A.
+- Neither A nor B is better (Score: 0): Both summaries have a comparable number and severity of errors or omissions, neither outweighing the other in terms of accuracy.
+- B slightly better than A (Score: 1): Summary B is largely accurate with minor inaccuracies at most, while Summary A has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary B.
+- B significantly better than A (Score: 2): Summary B is fully accurate with no significant errors, while Summary A has multiple significant errors or omissions that critically affect its accuracy.
+
+Revised Definitions
+- Corroborated Information: Statements directly supported by the reference text without extrapolation or assumption.
+- Minor Inaccuracy: Slight deviations from the reference text that do not fundamentally alter the understanding of the patient's condition.
+- Significant Error: Incorrect or missing information that fundamentally changes the understanding of the patient's condition or introduces unsupported concepts, conditions, or events.
+
+Additional Guidance
+- Critical omissions should be scored as significant errors, particularly if they relate to the patient's current clinical status or recent changes.
+- The impact of inaccuracies and omissions on the overall summary's accuracy and completeness should be considered.
+- Summaries should not be penalized for plausible clinical assumptions or common knowledge that is consistent with the reference text, unless they introduce inaccuracies or misunderstandings.
+- Provide specific examples from the incorrect answers to illustrate common errors and guide the evaluation process.
+- When evaluating the presence of conditions such as ""hypertension"" or ""diabetes mellitus,"" ensure that the reference text provides explicit evidence or clear clinical indicators that support these diagnoses.
+- For conditions or treatments not explicitly mentioned in the reference text but are common knowledge (e.g., insulin treatment for diabetes), consider the context and whether the inclusion is a plausible clinical assumption that does not introduce inaccuracies.
+
+Clarifications Based on Incorrect Answers:
+1. Conditions such as ""ESRD"" or ""hypertension"" must be explicitly mentioned in the reference text or conclusively inferred from the provided data. Do not introduce","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Refined)
+
+Objective
+To improve the precision of accuracy assessments for summaries (A, B) by comparing them to a reference text, ensuring that each summary is evaluated for accuracy based on corroborated information, minor inaccuracies, and significant errors.
+
+Revised Instructions
+1. Familiarize yourself with the reference text to understand the patient's clinical situation comprehensively.
+2. Compare each detail in the summaries to the reference text, verifying the accuracy and relevance of the information.
+3. Assign classifications to the information as corroborated, minor inaccuracy, or significant error, using the refined definitions and examples provided.
+4. Pay special attention to the presence of conditions, treatments, and clinical status indicators. Ensure that each is explicitly supported by the reference text or can be conclusively inferred from the provided data without assumption.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is fully accurate with no significant errors, while Summary B has multiple significant errors or omissions that critically affect its accuracy.
+- A slightly better than B (Score: -1): Summary A is largely accurate with minor inaccuracies at most, while Summary B has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary A.
+- Neither A nor B is better (Score: 0): Both summaries have a comparable number and severity of errors or omissions, neither outweighing the other in terms of accuracy.
+- B slightly better than A (Score: 1): Summary B is largely accurate with minor inaccuracies at most, while Summary A has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary B.
+- B significantly better than A (Score: 2): Summary B is fully accurate with no significant errors, while Summary A has multiple significant errors or omissions that critically affect its accuracy.
+
+Revised Definitions
+- Corroborated Information: Statements directly supported by the reference text without extrapolation or assumption.
+- Minor Inaccuracy: Slight deviations from the reference text that do not fundamentally alter the understanding of the patient's condition.
+- Significant Error: Incorrect or missing information that fundamentally changes the understanding of the patient's condition or introduces unsupported concepts, conditions, or events.
+
+Additional Guidance
+- Critical omissions should be scored as significant errors, particularly if they relate to the patient's current clinical status or recent changes.
+- The impact of inaccuracies and omissions on the overall summary's accuracy and completeness should be considered.
+- Summaries should not be penalized for plausible clinical assumptions or common knowledge that is consistent with the reference text, unless they introduce inaccuracies or misunderstandings.
+- Provide specific examples from the incorrect answers to illustrate common errors and guide the evaluation process.
+- When evaluating the presence of conditions such as ""hypertension"" or ""diabetes mellitus,"" ensure that the reference text provides explicit evidence or clear clinical indicators that support these diagnoses.
+- For conditions or treatments not explicitly mentioned in the reference text but are common knowledge (e.g., insulin treatment for diabetes), consider the context and whether the inclusion is a plausible clinical assumption that does not introduce inaccuracies.
+
+Clarifications Based on Incorrect Answers:
+1. Conditions such as ""ESRD"" or ""hypertension"" must be explicitly mentioned in the reference text or conclusively inferred from the provided data. Do not introduce","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Refined with Clarifications)
+
+Objective
+To enhance the precision of accuracy assessments for summaries (A, B) by comparing them to a reference text, ensuring that each summary is evaluated for accuracy based on corroborated information, minor inaccuracies, and significant errors.
+
+Revised Instructions
+1. Familiarize yourself with the reference text to understand the patient's clinical situation comprehensively.
+2. Compare each detail in the summaries to the reference text, verifying the accuracy and relevance of the information.
+3. Assign classifications to the information as corroborated, minor inaccuracy, or significant error, using the refined definitions and examples provided.
+4. Pay special attention to the presence of conditions, treatments, and clinical status indicators. Ensure that each is explicitly supported by the reference text or can be conclusively inferred from the provided data without assumption.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is fully accurate with no significant errors, while Summary B has multiple significant errors or omissions that critically affect its accuracy.
+- A slightly better than B (Score: -1): Summary A is largely accurate with minor inaccuracies at most, while Summary B has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary A.
+- Neither A nor B is better (Score: 0): Both summaries have a comparable number and severity of errors or omissions, neither outweighing the other in terms of accuracy.
+- B slightly better than A (Score: 1): Summary B is largely accurate with minor inaccuracies at most, while Summary A has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary B.
+- B significantly better than A (Score: 2): Summary B is fully accurate with no significant errors, while Summary A has multiple significant errors or omissions that critically affect its accuracy.
+
+Revised Definitions
+- Corroborated Information: Statements directly supported by the reference text without extrapolation or assumption.
+- Minor Inaccuracy: Slight deviations from the reference text that do not fundamentally alter the understanding of the patient's condition.
+- Significant Error: Incorrect or missing information that fundamentally changes the understanding of the patient's condition or introduces unsupported concepts, conditions, or events.
+
+Additional Guidance
+- Critical omissions should be scored as significant errors, particularly if they relate to the patient's current clinical status or recent changes.
+- The impact of inaccuracies and omissions on the overall summary's accuracy and completeness should be considered.
+- Summaries should not be penalized for plausible clinical assumptions or common knowledge that is consistent with the reference text, unless they introduce inaccuracies or misunderstandings.
+- Provide specific examples from the incorrect answers to illustrate common errors and guide the evaluation process.
+- When evaluating the presence of conditions such as ""hypertension"" or ""diabetes mellitus,"" ensure that the reference text provides explicit evidence or clear clinical indicators that support these diagnoses.
+- For conditions or treatments not explicitly mentioned in the reference text but are common knowledge (e.g., insulin treatment for diabetes), consider the context and whether the inclusion is a plausible clinical assumption that does not introduce inaccuracies.
+
+Clarifications Based on Incorrect Answers:
+1. Conditions such as ""ESRD"" or ""hypertension"" must be explicitly mentioned in the reference text or conclusively inferred from the provided data.","Title: Enhanced Summary Comparison - Correctness Policy (Revised with Additional Specificity and Examples)
+
+Objective
+To improve the accuracy of summary evaluations (A, B) by meticulously comparing them to a reference text, ensuring that each summary is assessed for accuracy based on corroborated information, minor inaccuracies, and significant errors.
+
+Revised Instructions
+1. Thoroughly review the reference text to gain a complete understanding of the patient's clinical situation.
+2. Scrutinize each detail in the summaries against the reference text, verifying the accuracy and relevance of the information.
+3. Categorize the information as corroborated, minor inaccuracy, or significant error, using the refined definitions and examples provided.
+4. Focus on the presence of conditions, treatments, and clinical status indicators. Confirm that each is explicitly supported by the reference text or can be conclusively inferred from the provided data without assumption.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is fully accurate with no significant errors, while Summary B has multiple significant errors or omissions that critically affect its accuracy.
+- A slightly better than B (Score: -1): Summary A is largely accurate with minor inaccuracies at most, while Summary B has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary A.
+- Neither A nor B is better (Score: 0): Both summaries have a comparable number and severity of errors or omissions, neither outweighing the other in terms of accuracy.
+- B slightly better than A (Score: 1): Summary B is largely accurate with minor inaccuracies at most, while Summary A has at least one significant error or a combination of minor inaccuracies that more severely affect its accuracy than those in Summary B.
+- B significantly better than A (Score: 2): Summary B is fully accurate with no significant errors, while Summary A has multiple significant errors or omissions that critically affect its accuracy.
+
+Revised Definitions
+- Corroborated Information: Statements directly supported by the reference text without extrapolation or assumption.
+- Minor Inaccuracy: Slight deviations from the reference text that do not fundamentally alter the understanding of the patient's condition.
+- Significant Error: Incorrect or missing information that fundamentally changes the understanding of the patient's condition or introduces unsupported concepts, conditions, or events.
+
+Additional Guidance
+- Critical omissions should be scored as significant errors, especially if they pertain to the patient's current clinical status or recent changes.
+- The impact of inaccuracies and omissions on the overall summary's accuracy and completeness should be considered.
+- Summaries should not be penalized for plausible clinical assumptions or common knowledge that is consistent with the reference text, unless they introduce inaccuracies or misunderstandings.
+- Provide specific examples from the incorrect answers to illustrate common errors and guide the evaluation process.
+- When evaluating the presence of conditions such as ""hypertension"" or ""diabetes mellitus,"" ensure that the reference text provides explicit evidence or clear clinical indicators that support these diagnoses.
+- For conditions or treatments not explicitly mentioned in the reference text but are common knowledge (e.g., insulin treatment for diabetes), consider the context and whether the inclusion is a plausible clinical assumption that does not introduce inaccuracies.
+
+Clarifications Based on Incorrect Answers:
+1. Conditions such as ""ESRD"" or ""hypertension"" must be explicitly mentioned in the reference text or conclusively inferred from the provided",[]
+score,0.35,0.3,0.25,0.47368421052631576,0.45,0.3,0.45,0.35,0.4,0.45,[]
+lower_limit,0.1875,0.125,0.0625,0.26666666666666666,0.25,0.125,0.25,0.1875,0.1875,0.25,[]
+upper_limit,0.5625,0.5,0.4375,0.6666666666666666,0.625,0.5,0.625,0.5625,0.625,0.6875,[]
+distance,0,3426,6339,6852,7392,1450,2146,484,975,2510,[]
+missed statements,"[(1128, 1, -1.0), (1096, 1, 0.0), (1307, -1, 0.0), (1231, -1, 0.0), (1385, -2, -1.0), (973, 1, -1.0), (1325, 1, 0.0), (1203, 2, 0.0), (1340, 1, 0.0), (1017, 1, 0.0), (1376, 2, 0.0), (1259, 1, 0.0), (1102, -2, -1.0)]","[(1365, 0, -1.0), (1128, 1, -1.0), (1096, 1, 0.0), (1065, 2, 1.0), (1307, -2, 0.0), (1231, 1, 0.0), (1078, -1, 1.0), (1385, -2, -1.0), (973, 1, -1.0), (1203, 1, 0.0), (1340, 2, 0.0), (1008, 1, 0.0), (1376, 2, 0.0), (1102, -2, -1.0)]","[(1096, 2, 0.0), (1307, -1, 0.0), (1231, -1, 0.0), (1078, 0, 1.0), (1385, -2, -1.0), (973, 0, -1.0), (1359, 0, -1.0), (1325, -1, 0.0), (1203, 1, 0.0), (1223, 1, -1.0), (1340, 2, 0.0), (1008, 1, 0.0), (1376, 2, 0.0), (1259, 1, 0.0), (1102, 0, -1.0)]","[(1096, 2, 0.0), (1307, -2, 0.0), (1231, -1, 0.0), (1078, -1, 1.0), (1385, 0, -1.0), (1325, 2, 0.0), (1203, 1, 0.0), (1223, 0, -1.0), (1340, 2, 0.0), (1017, -1, 0.0)]","[(1096, 1, 0.0), (1307, -2, 0.0), (1231, -2, 0.0), (1385, -2, -1.0), (973, 0, -1.0), (1359, 1, -1.0), (1325, 1, 0.0), (1203, 1, 0.0), (1008, 1, 0.0), (1017, 1, 0.0), (1102, -2, -1.0)]","[(1128, 1, -1.0), (1096, 2, 0.0), (1065, 2, 1.0), (1307, -1, 0.0), (1231, -1, 0.0), (1078, -1, 1.0), (1385, -2, -1.0), (973, 1, -1.0), (1359, 0, -1.0), (1325, 1, 0.0), (1203, 1, 0.0), (1340, 1, 0.0), (1376, 2, 0.0), (1102, -2, -1.0)]","[(1128, 1, -1.0), (1096, 1, 0.0), (1307, -2, 0.0), (1231, -1, 0.0), (1078, -1, 1.0), (1385, -2, -1.0), (1359, 1, -1.0), (1325, 1, 0.0), (1203, 1, 0.0), (1340, 1, 0.0), (1102, -2, -1.0)]","[(1128, 0, -1.0), (1096, 2, 0.0), (1307, -1, 0.0), (1231, -2, 0.0), (1078, -1, 1.0), (1385, -2, -1.0), (973, 1, -1.0), (1325, -1, 0.0), (1203, 1, 0.0), (1340, 1, 0.0), (1008, 1, 0.0), (1376, 2, 0.0), (1102, -2, -1.0)]","[(1128, 1, -1.0), (1307, -2, 0.0), (1231, -1, 0.0), (1385, -2, -1.0), (973, 0, -1.0), (1359, 0, -1.0), (1325, -1, 0.0), (1203, 1, 0.0), (1340, 2, 0.0), (1008, 1, 0.0), (1376, 2, 0.0), (1102, -2, -1.0)]","[(1096, 1, 0.0), (1307, -1, 0.0), (1231, 1, 0.0), (1078, -1, 1.0), (973, 1, -1.0), (1359, 1, -1.0), (1203, 1, 0.0), (1340, 1, 0.0), (1008, -1, 0.0), (1017, 1, 0.0), (1376, 2, 0.0)]",[]
+test values,[],[],[],[],[],[],[],[],[],[],"[0.37, 0.35, [(1330, 1, 0.0), (1106, 2, 0.0), (1278, 2, 0.0), (1423, -1, 0.0), (1123, 0, 1.0), (1075, 0, 1.0), (1163, 1, 0.0), (998, -2, -1.0), (1218, 1, 0.0), (1160, 1, 0.0), (1143, 1, 0.0), (1349, 1, 0.0), (1105, 2, 0.0), (1083, 1, 0.0), (1064, 2, 0.0), (1361, -2, -1.0), (1089, -1, 0.0), (1206, -1, 0.0), (946, -2, -1.0), (1283, -1, 1.0), (1087, 1, 0.0), (1300, -2, -1.0), (1097, 1, 0.0), (1279, 2, 0.0), (1049, 1, 0.0), (1246, 2, 1.0), (1164, 1, 0.0), (1046, 1, 0.0), (1082, 1, 0.0), (1397, 2, 1.0), (937, 2, 1.0), (1027, -2, -1.0), (1399, 0, 1.0), (1149, 1, 0.0), (1319, 2, 0.0), (1208, 1, 0.0), (999, -2, -1.0), (1034, -1, 0.0), (1388, -2, -1.0), (1343, 2, 0.0), (955, 1, 0.0), (974, 0, -1.0), (1215, 1, 0.0), (1404, 2, -1.0), (1335, -1, 0.0), (1297, -2, -1.0), (1029, -2, -1.0), (1353, 2, 1.0), (1194, 1, 0.0), (1378, 2, 0.0), (1030, 1, 0.0), (1220, 1, -1.0), (1321, 1, 0.0), (985, 2, 1.0), (966, 1, 0.0), (1045, 2, 0.0), (1336, 1, 0.0), (1129, 0, -1.0), (1327, 1, 0.0), (1158, 2, 1.0), (1190, 1, 0.0), (1288, -2, -1.0), (1304, -2, -1.0)], [(1330, 2, 0.0), (1106, 2, 0.0), (1278, 2, 0.0), (1079, -1, 1.0), (1395, -1, 1.0), (1121, 0, 1.0), (1423, -1, 0.0), (1075, -1, 1.0), (1163, 1, 0.0), (998, -2, -1.0), (1218, 1, 0.0), (1160, 1, 0.0), (1143, 1, 0.0), (1349, -1, 0.0), (1105, 1, 0.0), (1083, 1, 0.0), (1132, -2, -1.0), (1064, 1, 0.0), (1361, -2, -1.0), (1089, -1, 0.0), (1206, 1, 0.0), (1422, 1, 0.0), (946, -2, -1.0), (1087, -1, 0.0), (941, -1, 0.0), (1097, 2, 0.0), (1279, 1, 0.0), (1049, 1, 0.0), (1205, 1, 0.0), (1164, 1, 0.0), (1046, 1, 0.0), (1071, 15, -1.0), (1082, 1, 0.0), (1150, -1, 1.0), (1397, 2, 1.0), (1026, -2, -1.0), (1350, 2, 1.0), (1027, -2, -1.0), (1149, 1, 0.0), (1319, 1, 0.0), (1208, 1, 0.0), (1034, -1, 0.0), (1343, 1, 0.0), (955, 1, 0.0), (1404, 1, -1.0), (1117, -1, 1.0), (1335, -2, 0.0), (1297, -2, -1.0), (1029, -2, -1.0), (1353, 2, 1.0), (994, 2, 1.0), (1194, 1, 0.0), (1378, 2, 0.0), (1030, -1, 0.0), (1321, 1, 0.0), (985, 2, 1.0), (966, -1, 0.0), (1092, -1, 1.0), (1267, -1, 1.0), (1336, -2, 0.0), (1327, 1, 0.0), (1158, 0, 1.0), (1190, 1, 0.0), (1288, -2, -1.0), (1256, 1, 0.0)]]"

@@ -1,0 +1,217 @@
+,0,1,2,3,4,5,6,7,8,9,10
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+In cases where both summaries accurately represent the information from the reference text without any significant inaccuracies or false information, assign a score of 0. However, if one summary provides a more detailed and accurate description of the findings, including specific locations or additional relevant information, it should be considered slightly more accurate and assigned a score of -1 or 1 accordingly. Only when one summary contains significant inaccuracies or false information compared to the reference text, should it be considered significantly less accurate and assigned a score of -2 or 2.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+In cases where both summaries accurately represent the information from the reference text without any significant inaccuracies or false information, assign a score of 0. However, if one summary provides a more detailed and accurate description of the findings, including specific locations or additional relevant information, it should be considered slightly more accurate and assigned a score of -1 or 1 accordingly. Only when one summary contains significant inaccuracies or false information compared to the reference text, should it be considered significantly less accurate and assigned a score of -2.
+
+In the event of ambiguity or uncertainty, prioritize the summary that provides the most comprehensive and precise representation of the reference text, taking into account specific details and changes mentioned in the reference text.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+In cases where both summaries accurately represent the information from the reference text without any significant inaccuracies or false information, assign a score of 0. However, if one summary provides a more detailed and accurate description of the findings, including specific locations or additional relevant information, it should be considered slightly more accurate and assigned a score of -1 or 1 accordingly. Only when one summary contains significant inaccuracies or false information compared to the reference text, should it be considered significantly less accurate and assigned a score of -2.
+
+In the event of ambiguity or uncertainty, prioritize the summary that provides the most comprehensive and precise representation of the reference text, taking into account specific details and changes mentioned in the reference text.
+
+In addition, when evaluating the summaries, consider the overall completeness and relevance of the information presented. Ensure that the summaries accurately capture the key findings and do not omit crucial details that are essential for a comprehensive understanding of the reference text.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+In cases where both summaries accurately represent the information from the reference text without any significant inaccuracies or false information, assign a score of 0. However, if one summary provides a more detailed and accurate description of the findings, including specific locations or additional relevant information, it should be considered slightly more accurate and assigned a score of -1 or 1 accordingly. Only when one summary contains significant inaccuracies or false information compared to the reference text, should it be considered significantly less accurate and assigned a score of -2.
+
+In the event of ambiguity or uncertainty, prioritize the summary that provides the most comprehensive and precise representation of the reference text, taking into account specific details and changes mentioned in the reference text.
+
+In addition, when evaluating the summaries, consider the overall completeness and relevance of the information presented. Ensure that the summaries accurately capture the key findings and do not omit crucial details that are essential for a comprehensive understanding of the reference text.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+In cases where both summaries accurately represent the information from the reference text without any significant inaccuracies or false information, assign a score of 0. However, if one summary provides a more detailed and accurate description of the findings, including specific locations or additional relevant information, it should be considered slightly more accurate and assigned a score of -1 or 1 accordingly. Only when one summary contains significant inaccuracies or false information compared to the reference text, should it be considered significantly less accurate and assigned a score of -2.
+
+In the event of ambiguity or uncertainty, prioritize the summary that provides the most comprehensive and precise representation of the reference text, taking into account specific details and changes mentioned in the reference text.
+
+In addition, when evaluating the summaries, consider the overall completeness and relevance of the information presented. Ensure that the summaries accurately capture the key findings and do not omit crucial details that are essential for a comprehensive understanding of the reference text.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+In cases where both summaries accurately represent the information from the reference text without any significant inaccuracies or false information, assign a score of 0. However, if one summary provides a more detailed and accurate description of the findings, including specific locations or additional relevant information, it should be considered slightly more accurate and assigned a score of -1 or 1 accordingly. Only when one summary contains significant inaccuracies or false information compared to the reference text, should it be considered significantly less accurate and assigned a score of -2.
+
+In the event of ambiguity or uncertainty, prioritize the summary that provides the most comprehensive and precise representation of the reference text, taking into account specific details and changes mentioned in the reference text.
+
+In addition, when evaluating the summaries, consider the overall completeness and relevance of the information presented. Ensure that the summaries accurately capture the key findings and do not omit crucial details that are essential for a comprehensive understanding of the reference text.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the information from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the accuracy of the information presented in each summary compared to the reference text. Pay attention to any false information or inaccuracies present in the summaries and assign scores based on the level of accuracy in representing the reference text. It is important to note that minor differences in wording or phrasing should not affect the overall accuracy score, unless they significantly alter the meaning or accuracy of the information presented.
+
+In cases where both summaries accurately represent the information from the reference text without any significant inaccuracies or false information, assign a score of 0. However, if one summary provides a more detailed and accurate description of the findings, including specific locations or additional relevant information, it should be considered slightly more accurate and assigned a score of -1 or 1 accordingly. Only when one summary contains significant inaccuracies or false information compared to the reference text, should it be considered significantly less accurate and assigned a score of -2.
+
+In the event of ambiguity or uncertainty, prioritize the summary that provides the most comprehensive and precise representation of the reference text, taking into account specific details and changes mentioned in the reference text.
+
+In addition, when evaluating the summaries, consider the overall completeness and relevance of the information presented. Ensure that the summaries accurately capture the key findings and do not omit crucial details that are essential for a comprehensive understanding of the reference text.
+
+By incorporating this additional guidance, the model should be able to more accurately assess the summaries and assign the appropriate scores based on the level of accuracy in representing the reference text, thereby reducing the likelihood of incorrectly labeled examples.",[]
+score,0.7272727272727273,0.7272727272727273,0.6363636363636364,0.6363636363636364,0.5454545454545454,0.6363636363636364,0.45454545454545453,0.6363636363636364,0.45454545454545453,0.45454545454545453,[]
+lower_limit,0.5,0.5,0.375,0.375,0.25,0.375,0.125,0.375,0.125,0.125,[]
+upper_limit,1.0,1.0,0.875,0.875,0.875,0.875,0.75,0.875,0.75,0.75,[]
+distance,0,1242,1009,616,1460,295,0,0,0,0,[]
+missed statements,"[(283, -1, 0.0), (38, 0, 1.0), (47, -1, 0.0)]","[(38, 0, 1.0), (116, 0, 1.0), (339, 0, 1.0)]","[(38, 0, 1.0), (101, -1, 0.0), (116, 0, 1.0), (339, 0, 1.0)]","[(38, 0, 1.0), (168, -2, 0.0), (116, 0, 1.0), (339, 0, 1.0)]","[(38, 0, 1.0), (168, -1, 0.0), (116, 0, 1.0), (339, 0, 1.0), (47, -1, 0.0)]","[(155, 1, 0.0), (38, 0, 1.0), (246, 1, 0.0), (116, 0, 1.0)]","[(283, -1, 0.0), (246, 1, 0.0), (168, -1, 0.0), (116, 0, 1.0), (339, 0, 1.0), (47, -1, 0.0)]","[(155, -1, 0.0), (38, 0, 1.0), (116, 0, 1.0), (339, 0, 1.0)]","[(38, 0, 1.0), (246, -1, 0.0), (168, -1, 0.0), (116, 0, 1.0), (339, 0, 1.0), (160, -1, 0.0)]","[(155, 1, 0.0), (38, 0, 1.0), (168, -1, 0.0), (116, 0, 1.0), (339, 0, 1.0), (47, -1, 0.0)]",[]
+test values,[],[],[],[],[],[],[],[],[],[],"[0.5795454545454546, 0.5340909090909091, [(117, 0, 1.0), (372, -1, 0.0), (72, 1, 0.0), (350, 0, 1.0), (161, 0, 1.0), (390, 1, 0.0), (4, 0, 1.0), (187, 1, 0.0), (443, 0, 1.0), (6, -1, 1.0), (229, -1, 0.0), (416, -1, 0.0), (433, -2, 0.0), (253, 0, 1.0), (190, -2, 0.0), (68, -1, 0.0), (340, -1, 0.0), (235, -2, 0.0), (442, 0, 1.0), (174, -1, 0.0), (398, 1, 0.0), (3, 0, 1.0), (431, -2, 0.0), (326, 1, 0.0), (44, 0, 1.0), (10, 0, 1.0), (140, 1, 0.0), (437, 1, 0.0), (100, 0, 1.0), (267, -1, 0.0), (401, 1, 0.0), (236, -2, 0.0), (28, 0, 1.0), (144, 1, 0.0), (165, 0, 1.0), (338, 0, 1.0), (418, -1, 0.0)], [(117, 0, 1.0), (372, -1, 0.0), (377, -1, 0.0), (123, 1, 0.0), (4, 0, 1.0), (95, 0, 1.0), (107, -1, 0.0), (187, -1, 0.0), (245, -1, 0.0), (443, -1, 1.0), (6, -1, 1.0), (225, -1, 0.0), (170, -1, 0.0), (269, -1, 0.0), (337, 0, 1.0), (253, 0, 1.0), (190, -1, 0.0), (311, 1, 0.0), (340, -1, 0.0), (235, 1, 0.0), (442, -1, 1.0), (398, -1, 0.0), (216, -1, 0.0), (3, 0, 1.0), (431, -1, 0.0), (32, 1, 0.0), (255, -1, 0.0), (318, 1, 0.0), (260, -1, 0.0), (44, 0, 1.0), (317, -1, 0.0), (10, -1, 1.0), (140, 1, 0.0), (437, -1, 0.0), (100, 0, 1.0), (267, -1, 0.0), (401, -1, 0.0), (79, -1, 0.0), (28, 0, 1.0), (144, -1, 0.0), (338, 0, 1.0)]]"

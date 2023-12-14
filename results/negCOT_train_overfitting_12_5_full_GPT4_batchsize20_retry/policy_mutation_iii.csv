@@ -1,0 +1,133 @@
+,0,1,2,3,4,5
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Enhanced Summary Comparison - Correctness and Completeness Policy
+
+Objective
+To evaluate which summary (A or B) is more accurate and complete by including all relevant information from the reference text without introducing false information.
+
+Instructions
+You are given two summaries (A, B) created from a reference text. Your task is to evaluate which summary is more accurate and complete by comparing each summary to the reference text. A summary is considered more accurate when it contains all the relevant information from the reference text without adding any false or misleading details. A summary is considered more complete when it includes all necessary details from the reference text that contribute to a full understanding of the situation.
+
+Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is both more accurate and more complete than Summary B, containing all relevant information and no false information.
+- A slightly better than B (Score: -1): Summary A is either more accurate or more complete than Summary B, but not both.
+- Neither A nor B is better than the other (Score: 0): Both summaries are equally accurate and complete.
+- B slightly better than A (Score: 1): Summary B is either more accurate or more complete than Summary A, but not both.
+- B significantly better than A (Score 2): Summary B is both more accurate and more complete than Summary A, containing all relevant information and no false information.
+
+Additional Guidance
+- False information includes any details that are not present in the reference text or are contradicted by the reference text.
+- Missing information refers to the omission of any relevant details that are necessary for a full understanding of the reference text.
+- Misleading information includes any interpretation or speculation that is not directly supported by the reference text.
+- When evaluating completeness, consider whether the summary omits any incidental findings or relevant details that are present in the reference text.
+- If a summary introduces new terms or concepts not present in the reference text, evaluate whether these contribute to a more accurate understanding or if they introduce potential confusion.
+- In cases where both summaries contain inaccuracies or omissions, determine which summary has the least impact on the overall accuracy and completeness of the information presented.
+
+Examples for Clarification
+1. If Summary A omits a minor detail from the reference text but includes no false information, and Summary B includes all details but introduces a minor inaccuracy, Summary A would be slightly better than Summary B (Score: -1).
+2. If Summary A includes a speculative interpretation not present in the reference text, and Summary B is less detailed but does not speculate, Summary B would be slightly better than Summary A (Score: 1).
+3. If both summaries are equally detailed and accurate, but Summary A includes an irrelevant detail not present in the reference text, the score would be Neither A nor B is better than the other (Score: 0), as the irrelevant detail does not constitute false information but does not contribute to the accuracy or completeness.
+
+By following this revised policy, the model should be able to more accurately label the examples based on the accuracy and completeness of the information provided in the summaries.","Title: Enhanced Summary Comparison - Correctness and Completeness Policy (Revised)
+
+Objective
+To accurately evaluate which summary (A or B) more effectively captures the essence of the reference text in terms of accuracy and completeness, ensuring all relevant information is included without introducing inaccuracies.
+
+Revised Instructions
+When given two summaries (A, B) derived from a reference text, your task is to determine which summary more faithfully represents the reference text's content. A summary surpasses the other if it includes all pertinent information and refrains from adding any incorrect or misleading content. Evaluate summaries based on the following revised criteria:
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is both more accurate and more complete than Summary B, including all relevant information and avoiding any inaccuracies or omissions.
+- A slightly better than B (Score: -1): Summary A is more accurate or more complete than Summary B, but not both, and does not introduce significant errors or omissions.
+- Neither A nor B is better than the other (Score: 0): Both summaries are equally accurate and complete, neither introducing inaccuracies nor omitting important details.
+- B slightly better than A (Score: 1): Summary B is more accurate or more complete than Summary A, but not both, and does not introduce significant errors or omissions.
+- B significantly better than A (Score 2): Summary B is both more accurate and more complete than Summary A, including all relevant information and avoiding any inaccuracies or omissions.
+
+Revised Additional Guidance
+- When evaluating accuracy, ensure that the summary does not contain any speculative information or details not present in the reference text.
+- When evaluating completeness, ensure that the summary does not omit any findings that would alter the understanding of the reference text.
+- Minor details should not heavily influence the scoring unless their omission or misrepresentation leads to a misunderstanding of the reference text.
+- If a summary introduces a minor error but includes more relevant details than the other, it may still be considered slightly better, provided the error does not lead to a significant misunderstanding.
+- In cases where both summaries contain minor inaccuracies or omissions, prioritize the summary that provides a clearer and more comprehensive understanding of the essential information from the reference text.
+
+Revised Examples for Clarification
+1. If Summary A omits a non-critical detail but includes no false information, and Summary B includes all details but introduces a minor inaccuracy that does not mislead the understanding, both summaries should be considered equally accurate and complete (Score: 0).
+2. If Summary A includes all details without inaccuracies, and Summary B omits a minor detail that does not significantly impact the understanding, Summary A would be slightly better than Summary B (Score: -1).
+3. If both summaries omit a critical detail that changes the understanding of the reference text, neither summary is better than the other (Score: 0), unless one summary introduces additional inaccuracies, in which case the more accurate summary is slightly better.
+
+By adhering to this revised policy, the model should improve its labeling accuracy for the examples based on the enhanced criteria for accuracy and completeness.","Title: Enhanced Summary Comparison - Correctness and Completeness Policy (Revision 2)
+
+Objective
+To refine the evaluation process for determining which summary (A or B) more effectively captures the essence of the reference text in terms of accuracy and completeness, ensuring all relevant information is included without introducing inaccuracies.
+
+Revised Instructions
+When presented with two summaries (A, B) derived from a reference text, your task is to assess which summary more accurately and completely represents the reference text's content. A summary is superior if it includes all pertinent information and refrains from adding any incorrect or misleading content. Summaries should be evaluated based on the following refined criteria:
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is both more accurate and more complete than Summary B, including all relevant information and avoiding any inaccuracies or omissions.
+- A slightly better than B (Score: -1): Summary A is more accurate or more complete than Summary B, but not both, and does not introduce significant errors or omissions.
+- Neither A nor B is better than the other (Score: 0): Both summaries are equally accurate and complete, neither introducing inaccuracies nor omitting important details.
+- B slightly better than A (Score: 1): Summary B is more accurate or more complete than Summary A, but not both, and does not introduce significant errors or omissions.
+- B significantly better than A (Score 2): Summary B is both more accurate and more complete than Summary A, including all relevant information and avoiding any inaccuracies or omissions.
+
+Revised Additional Guidance
+- Evaluate accuracy by confirming that the summary contains only information present in the reference text, without speculation or extrapolation.
+- Assess completeness by ensuring that the summary includes all critical findings from the reference text that contribute to the overall understanding of the situation.
+- Minor details should not heavily influence the scoring unless their omission or misrepresentation leads to a misunderstanding of the reference text.
+- If a summary introduces a minor error but includes more relevant details than the other, it may still be considered slightly better, provided the error does not lead to a significant misunderstanding.
+- In cases where both summaries contain minor inaccuracies or omissions, prioritize the summary that provides a clearer and more comprehensive understanding of the essential information from the reference text.
+- Clarify that incidental findings, unless specified as clinically significant in the reference text, should not affect the scoring.
+- Emphasize that the presence of a new finding or the change in a condition is a critical detail that must be included for a summary to be considered complete.
+
+Revised Examples for Clarification
+1. If Summary A omits a non-critical detail but includes no false information, and Summary B includes all details but introduces a minor inaccuracy that does not mislead the understanding, both summaries should be considered equally accurate and complete (Score: 0).
+2. If Summary A includes all details without inaccuracies, and Summary B omits a minor detail that does not significantly impact the understanding, Summary A would be slightly better than Summary B (Score: -1).
+3. If both summaries omit a critical detail that changes the understanding of the reference text, neither summary is better than the other (Score: 0), unless one summary introduces additional inaccuracies, in which case the more accurate summary is slightly better.
+4. If a summary incorrectly localizes a finding (e.g., stating hemorrhage in the right frontal","Title: Enhanced Summary Comparison - Correctness and Completeness Policy (Revision 3)
+
+Objective
+To improve the evaluation process for determining which summary (A or B) more effectively captures the essence of the reference text in terms of accuracy and completeness, ensuring all relevant information is included without introducing inaccuracies.
+
+Revised Instructions
+When presented with two summaries (A, B) derived from a reference text, your task is to assess which summary more accurately and completely represents the reference text's content. A summary is superior if it includes all pertinent information and refrains from adding any incorrect or misleading content. Summaries should be evaluated based on the refined criteria below:
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is both more accurate and more complete than Summary B, including all relevant information and avoiding any inaccuracies or omissions.
+- A slightly better than B (Score: -1): Summary A is more accurate or more complete than Summary B, but not both, and does not introduce significant errors or omissions.
+- Neither A nor B is better than the other (Score: 0): Both summaries are equally accurate and complete, neither introducing inaccuracies nor omitting important details.
+- B slightly better than A (Score: 1): Summary B is more accurate or more complete than Summary A, but not both, and does not introduce significant errors or omissions.
+- B significantly better than A (Score 2): Summary B is both more accurate and more complete than Summary A, including all relevant information and avoiding any inaccuracies or omissions.
+
+Revised Additional Guidance
+- Evaluate accuracy by confirming that the summary contains only information present in the reference text, without speculation or extrapolation.
+- Assess completeness by ensuring that the summary includes all critical findings from the reference text that contribute to the overall understanding of the situation.
+- Minor details should not heavily influence the scoring unless their omission or misrepresentation leads to a misunderstanding of the reference text.
+- If a summary introduces a minor error but includes more relevant details than the other, it may still be considered slightly better, provided the error does not lead to a significant misunderstanding.
+- In cases where both summaries contain minor inaccuracies or omissions, prioritize the summary that provides a clearer and more comprehensive understanding of the essential information from the reference text.
+- Clarify that incidental findings, unless specified as clinically significant in the reference text, should not affect the scoring.
+- Emphasize that the presence of a new finding or the change in a condition is a critical detail that must be included for a summary to be considered complete.
+- When evaluating the summaries, pay close attention to the localization of findings, as incorrect localization can significantly alter the clinical picture and should be considered a major error.
+- Recommendations for further evaluation or studies, if mentioned in the reference text, should be included in the summary as they provide context for the findings and suggest the need for additional information.
+
+Revised Examples for Clarification
+1. If Summary A omits a non-critical detail but includes no false information, and Summary B includes all details but introduces a minor inaccuracy that does not mislead the understanding, both summaries should be considered equally accurate and complete (Score: 0).
+2. If Summary A includes all details without inaccuracies, and Summary B omits a minor detail that does not significantly impact the understanding, Summary A would be slightly better than Summary B (Score: -1).
+3. If",[]
+score,0.21739130434782608,0.13043478260869565,0.17391304347826086,0.043478260869565216,0.0,[]
+lower_limit,0.05555555555555555,0.0,0.05555555555555555,0.0,0.0,[]
+upper_limit,0.3888888888888889,0.2777777777777778,0.3333333333333333,0.1111111111111111,0.0,[]
+distance,0,3793,6815,2540,2213,[]
+missed statements,"[(74, 1, 0.0), (127, 1, 0.0), (171, 1, 0.0), (116, 2, 1.0), (55, -1, 0.0), (186, 1, 0.0), (125, 1, 0.0), (46, -1, 0.0), (227, 1, 0.0), (138, 1, 0.0), (73, 1, 0.0), (353, 2, 1.0), (30, 0, 1.0), (300, 1, 0.0), (166, 1, 0.0), (233, 2, 0.0), (83, 2, 1.0), (395, 1, 0.0)]","[(74, 1, 0.0), (127, 1, 0.0), (171, 1, 0.0), (116, 2, 1.0), (377, -2, 0.0), (214, 2, 0.0), (55, 1, 0.0), (186, 2, 0.0), (125, 1, 0.0), (46, -1, 0.0), (227, 1, 0.0), (37, 2, 1.0), (442, 2, 1.0), (138, 1, 0.0), (73, 1, 0.0), (300, 1, 0.0), (166, 2, 0.0), (233, 2, 0.0), (83, 2, 1.0), (395, 1, 0.0)]","[(74, 1, 0.0), (127, 2, 0.0), (116, 2, 1.0), (377, 1, 0.0), (214, 2, 0.0), (55, 1, 0.0), (186, 1, 0.0), (125, 1, 0.0), (46, -1, 0.0), (37, 2, 1.0), (442, 2, 1.0), (440, 0, 1.0), (138, 1, 0.0), (73, 1, 0.0), (300, -1, 0.0), (166, 1, 0.0), (233, 2, 0.0), (83, 2, 1.0), (395, 2, 0.0)]","[(74, 1, 0.0), (127, 1, 0.0), (171, 2, 0.0), (377, -1, 0.0), (214, 2, 0.0), (55, 1, 0.0), (186, 2, 0.0), (125, 1, 0.0), (46, 1, 0.0), (227, 1, 0.0), (37, 2, 1.0), (442, 0, 1.0), (440, 2, 1.0), (138, 1, 0.0), (73, 1, 0.0), (353, 2, 1.0), (30, 0, 1.0), (300, -1, 0.0), (166, 2, 0.0), (233, 2, 0.0), (83, 2, 1.0), (395, 1, 0.0)]","[(74, 2, 0.0), (127, 1, 0.0), (171, 1, 0.0), (116, 2, 1.0), (377, 1, 0.0), (214, 2, 0.0), (55, 1, 0.0), (186, 2, 0.0), (125, 1, 0.0), (46, -2, 0.0), (227, 1, 0.0), (37, 2, 1.0), (442, 2, 1.0), (440, 2, 1.0), (138, 1, 0.0), (73, 1, 0.0), (353, 2, 1.0), (30, 0, 1.0), (300, 1, 0.0), (166, 1, 0.0), (233, 2, 0.0), (83, 2, 1.0), (395, 1, 0.0)]",[]
+test values,[],[],[],[],[],"[0.33707865168539325, 0.13793103448275862, [(200, 1, 0.0), (190, 1, 0.0), (76, 1, 0.0), (392, 1, 0.0), (58, 1, 0.0), (59, 1, 0.0), (255, 1, 0.0), (139, 1, 0.0), (413, 1, 0.0), (247, -1, 0.0), (369, 1, 0.0), (208, 2, 1.0), (354, 2, 1.0), (199, 1, 0.0), (358, 2, -1.0), (105, 1, 0.0), (24, 1, 0.0), (260, 1, 0.0), (245, -1, 0.0), (281, 1, 0.0), (347, 2, 0.0), (121, 1, 0.0), (240, 1, -1.0), (123, 1, 0.0), (348, 2, 0.0), (437, 1, 0.0), (241, 1, -1.0), (356, 2, -1.0), (110, -1, 0.0), (91, 2, 1.0), (373, 1, 0.0), (411, 1, 0.0), (136, 1, 0.0), (223, 1, 0.0), (415, 1, 0.0), (45, 2, 1.0), (284, 1, 0.0), (417, 1, 0.0), (430, -1, 0.0), (408, 2, 0.0), (361, 2, 1.0), (409, 1, 0.0), (390, 1, 0.0), (230, 2, 0.0), (222, 1, 0.0), (330, 1, 0.0), (210, 1, 0.0), (28, 0, 1.0), (143, 1, 0.0), (160, 1, 0.0), (242, 1, -1.0), (412, 1, 0.0), (249, 1, 0.0), (75, 1, 0.0), (211, 1, 0.0), (162, 2, 1.0), (280, 1, 0.0), (10, 2, 1.0), (386, 1, 0.0)], [(337, 2, 1.0), (200, 2, 0.0), (190, 2, 0.0), (76, 1, 0.0), (392, 2, 0.0), (58, 1, 0.0), (59, 1, 0.0), (255, 1, 0.0), (148, 1, 0.0), (139, 1, 0.0), (413, 2, 0.0), (247, 1, 0.0), (369, 2, 0.0), (208, 0, 1.0), (69, 1, 0.0), (199, 2, 0.0), (358, 2, -1.0), (105, 1, 0.0), (52, 1, 0.0), (24, 1, 0.0), (260, 1, 0.0), (245, 1, 0.0), (449, 1, 0.0), (281, 1, 0.0), (332, 1, 0.0), (39, 2, 1.0), (121, 2, 0.0), (240, 1, -1.0), (123, 1, 0.0), (348, 1, 0.0), (437, 1, 0.0), (241, 1, -1.0), (356, 2, -1.0), (110, 1, 0.0), (373, 1, 0.0), (80, 1, 0.0), (411, 2, 0.0), (136, 1, 0.0), (223, 1, 0.0), (132, 1, 0.0), (149, 1, 0.0), (157, 1, 0.0), (415, 1, 0.0), (446, 1, 0.0), (179, 1, 0.0), (45, 2, 1.0), (284, 1, 0.0), (417, 1, 0.0), (430, -1, 0.0), (408, 2, 0.0), (361, 2, 1.0), (323, 1, 0.0), (326, 1, 0.0), (409, 2, 0.0), (18, -1, 0.0), (390, 1, 0.0), (230, 2, 0.0), (222, 1, 0.0), (210, 1, 0.0), (143, 2, 0.0), (160, 1, 0.0), (378, 1, 0.0), (248, 1, 0.0), (242, 1, -1.0), (412, 1, 0.0), (249, 1, 0.0), (75, 2, 0.0), (211, 2, 0.0), (162, 2, 1.0), (280, 1, 0.0), (10, 2, 1.0), (194, 1, 0.0), (383, 1, 0.0), (386, 1, 0.0), (175, 1, 0.0)]]"

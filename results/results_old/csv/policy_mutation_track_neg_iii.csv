@@ -1,0 +1,67 @@
+0,1,2,3,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary provides a more accurate representation of the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides a more accurate representation of the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both summaries are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Rationale
+Accuracy is determined by the completeness and precision of the information presented in the summaries compared to the reference text. Consider the inclusion of uncertain or speculative language, as well as the level of detail and accuracy in describing the findings.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary provides a more accurate representation of the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides a more accurate representation of the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both summaries are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Rationale
+Accuracy is determined by the completeness and precision of the information presented in the summaries compared to the reference text. Consider the inclusion of uncertain or speculative language, as well as the level of detail and accuracy in describing the findings. In cases where both summaries accurately capture the key findings and observations, the score should be ""Both summaries are equally accurate (Score: 0)"" regardless of additional details included in either summary.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary provides a more accurate representation of the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides a more accurate representation of the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both summaries are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Rationale
+Accuracy is determined by the completeness and precision of the information presented in the summaries compared to the reference text. Consider the inclusion of uncertain or speculative language, as well as the level of detail and accuracy in describing the findings. In cases where both summaries accurately capture the key findings and observations, the score should be ""Both summaries are equally accurate (Score: 0)"" regardless of additional details included in either summary.
+
+Revision Reasoning
+The revised policy maintains the original objective, instructions, and scoring criteria while emphasizing the importance of precision and completeness in the summaries. The rationale has been clarified to ensure that the scoring reflects the accuracy of the information presented in the summaries compared to the reference text. This revision aims to provide a clearer understanding of the criteria for evaluating the accuracy of the summaries.",0.5
+0.5,0.5,0.6666666666666666,1.0,0.75

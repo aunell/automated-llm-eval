@@ -1,0 +1,58 @@
+,0,1,2,3
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately captures the key findings from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately captures the key findings from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the relevance and completeness of the information in each summary. Pay attention to any additional relevant details provided in one summary compared to the other. Ensure that the accuracy of the information presented in the summaries is the primary focus for scoring.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately captures the key findings from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately captures the key findings from the reference text.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Both A and B are equally accurate (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Additional Guidance
+Consider the relevance and completeness of the information in each summary. Pay attention to any additional relevant details provided in one summary compared to the other. Ensure that the accuracy of the information presented in the summaries is the primary focus for scoring.
+
+Revised Explanation for Incorrect Examples:
+1. The statement regarding the presence of an indwelling central venous catheter via right subclavian approach was not explicitly mentioned in the original policy. Therefore, the presence or absence of this detail should not impact the scoring. The scoring should be based solely on the accuracy and completeness of the medical findings presented in the summaries.
+2. The location of the subgaleal hematoma was not specified as a key criterion in the original policy. Therefore, the scoring should not be influenced by the specific mention of the location of the hematoma in the summaries.
+3. The absence of intraparenchymal hemorrhage and the presence of trauma history were not explicitly outlined as scoring criteria in the original policy. Therefore, the scoring should be based on the accuracy and completeness of the information related to the medical findings, without considering additional details not specified in the original policy.",[]
+score,0.7,0.6,0.6363636363636364,[]
+lower_limit,0.375,0.375,0.375,[]
+upper_limit,1.0,0.875,0.875,[]
+distance,0,1253,995,[]
+missed statements,"[(390, 1, 0.0), (137, 1, 0.0), (74, -1, 0.0)]","[(137, 1, 0.0), (93, -1, 1.0), (191, 1, 0.0), (74, -1, 0.0)]","[(343, -1, 0.0), (390, -2, 0.0), (191, -1, 0.0), (74, 1, 0.0)]",[]
+test values,[],[],[],"[0.4827586206896552, 0.6590909090909091, [(40, 0, 1.0), (47, -1, 0.0), (98, 0, 1.0), (172, 1, 0.0), (432, -2, 0.0), (190, 1, 0.0), (26, 0, 1.0), (30, 0, 1.0), (96, 0, 1.0), (120, 0, 1.0), (358, 0, -1.0), (399, 1, 0.0), (294, -2, 0.0), (252, 0, 1.0), (442, 0, 1.0), (139, 1, 0.0), (138, 1, 0.0), (360, 0, 1.0), (293, -2, 0.0), (71, -1, 0.0), (250, 0, 1.0), (269, 1, 0.0), (78, 1, 0.0), (5, 0, 1.0), (49, -1, 0.0), (23, 1, 0.0), (403, -2, 0.0), (62, -1, 1.0), (83, 0, 1.0), (367, -1, 0.0), (7, -1, 1.0), (3, 0, 1.0), (46, -1, 0.0), (76, -1, 0.0), (28, 0, 1.0), (239, -2, 0.0), (414, -1, 0.0), (225, -1, 0.0), (8, 0, 1.0), (251, 0, 1.0), (305, -1, 0.0), (146, -1, 0.0), (444, 0, 1.0), (211, 1, 0.0), (226, -1, 0.0)], [(208, 0, 1.0), (116, 0, 1.0), (206, 0, 1.0), (40, 0, 1.0), (98, 0, 1.0), (26, 0, 1.0), (338, 0, 1.0), (30, 0, 1.0), (96, 0, 1.0), (120, 0, 1.0), (358, 0, -1.0), (252, 0, 1.0), (442, 0, 1.0), (360, 0, 1.0), (161, 0, 1.0), (71, 1, 0.0), (250, 0, 1.0), (78, 1, 0.0), (5, 0, 1.0), (117, 0, 1.0), (62, 0, 1.0), (243, 0, -1.0), (83, 0, 1.0), (7, 0, 1.0), (3, 0, 1.0), (28, 0, 1.0), (8, 0, 1.0), (251, 0, 1.0), (444, 0, 1.0), (211, 1, 0.0)]]"

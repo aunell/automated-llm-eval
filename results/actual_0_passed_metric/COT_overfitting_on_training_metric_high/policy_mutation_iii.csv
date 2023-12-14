@@ -1,0 +1,167 @@
+0,1,2,3,4,5,6,7,8,9,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information. False information includes inaccuracies, omissions, or misrepresentations of the reference text.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations. If there is uncertainty about the accuracy of a summary, it is recommended to provide a score of 0.
+
+Additional Note: In cases where both summaries accurately capture the key findings and interpretations without significant inaccuracies, omissions, or misrepresentations, it is important to provide a score of 0 to indicate that neither summary is better than the other in terms of accuracy.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations. If there is uncertainty about the accuracy of a summary, it is recommended to provide a score of 0.
+
+Additional Note: In cases where both summaries accurately capture the key findings and interpretations without significant inaccuracies, omissions, or misrepresentations, it is important to provide a score of 0 to indicate that neither summary is better than the other in terms of accuracy. If there is any doubt about the accuracy of a summary, it is recommended to provide a score of 0.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations. If there is uncertainty about the accuracy of a summary, it is recommended to provide a score of 0.
+
+Additional Note: In cases where both summaries accurately capture the key findings and interpretations without significant inaccuracies, omissions, or misrepresentations, it is important to provide a score of 0 to indicate that neither summary is better than the other in terms of accuracy. If there is any doubt about the accuracy of a summary, it is recommended to provide a score of 0. If the model is uncertain about the accuracy of a summary, it should refrain from assigning a score and indicate the need for further evaluation.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations. If there is uncertainty about the accuracy of a summary, it is recommended to provide a score of 0.
+
+Additional Note: In cases where both summaries accurately capture the key findings and interpretations without significant inaccuracies, omissions, or misrepresentations, it is important to provide a score of 0 to indicate that neither summary is better than the other in terms of accuracy. If there is any doubt about the accuracy of a summary, it is recommended to provide a score of 0. If the model is uncertain about the accuracy of a summary, it should refrain from assigning a score and indicate the need for further evaluation.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations. If there is uncertainty about the accuracy of a summary, it is recommended to provide a score of 0.
+
+Additional Note: In cases where both summaries accurately capture the key findings and interpretations without significant inaccuracies, omissions, or misrepresentations, it is important to provide a score of 0 to indicate that neither summary is better than the other in terms of accuracy. If the model is uncertain about the accuracy of a summary, it should refrain from assigning a score and indicate the need for further evaluation.
+
+Please use the revised policy for evaluating the accuracy of the summaries.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations. If there is uncertainty about the accuracy of a summary, it is recommended to provide a score of 0.
+
+Additional Note: In cases where both summaries accurately capture the key findings and interpretations without significant inaccuracies, omissions, or misrepresentations, it is important to provide a score of 0 to indicate that neither summary is better than the other in terms of accuracy. If the model is uncertain about the accuracy of a summary, it should refrain from assigning a score and indicate the need for further evaluation. If the model is uncertain about the accuracy of a summary, it should refrain from assigning a score and indicate the need for further evaluation.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the reference text. Accuracy is determined by the extent to which the summary captures the key findings and interpretations of the reference text without significant inaccuracies, omissions, or misrepresentations.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: Accuracy is based on the faithful representation of the reference text without introducing false information, inaccuracies, omissions, or misrepresentations. If there is uncertainty about the accuracy of a summary, it is recommended to provide a score of 0.
+
+Additional Note: In cases where both summaries accurately capture the key findings and interpretations without significant inaccuracies, omissions, or misrepresentations, it is important to provide a score of 0 to indicate that neither summary is better than the other in terms of accuracy. If the model is uncertain about the accuracy of a summary, it should refrain from assigning a score and indicate the need for further evaluation.",0.6704545454545454
+0.7093023255813954,0.6179775280898876,0.7441860465116279,0.8539325842696629,0.797752808988764,0.8089887640449438,0.8160919540229885,0.8588235294117647,0.8505747126436781,0.8651685393258427,0.8089887640449438
+0.6176470588235294,0.5211267605633803,0.6470588235294118,0.7887323943661971,0.7183098591549296,0.7323943661971831,0.7391304347826086,0.7794117647058824,0.782608695652174,0.7887323943661971,"[0.5857142857142857, 0.7714285714285715]"
+0.7941176470588235,0.704225352112676,0.8382352941176471,0.9154929577464789,0.8732394366197183,0.8732394366197183,0.8985507246376812,0.9264705882352942,0.9130434782608695,0.9295774647887324,"[0.7323943661971831, 0.8873239436619719]"

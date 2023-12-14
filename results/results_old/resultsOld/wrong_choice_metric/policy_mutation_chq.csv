@@ -1,0 +1,153 @@
+0,1,2,3,4,5,6,7,8,9,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message and providing accurate and relevant information. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance.","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message and providing accurate and relevant information. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries.","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information and accurately addresses the specific concerns raised in the original message.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information and accurately addresses the specific concerns raised in the original message.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message and providing accurate and relevant information. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries. If the summaries accurately capture the individual's struggles with eating, loss of appetite, and desire to gain weight, they should be evaluated based on the degree of detail and relevance to the original message.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message and providing accurate and relevant information. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries. If the summaries accurately capture the individual's struggles with eating, loss of appetite, and desire to gain weight, they should be evaluated based on the degree of detail and relevance to the original message.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message and providing accurate and relevant information. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance to the original message. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries. If the summaries accurately capture the individual's struggles with eating, loss of appetite, and desire to gain weight, they should be evaluated based on the degree of detail and relevance to the original message. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message and providing accurate and relevant information. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance to the original message. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries. If the summaries accurately capture the individual's struggles with eating, loss of appetite, and desire to gain weight, they should be evaluated based on the degree of detail and relevance to the original message. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance.","Title: Summary comparison - addressing specific concerns policy
+
+Objective
+Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately addresses the specific concerns raised in the original message.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message and providing accurate and relevant information. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance to the original message. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries. If the summaries accurately capture the individual's struggles with eating, loss of appetite, and desire to gain weight, they should be evaluated based on the degree of detail and relevance to the original message. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance.","Title: Summary comparison - addressing specific concerns and allergies policy
+
+Objective
+Evaluate which summary accurately addresses the specific concerns raised in the original message, taking into account any allergies or dietary restrictions mentioned.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately addresses the specific concerns raised in the original message, considering any allergies or dietary restrictions mentioned.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message, taking into account any allergies or dietary restrictions. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance to the original message. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries, considering any allergies or dietary restrictions mentioned.","Title: Summary comparison - addressing specific concerns, allergies, and dietary restrictions policy
+
+Objective
+Evaluate which summary accurately addresses the specific concerns raised in the original message, taking into account any allergies or dietary restrictions mentioned.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately addresses the specific concerns raised in the original message, considering any allergies or dietary restrictions mentioned.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, focus on addressing the specific concerns mentioned in the original message, taking into account any allergies or dietary restrictions. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance to the original message. Ensure that the evaluation is based on the specific concerns raised in the original message and the accuracy of the information provided in the summaries, considering any allergies or dietary restrictions mentioned. If the summaries do not directly address the concerns or provide inaccurate information, assign the appropriate score based on the degree of accuracy and relevance to the original message.",0.449438202247191
+0.46153846153846156,0.34444444444444444,0.3111111111111111,0.3614457831325301,0.2962962962962963,0.32926829268292684,0.26136363636363635,0.2716049382716049,0.4838709677419355,0.5666666666666667,0.5730337078651685
+0.3611111111111111,0.25,0.2222222222222222,0.25757575757575757,0.203125,0.23076923076923078,0.18571428571428572,0.1875,0.3918918918918919,0.4722222222222222,"[0.352112676056338, 0.5492957746478874]"
+0.5555555555555556,0.4305555555555556,0.4027777777777778,0.45454545454545453,0.390625,0.4307692307692308,0.35714285714285715,0.359375,0.581081081081081,0.6666666666666666,"[0.4788732394366197, 0.676056338028169]"

@@ -1,0 +1,185 @@
+0,1,2,3,4,5,6,7,8,9,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries. Additionally, the model should consider the context and relevance of the information to the reference text, ensuring a comprehensive evaluation of the accuracy of the summaries.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries. Additionally, the model should consider the context and relevance of the information to the reference text, ensuring a comprehensive evaluation of the accuracy of the summaries. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries. Additionally, the model should consider the context and relevance of the information to the reference text, ensuring a comprehensive evaluation of the accuracy of the summaries. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future. Additionally, the model should be trained to identify and correct any misinterpretations or misrepresentations in the summaries to improve its accuracy in evaluating the findings.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future. Additionally, the model should be trained to identify and correct any misinterpretations or misrepresentations in the summaries to improve its accuracy in evaluating the findings. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the findings.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately represents the findings.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A or B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the comprehensive representation of the findings in the reference text. Any misrepresentation or omission of critical details should result in a lower accuracy score. Additionally, ensure that the evaluation is based on the entirety of the information provided and not just specific details.
+
+In cases where the summaries contain technical medical information, the model should consider the overall accuracy and completeness of the representation of findings, rather than focusing on specific details. It should also take into account the context and relevance of the information to the reference text.
+
+By incorporating a holistic approach to evaluating accuracy, the model will be better equipped to provide more accurate labels for the given summaries. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future. Additionally, the model should be trained to identify and correct any misinterpretations or misrepresentations in the summaries to improve its accuracy in evaluating the findings. If the model has previously mislabeled examples, it should reevaluate its approach to ensure accurate labeling in the future.",0.5632183908045977
+0.6,0.7126436781609196,0.8275862068965517,0.797752808988764,0.7701149425287356,0.8390804597701149,0.8068181818181818,0.7727272727272727,0.7011494252873564,0.7840909090909091,0.8023255813953488
+0.5147058823529411,0.6231884057971014,0.7536231884057971,0.7183098591549296,0.6811594202898551,0.7681159420289855,0.7285714285714285,0.6857142857142857,0.6086956521739131,0.7,"[0.463768115942029, 0.6666666666666666]"
+0.6911764705882353,0.797826086956521,0.8985507246376812,0.8732394366197183,0.8405797101449275,0.9130434782608695,0.8857142857142857,0.8571428571428571,0.782608695652174,0.8571428571428571,"[0.7205882352941176, 0.8676470588235294]"

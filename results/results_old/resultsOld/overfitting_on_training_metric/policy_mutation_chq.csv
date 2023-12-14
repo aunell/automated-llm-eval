@@ -1,0 +1,176 @@
+0,1,2,3,4,5,6,7,8,9,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Note: Consider the direct addressing of the specific concerns expressed in the reference text to determine relevance and accuracy.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Note: Consider the direct addressing of the specific concerns expressed in the reference text to determine relevance and accuracy. Ensure that the summary directly aligns with the primary concern expressed in the reference text and does not deviate to a different aspect.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Note: Consider the direct addressing of the specific concerns expressed in the reference text to determine relevance and accuracy. Ensure that the summary directly aligns with the primary concern expressed in the reference text and does not deviate to a different aspect.
+
+Revised Explanation for Incorrect Labels:
+The agent should evaluate the summaries based on their direct alignment with the primary concern expressed in the reference text. If a summary addresses the specific concern accurately, it should be scored higher, regardless of the broader relevance of the other summary. Additionally, the agent should prioritize the direct addressing of the specific concerns over general information related to the query.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Revised Explanation for Incorrect Labels:
+The agent should evaluate the summaries based on their direct alignment with the primary concern expressed in the reference text. If a summary addresses the specific concern accurately, it should be scored higher, regardless of the broader relevance of the other summary. Additionally, the agent should prioritize the direct addressing of the specific concerns over general information related to the query. However, the agent should also consider whether the summary provides a comprehensive solution to the problem presented in the reference text. If a summary provides a solution that directly addresses the primary concern and offers a practical resolution, it should be scored higher, even if it deviates slightly from the immediate concern expressed in the reference text.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Revised Explanation for Incorrect Labels:
+The agent should evaluate the summaries based on their direct alignment with the primary concern expressed in the reference text. If a summary addresses the specific concern accurately, it should be scored higher, regardless of the broader relevance of the other summary. Additionally, the agent should prioritize the direct addressing of the specific concerns over general information related to the query. However, the agent should also consider whether the summary provides a comprehensive solution to the problem presented in the reference text. If a summary provides a solution that directly addresses the primary concern and offers a practical resolution, it should be scored higher, even if it deviates slightly from the immediate concern expressed in the reference text. The agent should also ensure that the summaries are evaluated based on their direct relevance to the specific query and the provision of practical solutions to the concerns expressed in the reference text. It should not prioritize general information over the direct addressing of the specific concerns.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Revised Explanation for Incorrect Labels:
+The agent should evaluate the summaries based on their direct alignment with the primary concern expressed in the reference text. If a summary addresses the specific concern accurately, it should be scored higher, regardless of the broader relevance of the other summary. Additionally, the agent should prioritize the direct addressing of the specific concerns over general information related to the query. However, the agent should also consider whether the summary provides a comprehensive solution to the problem presented in the reference text. If a summary provides a solution that directly addresses the primary concern and offers a practical resolution, it should be scored higher, even if it deviates slightly from the immediate concern expressed in the reference text. The agent should also ensure that the summaries are evaluated based on their direct relevance to the specific query and the provision of practical solutions to the concerns expressed in the reference text. It should not prioritize general information over the direct addressing of the specific concerns.
+
+In cases where the summaries provide solutions or directly address the concerns expressed in the reference text, the agent should prioritize the immediate concern over broader relevance. The agent should also consider the practicality and specificity of the solutions provided in the summaries, scoring higher for summaries that offer practical resolutions to the concerns expressed in the reference text.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Revised Explanation for Incorrect Labels:
+The agent should evaluate the summaries based on their direct alignment with the primary concern expressed in the reference text. If a summary addresses the specific concern accurately, it should be scored higher, regardless of the broader relevance of the other summary. Additionally, the agent should prioritize the direct addressing of the specific concerns over general information related to the query. However, the agent should also consider whether the summary provides a comprehensive solution to the problem presented in the reference text. If a summary provides a solution that directly addresses the primary concern and offers a practical resolution, it should be scored higher, even if it deviates slightly from the immediate concern expressed in the reference text. The agent should also ensure that the summaries are evaluated based on their direct relevance to the specific query and the provision of practical solutions to the concerns expressed in the reference text. It should not prioritize general information over the direct addressing of the specific concerns.
+
+In cases where the summaries provide solutions or directly address the concerns expressed in the reference text, the agent should prioritize the immediate concern over broader relevance. The agent should also consider the practicality and specificity of the solutions provided in the summaries, scoring higher for summaries that offer practical resolutions to the concerns expressed in the reference text.
+
+The agent should avoid favoring general information over the direct addressing of the specific concerns. It should prioritize the direct alignment of the summaries with the primary concern expressed in the reference text, ensuring that practical solutions to the concerns are given higher scores.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Revised Explanation for Incorrect Labels:
+The agent should evaluate the summaries based on their direct alignment with the primary concern expressed in the reference text. If a summary addresses the specific concern accurately, it should be scored higher, regardless of the broader relevance of the other summary. Additionally, the agent should prioritize the direct addressing of the specific concerns over general information related to the query. However, the agent should also consider whether the summary provides a comprehensive solution to the problem presented in the reference text. If a summary provides a solution that directly addresses the primary concern and offers a practical resolution, it should be scored higher, even if it deviates slightly from the immediate concern expressed in the reference text. The agent should also ensure that the summaries are evaluated based on their direct relevance to the specific query and the provision of practical solutions to the concerns expressed in the reference text. It should not prioritize general information over the direct addressing of the specific concerns.
+
+In cases where the summaries provide solutions or directly address the concerns expressed in the reference text, the agent should prioritize the immediate concern over broader relevance. The agent should also consider the practicality and specificity of the solutions provided in the summaries, scoring higher for summaries that offer practical resolutions to the concerns expressed in the reference text.
+
+The agent should avoid favoring general information over the direct addressing of the specific concerns. It should prioritize the direct alignment of the summaries with the primary concern expressed in the reference text, ensuring that practical solutions to the concerns are given higher scores.","Title: Summary comparison - relevance and accuracy policy
+
+Objective
+Evaluate which summary is more relevant and accurate to the specific query.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary is more relevant and accurate to the specific query.
+
+Scoring Criteria
+A significantly more relevant and accurate than B (Score: -2)
+A slightly more relevant and accurate than B (Score: -1)
+Both summaries are equally relevant and accurate (Score: 0)
+B slightly more relevant and accurate than A (Score: 1)
+B significantly more relevant and accurate than A (Score: 2)
+
+Revised Explanation for Incorrect Labels:
+The agent should evaluate the summaries based on their direct alignment with the primary concern expressed in the reference text. If a summary addresses the specific concern accurately, it should be scored higher, regardless of the broader relevance of the other summary. Additionally, the agent should prioritize the direct addressing of the specific concerns over general information related to the query.
+
+In cases where the summaries provide solutions or directly address the concerns expressed in the reference text, the agent should prioritize the immediate concern over broader relevance. The agent should also consider the practicality and specificity of the solutions provided in the summaries, scoring higher for summaries that offer practical resolutions to the concerns expressed in the reference text.
+
+The agent should avoid favoring general information over the direct addressing of the specific concerns. It should prioritize the direct alignment of the summaries with the primary concern expressed in the reference text, ensuring that practical solutions to the concerns are given higher scores. The agent should also consider the context and specific details of the query, ensuring that the summaries directly address the immediate concerns expressed in the reference text.",0.46153846153846156
+0.5652173913043478,0.21739130434782608,0.28169014084507044,0.27941176470588236,0.19480519480519481,0.19540229885057472,0.16091954022988506,0.19047619047619047,0.24719101123595505,0.2441860465116279,0.275
+0.4657534246575342,0.12727272727272726,0.17857142857142858,0.18518518518518517,0.11475409836065574,0.11594202898550725,0.08695652173913043,0.11940298507462686,0.16901408450704225,0.16176470588235295,"[0.3611111111111111, 0.5555555555555556]"
+0.6575342465753424,0.3090909090909091,0.375,0.37037037037037035,0.2786885245901639,0.2753623188405797,0.2318840579710145,0.26865671641791045,0.3380281690140845,0.3235294117647059,"[0.1875, 0.359375]"

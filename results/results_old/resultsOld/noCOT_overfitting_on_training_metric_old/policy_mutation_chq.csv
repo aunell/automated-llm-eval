@@ -1,0 +1,51 @@
+0,1,2,final scores
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary contains more accurate information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary contains more accurate information.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A nor B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the factual correctness and relevance of the information presented in the summaries.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary contains more accurate information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary contains more accurate information.
+
+Scoring Criteria
+A significantly more accurate than B (Score: -2)
+A slightly more accurate than B (Score: -1)
+Neither A nor B is more accurate than the other (Score: 0)
+B slightly more accurate than A (Score: 1)
+B significantly more accurate than A (Score: 2)
+
+Note: Accuracy is determined by the factual correctness and relevance of the information presented in the summaries.
+
+Additional Guidance
+When evaluating the accuracy of the summaries, consider the completeness, relevance, and factual correctness of the information presented. Pay close attention to any potential misinformation or missing key details that could impact the overall accuracy of the summaries.",0.4230769230769231
+0.4230769230769231,0.42857142857142855,0.38961038961038963,0.581081081081081
+0.3225806451612903,0.30357142857142855,0.29508196721311475,"[0.3225806451612903, 0.532258064516129]"
+0.5161290322580645,0.5357142857142857,0.4918032786885246,"[0.4745762711864407, 0.6779661016949152]"

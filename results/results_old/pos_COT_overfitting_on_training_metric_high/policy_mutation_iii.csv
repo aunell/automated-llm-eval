@@ -1,0 +1,38 @@
+,0,1
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately captures the key information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately captures the key information from the reference text without introducing false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Reasoning for Correct Labeling:
+- Based on the provided reference text, both Summary A and Summary B accurately capture the key findings and details. Therefore, neither summary includes false information. As a result, the score for this comparison according to the accuracy policy is 0, indicating that neither summary is better than the other in terms of accuracy.
+
+Reasoning for Incorrect Labeling:
+- The agent's incorrect reasoning for this score is as follows: Based on the provided reference text, I would score summary B as slightly better than summary A. Summary B accurately captures the key findings of the reference text, including the postoperative changes following left frontal craniotomy with intracranial gas, extensive edema, and multiple foci of hemorrhage in the left frontal lobe, as well as the recommendation for comparison with prior studies for further evaluation. Summary A, on the other hand, introduces some false information by stating ""multiple foci of hemorrhage in the right frontal lobe,"" which is not supported by the reference text. Therefore, based on the accuracy policy, summary B is slightly better than summary A, and I would assign a score of 1 to summary B."
+score,0.8,0.8
+lower_limit,0.5,0.5
+upper_limit,1.0,1.0
+distance,0,12

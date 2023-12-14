@@ -1,0 +1,20 @@
+,0
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)"
+score,0.6666666666666666
+lower_limit,0.25
+upper_limit,1.0
+distance,0
+missed statements,"[(61, 0, 1.0), (1, 0, 1.0)]"

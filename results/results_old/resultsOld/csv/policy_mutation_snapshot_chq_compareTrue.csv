@@ -1,0 +1,69 @@
+0,1,2,3
+"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than B (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Note: When evaluating the summaries, consider the accuracy and relevance of the information presented in each summary to the original reference text. Ensure that the summaries address the core concerns and provide accurate information in response to the original statements.","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Note: When evaluating the summaries, consider the accuracy and relevance of the information presented in each summary to the original reference text. Ensure that the summaries address the core concerns and provide accurate information in response to the original statements.
+
+Additional Guidance
+When evaluating the summaries, consider the specific questions or concerns raised in the original statements and assess how well each summary addresses those points. Pay close attention to the accuracy of the information provided and the relevance to the original reference text. If the summaries do not directly address the core concerns or provide accurate information, assign a score based on the degree of inaccuracy and relevance.","Title: Summary comparison - accuracy and relevance policy
+
+Objective
+Evaluate which summary provides the most accurate and relevant information in response to the original statements.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides the most accurate and relevant information in response to the original statements.
+
+Scoring Criteria
+A significantly better than B in accuracy and relevance (Score: -2)
+A slightly better than B in accuracy and relevance (Score: -1)
+Neither A or B is better than the other in accuracy and relevance (Score: 0)
+B slightly better than A in accuracy and relevance (Score: 1)
+B significantly better than A in accuracy and relevance (Score 2)
+
+Note: When evaluating the summaries, consider the accuracy and relevance of the information presented in each summary to the original reference text. Ensure that the summaries address the core concerns and provide accurate and relevant information in response to the original statements.
+
+Additional Guidance
+When evaluating the summaries, consider the specific questions or concerns raised in the original statements and assess how well each summary addresses those points. Pay close attention to the accuracy of the information provided and the relevance to the original reference text. If the summaries do not directly address the core concerns or provide accurate and relevant information, assign a score based on the degree of inaccuracy and relevance."
+0.2878787878787879,0.3283582089552239,0.3968253968253968,0.16363636363636364
+0.19230769230769232,0.22641509433962265,0.28,0.06818181818181818
+0.40384615384615385,0.4339622641509434,0.52,0.25

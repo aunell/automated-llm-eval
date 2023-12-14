@@ -1,0 +1,408 @@
+,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information. Consider the accuracy and reliability of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Note: When evaluating the summaries, consider the accuracy and reliability of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary contains less false information than the other, based on the provided reference text.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides the most accurate and comprehensive representation of the information.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides the most accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy and specificity of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy and specificity of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and reliability policy
+
+Objective
+Evaluate which summary accurately and reliably conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and reliably conveys the information from the reference text. Consider the accuracy, reliability, and completeness of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, and completeness of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and reliably conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy and specificity of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text.","Title: Summary comparison - accuracy and completeness policy
+
+Objective
+Evaluate which summary accurately and comprehensively conveys the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary accurately and comprehensively conveys the information from the reference text. Consider the accuracy, reliability, completeness, and specificity of the information presented in each summary.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score: 2)
+
+Note: When evaluating the summaries, consider the accuracy, reliability, completeness, and specificity of the information presented in each summary. Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary. In case of any discrepancies or lack of specificity in the summaries compared to the reference text, prioritize the summary that provides a more accurate and comprehensive representation of the information.
+
+Additional Guidance for Incorrectly Labeled Examples:
+In cases where the summaries accurately convey the information but differ in specificity or completeness, prioritize the summary that provides a more comprehensive and detailed representation of the information. Ensure that the scoring reflects the level of completeness and specificity in addition to accuracy and reliability. However, if one summary includes specific details or key findings that are not present in the other summary, prioritize the summary that includes these additional details, as they contribute to a more comprehensive representation of the information.
+
+Ensure that the scoring reflects the degree to which one summary accurately and comprehensively conveys the information from the reference text compared to the other summary, taking into account both accuracy and completeness.
+
+Note: It is important to prioritize the accuracy, specificity, and completeness of the information presented in the summaries. In cases where one summary provides more specific and detailed information compared to the other, it should be considered as more accurate and reliable in conveying the information from the reference text."
+score,0.9550561797752809,0.9550561797752809,0.9550561797752809,0.9655172413793104,0.9540229885057471,0.9662921348314607,0.9550561797752809,0.9534883720930233,0.9534883720930233,0.9534883720930233,0.9540229885057471,0.9651162790697675,0.9540229885057471,0.9545454545454546,0.9523809523809523,0.9642857142857143,0.9545454545454546,0.9647058823529412,0.9534883720930233,0.9529411764705882
+lower_limit,0.9154929577464789,0.9154929577464789,0.9014084507042254,0.927536231884058,0.9130434782608695,0.9295774647887324,0.9154929577464789,0.9117647058823529,0.9117647058823529,0.9117647058823529,0.9130434782608695,0.9264705882352942,0.9130434782608695,0.9142857142857143,0.9104477611940298,0.9253731343283582,0.9142857142857143,0.9264705882352942,0.9117647058823529,0.9117647058823529
+upper_limit,0.9859154929577465,0.9859154929577465,0.9859154929577465,1.0,0.9855072463768116,1.0,0.9859154929577465,0.9852941176470589,0.9852941176470589,0.9852941176470589,0.9855072463768116,1.0,0.9855072463768116,0.9857142857142858,0.9850746268656716,1.0,0.9857142857142858,1.0,0.9852941176470589,0.9852941176470589
+distance,0,601,1389,819,386,2157,0,321,0,0,3010,0,0,0,0,0,0,0,0,0

@@ -1,0 +1,51 @@
+,0,1,2
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides a clear and concise description of the findings in the reference text without introducing false or incomplete information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Reasoning for Incorrect Answers:
+The model should consider the completeness and accuracy of the information in the summaries, ensuring that they accurately represent the content of the reference text without introducing false or incomplete information.","Title: Summary comparison - accuracy policy
+
+Objective
+Evaluate which summary accurately represents the information from the reference text.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary provides a clear and concise description of the findings in the reference text without introducing false or incomplete information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)
+
+Reasoning for Incorrect Answers:
+The model should consider the completeness and accuracy of the information in the summaries, ensuring that they accurately represent the content of the reference text without introducing false or incomplete information. In cases where one summary includes more accurate and complete information than the other, the model should assign the appropriate score based on the level of accuracy and completeness in each summary. It should not assume that both summaries are equally accurate and complete if one provides more comprehensive and precise details than the other."
+score,0.8850574712643678,0.8539325842696629,0.8876404494382022
+lower_limit,0.4927536231884058,0.6056338028169014,0.38028169014084506
+upper_limit,0.6811594202898551,0.7887323943661971,0.5774647887323944
+distance,0,835,790

@@ -1,0 +1,56 @@
+0,1,2,3,4,final scores
+"Given the human statement and the machine statement, compare the two statements in terms of correctness.
+Assess which summary contains less false information.
+Rate the responses on a scale of -2 to 2, with 2 meaning that the machine output was significantly more  correct.
+A score of -2 would mean that the human output was significantly more correct.","Revised Policy: When comparing the human and machine statements, examine the details and accuracy of each. Score the responses on a scale of -2 to 2. 
+
+A score of 2 indicates that the machine output was not only accurate, but it also provided substantially more relevant, detailed, and insightful information than the human output. A score of -2, on the other hand, implies that the human output was significantly more accurate or comprehensive.
+
+If both statements are equally accurate and provide a similar level of detail, assign a score of 0, regardless of minor differences in the amount of information given. If one statement provides slightly more detail or accuracy, adjust the score by 1 in favor of that output (i.e., -1 if the human statement is slightly better, 1 if the machine statement is slightly better).
+
+Be cautious not to overvalue the inclusion of more detail if it does not significantly contribute to the correctness or usefulness of the information. Always prioritize accuracy over the amount of detail when assigning the scores.","Revised Policy: When comparing the human and machine statements, the model should closely examine the details, precision, and completeness of each. Score the responses on a scale of -2 to 2. 
+
+A score of 2 indicates that the machine output was not only accurate but also provided considerably more relevant, detailed, and insightful information than the human output. A score of -2 implies that the human output was significantly more accurate or comprehensive.
+
+If both statements are equally accurate and provide a similar level of detail, assign a score of 0, regardless of minor differences in the amount of information given. If one statement provides slightly more detail or accuracy, adjust the score by 1 in favor of that output (i.e., -1 if the human statement is slightly better, 1 if the machine statement is slightly better).
+
+When considering the level of detail, the model should be more discerning about the impact and value of the extra information provided. For instance, minor additional details that do not significantly contribute to the clinical insight, diagnostic precision, or usefulness of the information should not drastically affect the score. 
+
+Accuracy should still be prioritized over the quantity of detail. However, if the machine response is slightly less specific in one area but provides valuable additional information in another that was omitted in the human response, these should balance out, and a score of 0 should be assigned.
+
+Also, take note of any essential details omitted in either the human or machine response. An omission of important information should influence the score more significantly.","Revised Policy: When comparing human and machine statements, the model should meticulously evaluate the details, precision, and completeness. Score the responses on a scale of -2 to 2.
+
+A score of 2 indicates the machine output was not only accurate but also provided substantially more pertinent, detailed, and insightful information than the human output. A score of -2 suggests the human output was significantly more accurate or comprehensive.
+
+When both statements are equally accurate and exhibit a similar level of detail, assign a score of 0, even if there are slight differences in the amount of information. If one statement provides minutely more detail or accuracy, adjust the score by 1 in favor of that output (i.e., -1 if the human statement is slightly superior, 1 if the machine statement is slightly superior).
+
+In evaluating the level of detail, ensure to consider the impact and value of the extra information provided. Minor additional details that do not meaningfully enhance the clinical insight, diagnostic precision, or utility of the information should not considerably affect the score.
+
+Even though the quantity of detail is important, prioritize accuracy. If the machine response is marginally less specific in one area but provides valuable supplementary information in another omitted in the human response, these should balance out, leading to a score of 0.
+
+Take note of any crucial details left out in either the human or machine response. The omission of significant information should heavily impact the score. However, remember that a slightly more detailed response does not necessarily mean it is better. Make sure that the additional details are relevant, provide context, and increase the understanding of the situation before awarding a higher score. Also, if the additional details provided are generic and don't contribute to the understanding of the specific situation, they should not sway the score in favor of the more detailed response.","Revised Policy: 
+
+When comparing human and machine statements, the model should thoroughly evaluate the level of detail, accuracy, and completeness. Responses are to be scored on a scale of -2 to 2. 
+
+A score of 2 means that the machine output was not only accurate but also provided significantly more relevant, detailed, and insightful information than the human output. A score of -2 suggests that the human output was substantially more accurate or comprehensive.
+
+When both statements are equally accurate and have a similar level of detail, assign a score of 0, regardless of minor differences in the amount of information. If one statement provides slightly more detail or accuracy, adjust the score by 1 in favor of that output (i.e., -1 if the human statement is marginally superior, 1 if the machine statement is marginally superior).
+
+For minor additional details that do not meaningfully enhance the clinical insight, diagnostic precision, or utility of the information, do not considerably adjust the score.
+
+While the quantity of detail is important, accuracy should be prioritized. If the machine response is slightly less specific in one area but provides valuable supplementary information in another that the human response missed, these should balance out, leading to a score of 0.
+
+The omission of significant information should heavily impact the score. However, a slightly more detailed response does not necessarily mean it is better. Additional details should be relevant, provide context, and increase the understanding of the situation to warrant a higher score. Generic additional details that don't contribute to understanding the specific situation should not sway the score in favor of the more detailed response.
+
+New Additions:
+
+When evaluating the accuracy of a response, the omission of any substantial information in either the human or machine response, such as the location of a disease, should significantly impact the score. A machine response that omits critical details, even when providing additional but generic information, should not receive a higher score. 
+
+In a situation where the machine response provides more information but does not dramatically enhance the understanding of the patient's condition, a score of 0 is more suitable, as both the machine and human responses are on par with each other in terms of providing valuable insight. 
+
+The interpretation of 'slightly superior' in the scoring guidelines needs to be carefully assessed. A response is 'slightly superior' if it provides key clinical insights that the other response misses, not merely because it has more words or appears more detailed. 
+
+Always consider the clinical context when scoring. Even if a response includes more information, if this information is not valuable in the specific clinical context, it should not warrant a higher score. On the other hand, a response that omits a detail that is critical in a specific clinical context should receive a lower score. 
+
+The score should reflect the relative value of the information provided in the specific clinical context, and not simply the quantity of detail. The emphasis is on the quality, relevance, and completeness of the information, rather than the volume of it.",0.09090909090909091
+0.45454545454545453,0.36363636363636365,0.4,0.45454545454545453,0.5454545454545454,0.2727272727272727

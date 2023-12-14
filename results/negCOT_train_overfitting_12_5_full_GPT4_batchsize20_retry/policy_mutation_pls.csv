@@ -1,0 +1,152 @@
+,0,1,2,3,4,5
+current_policy,"Title: Summary comparison - correctness policy
+
+Objective
+Evaluate which summary includes less false information.
+
+Instructions
+You are given 2 summaries (A, B) created from a reference text. Evaluate which summary includes less false information.
+
+Scoring Criteria
+A significantly better than B (Score: -2)
+A slightly better than B (Score: -1)
+Neither A or B is better than the other (Score: 0)
+B slightly better than A (Score: 1)
+B significantly better than A (Score 2)","Title: Enhanced Summary Comparison - Correctness Policy
+
+Objective
+To accurately evaluate which summary (A or B) contains the least amount of false information when compared to a reference text.
+
+Instructions
+You are presented with two summaries (A, B) derived from a reference text. Your task is to assess which summary is more accurate by containing fewer inaccuracies or unsupported statements.
+
+Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is almost entirely accurate with no more than one minor inaccuracy, while Summary B contains multiple significant inaccuracies.
+- A slightly better than B (Score: -1): Summary A is more accurate, with fewer and less critical inaccuracies than Summary B.
+- Neither A nor B is better than the other (Score: 0): Both summaries contain a similar number and severity of inaccuracies, or both are equally accurate.
+- B slightly better than A (Score: 1): Summary B is more accurate, with fewer and less critical inaccuracies than Summary A.
+- B significantly better than A (Score 2): Summary B is almost entirely accurate with no more than one minor inaccuracy, while Summary A contains multiple significant inaccuracies.
+
+Additional Guidance
+- An inaccuracy is considered significant if it introduces a condition or fact not present in the reference text or directly contradicts the reference text.
+- Minor inaccuracies involve slight misrepresentations that do not alter the overall accuracy of the summary.
+- When a summary includes an inference or assumption not explicitly stated in the reference text, evaluate whether it is a reasonable deduction based on the information provided. If it is a reasonable inference, it should not be considered an inaccuracy.
+- If a summary includes additional relevant information that is accurate and supported by the reference text, this should be considered when determining the overall accuracy.
+- If a summary omits important information present in the reference text, consider the omission's impact on the summary's accuracy.
+- Avoid penalizing summaries for stylistic differences that do not affect the factual content (e.g., using ""GI bleed"" instead of ""gastrointestinal bleed"").
+
+Examples for Clarification
+1. If Summary A mentions ""hypertension"" without support from the reference text, and Summary B accurately includes ""gallstones"" as indicated in the reference text, then Summary B would be slightly better than A (Score: 1), despite B also including an unsupported condition like ""sleep apnea.""
+
+2. When Summary A includes ""renal failure"" without clear context from the reference text, and Summary B incorrectly states ""COPD exacerbation"" instead of asthma, both summaries have inaccuracies. However, if Summary B has one less significant error, it would be scored as B slightly better than A (Score: 1).
+
+3. If Summary A includes a repeated term like ""hypothyroidism"" twice due to an error but does not introduce false information, and Summary B is more comprehensive and aligns closely with the source text, neither summary is better than the other (Score: 0), assuming no false information is introduced.
+
+By following these revised instructions and examples, the model should improve its accuracy in labeling the summaries based on the presence and severity of inaccuracies relative to the reference text.","Title: Enhanced Summary Comparison - Correctness Policy (Revised)
+
+Objective
+To improve the evaluation of which summary (A or B) more accurately reflects the reference text by minimizing false information and unsupported statements.
+
+Revised Instructions
+When presented with two summaries (A, B) derived from a reference text, your task is to determine which summary more faithfully represents the original text by containing the least number of inaccuracies or unsupported statements.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is nearly completely accurate, with at most one minor inaccuracy, while Summary B contains several significant inaccuracies.
+- A slightly better than B (Score: -1): Summary A is more accurate, with fewer and less critical inaccuracies than Summary B.
+- Neither A nor B is better than the other (Score: 0): Both summaries have a similar number and severity of inaccuracies, or both are equally accurate.
+- B slightly better than A (Score: 1): Summary B is more accurate, with fewer and less critical inaccuracies than Summary A.
+- B significantly better than A (Score 2): Summary B is nearly completely accurate, with at most one minor inaccuracy, while Summary A contains several significant inaccuracies.
+
+Clarifications and Emphasis on Common Misinterpretations
+- A significant inaccuracy is one that introduces a condition or fact not present in the reference text or directly contradicts it.
+- Minor inaccuracies are slight misrepresentations that do not change the overall message of the summary.
+- Reasonable inferences or assumptions based on the reference text are not inaccuracies. However, if an inference introduces a new significant condition not implied by the text, it should be considered an inaccuracy.
+- Additional relevant information that is accurate and supported by the reference text should be considered a strength of the summary.
+- Omissions of important information should be weighed based on their impact on the summary's overall accuracy.
+- Stylistic differences should not affect scoring unless they lead to factual errors.
+- When evaluating medical conditions, differentiate between historical mentions (e.g., ""history of..."") and current conditions. Do not penalize for historical mentions if they are not relevant to the current clinical picture.
+- Avoid penalizing for the omission of minor details that do not significantly alter the understanding of the patient's condition.
+- When summaries include medical abbreviations or terms, ensure they are interpreted correctly in the context of the reference text (e.g., ""PNA"" understood as pneumonia if supported by the context).
+
+Revised Examples for Clarification
+1. If Summary A includes ""hypertension"" supported by the reference text, and Summary B includes ""hypotension"" not supported by the reference text, Summary A is significantly better than B (Score: -2), as Summary B introduces a significant inaccuracy by misrepresenting the patient's blood pressure condition.
+
+2. When Summary A includes ""acute renal failure"" supported by the reference text, and Summary B includes ""chronic kidney disease"" without specifying the acuteness, consider the context. If the reference text indicates an acute exacerbation of chronic kidney disease, Summary A would be more accurate. If the reference text only supports chronic kidney disease without an acute change, Summary B would be more accurate.
+
+3. If both summaries include the same conditions but Summary A omits ""anemia"" while Summary B includes it, and the reference text supports the presence of anemia,","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Updated)
+
+Objective
+To refine the evaluation process for comparing two summaries (A and B) against a reference text, ensuring that the summary which most accurately reflects the original text is identified by minimizing false information and unsupported statements.
+
+Updated Instructions
+When presented with two summaries (A, B) derived from a reference text, your task is to determine which summary more faithfully represents the original text. This determination should be based on the presence of inaccuracies or unsupported statements, with a focus on the impact these have on the overall message and factual integrity of the summary.
+
+Updated Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is nearly completely accurate, with at most one minor inaccuracy, while Summary B contains multiple significant inaccuracies.
+- A slightly better than B (Score: -1): Summary A is more accurate, with fewer and less critical inaccuracies than Summary B.
+- Neither A nor B is better than the other (Score: 0): Both summaries have a similar number and severity of inaccuracies, or both are equally accurate.
+- B slightly better than A (Score: 1): Summary B is more accurate, with fewer and less critical inaccuracies than Summary A.
+- B significantly better than A (Score 2): Summary B is nearly completely accurate, with at most one minor inaccuracy, while Summary A contains multiple significant inaccuracies.
+
+Additional Guidelines for Scoring
+- Evaluate the presence of significant inaccuracies, which are those that introduce conditions or facts not present in the reference text or directly contradict it.
+- Minor inaccuracies are slight misrepresentations that do not change the overall message of the summary.
+- Reasonable inferences or assumptions based on the reference text are not inaccuracies unless they introduce a new significant condition not implied by the text.
+- Accurate additional information that is supported by the reference text is a strength of the summary.
+- Omissions should be weighed based on their impact on the summary's overall accuracy.
+- Stylistic differences should not affect scoring unless they lead to factual errors.
+- Medical conditions should be evaluated for historical versus current relevance.
+- Avoid penalizing for the omission of minor details that do not significantly alter the understanding of the patient's condition.
+- Ensure medical abbreviations or terms are interpreted correctly in the context of the reference text.
+
+Enhanced Clarifications for Common Misinterpretations
+- When a summary includes a condition not explicitly stated but is a common treatment or implication of stated conditions (e.g., hypertension inferred from the use of antihypertensive medication), it should not be considered an inaccuracy.
+- If a summary omits a condition that significantly alters the understanding of the patient's health status or the complexity of their medical situation, this should be considered a significant inaccuracy.
+- When summaries include or omit details, consider the clinical relevance and whether the inclusion or exclusion changes the clinical picture.
+- For conditions that may have both acute and chronic states, ensure the summary accurately reflects the state supported by the reference text.
+
+Revised Examples for Clarification
+1. If Summary A accurately includes ""hypertension"" based on the reference text, and Summary B incorrectly states ""hypotension"" not supported by the reference text, Summary A is significantly better than B (Score: -2), as Summary B introduces a significant inaccuracy by misrepresenting the patient's blood pressure condition.
+
+2. When Summary A correctly","Title: Enhanced Summary Comparison - Correctness Policy (Revised and Refined)
+
+Objective
+To improve the accuracy of evaluating two summaries (A and B) against a reference text by providing clear, concise, and comprehensive guidelines that minimize the occurrence of inaccuracies and unsupported statements, ensuring the most faithful representation of the original text is identified.
+
+Revised Instructions
+When comparing two summaries (A, B) against a reference text, assess which summary more accurately encapsulates the original text. Focus on the presence and impact of inaccuracies or unsupported statements on the factual integrity and overall message of the summary.
+
+Revised Scoring Criteria
+- A significantly better than B (Score: -2): Summary A is almost entirely accurate, with at most one minor inaccuracy, while Summary B contains multiple significant inaccuracies.
+- A slightly better than B (Score: -1): Summary A has fewer and less severe inaccuracies than Summary B.
+- Neither A nor B is better (Score: 0): Both summaries have a similar level of accuracy and number of inaccuracies, or both are equally accurate.
+- B slightly better than A (Score: 1): Summary B has fewer and less severe inaccuracies than Summary A.
+- B significantly better than A (Score: 2): Summary B is almost entirely accurate, with at most one minor inaccuracy, while Summary A contains multiple significant inaccuracies.
+
+Additional Guidelines for Scoring
+- Significant inaccuracies are those that introduce or omit facts not present in the reference text or directly contradict it.
+- Minor inaccuracies are slight misrepresentations that do not alter the overall message of the summary.
+- Reasonable inferences based on the reference text are acceptable unless they introduce significant new conditions not implied by the text.
+- Accurate additional information that is supported by the reference text strengthens the summary.
+- Omissions should be evaluated for their impact on the summary's overall accuracy.
+- Stylistic differences should not affect scoring unless they lead to factual errors.
+- Medical conditions should be evaluated for historical versus current relevance.
+- Avoid penalizing for the omission of minor details that do not significantly alter the understanding of the patient's condition.
+- Ensure medical abbreviations or terms are interpreted correctly in the context of the reference text.
+
+Enhanced Clarifications for Common Misinterpretations
+- A condition not explicitly stated but commonly associated with stated conditions should not be considered an inaccuracy unless it introduces a significant new condition not implied by the text.
+- Omitting a condition that significantly alters the understanding of the patient's health status or the complexity of their medical situation should be considered a significant inaccuracy.
+- When summaries include or omit details, consider the clinical relevance and whether the inclusion or exclusion changes the clinical picture.
+- For conditions with both acute and chronic states, ensure the summary accurately reflects the state supported by the reference text.
+
+Revised Examples for Clarification
+1. If Summary A accurately includes ""hypertension"" based on the reference text, and Summary B incorrectly states ""hypotension"" not supported by the reference text, Summary A is significantly better than B (Score: -2), as Summary B introduces a significant inaccuracy by misrepresenting the patient's blood pressure condition.
+
+2. When Summary A correctly identifies ""pneumonia"" as present in the reference text, but Summary B omits it, Summary A is slightly better than B (Score: -1), as the omission in Summary B is a significant condition that alters the",[]
+score,0.4230769230769231,0.19230769230769232,0.38461538461538464,0.34615384615384615,0.34615384615384615,[]
+lower_limit,0.25,0.05,0.2,0.19749999999999945,0.2,[]
+upper_limit,0.6,0.35,0.55,0.5,0.55,[]
+distance,0,3747,6439,5829,5471,[]
+missed statements,"[(1154, 0, 1.0), (947, -2, -1.0), (1140, 1, 0.0), (1105, 1, 0.0), (1233, -1, 0.0), (1312, 1, 0.0), (1085, 1, 0.0), (937, 2, 1.0), (1003, 1, 0.0), (1404, 1, -1.0), (996, -2, -1.0), (1029, -2, -1.0), (1128, 1, -1.0), (1147, 1, 0.0), (1081, 1, 0.0)]","[(953, 2, 1.0), (1078, -1, 1.0), (947, -2, -1.0), (990, 0, 1.0), (1140, 1, 0.0), (981, -2, -1.0), (1105, 2, 0.0), (1233, 1, 0.0), (1312, -1, 0.0), (1085, -1, 0.0), (937, 2, 1.0), (1003, 1, 0.0), (1404, 1, -1.0), (996, -2, -1.0), (1128, 1, -1.0), (1147, 1, 0.0), (1061, 2, 0.0), (1081, 1, 0.0), (1358, 1, -1.0), (1413, 2, 1.0), (1284, 2, 1.0)]","[(1078, -1, 1.0), (947, -2, -1.0), (990, 0, 1.0), (1140, 1, 0.0), (1105, 2, 0.0), (1233, 2, 0.0), (1085, -1, 0.0), (1152, 2, 1.0), (1003, 1, 0.0), (1404, 2, -1.0), (1029, -2, -1.0), (1128, 2, -1.0), (1147, 1, 0.0), (1061, 2, 0.0), (1081, 1, 0.0), (1413, 2, 1.0)]","[(953, 2, 1.0), (1078, -1, 1.0), (947, -2, -1.0), (990, 0, 1.0), (1140, 2, 0.0), (1105, 2, 0.0), (1312, -1, 0.0), (1085, -1, 0.0), (1003, 1, 0.0), (1404, 1, -1.0), (996, -2, -1.0), (1029, -2, -1.0), (1128, 1, -1.0), (1147, 1, 0.0), (1061, 1, 0.0), (1081, 1, 0.0), (1413, 2, 1.0)]","[(953, 0, 1.0), (1078, -1, 1.0), (947, -2, -1.0), (990, -1, 1.0), (1140, 2, 0.0), (1105, 2, 0.0), (1233, -1, 0.0), (1312, -1, 0.0), (1085, -1, 0.0), (1003, 2, 0.0), (1404, 2, -1.0), (996, -2, -1.0), (1128, 2, -1.0), (1147, 1, 0.0), (1061, 1, 0.0), (1081, 1, 0.0), (1358, 1, -1.0)]",[]
+test values,[],[],[],[],[],"[0.26, 0.26, [(1175, -2, -1.0), (1309, -1, 0.0), (1176, -2, -1.0), (1322, 1, 0.0), (1001, -1, 0.0), (1313, 1, 0.0), (1307, -1, 0.0), (1174, 1, 0.0), (1282, -1, 1.0), (1211, 2, 0.0), (1084, 1, 0.0), (1362, -2, -1.0), (1181, 1, -1.0), (1205, 1, 0.0), (1092, -1, 1.0), (1335, -2, 0.0), (973, 1, -1.0), (1016, 1, 0.0), (1379, 2, 0.0), (1223, -2, -1.0), (998, -2, -1.0), (1346, 2, 0.0), (1083, 1, 0.0), (1000, 1, 0.0), (1203, 1, 0.0), (1374, 1, 0.0), (1162, 1, 0.0), (1139, 1, 0.0), (1163, 1, 0.0), (1393, 1, 0.0), (978, 2, 0.0), (1317, 2, 0.0), (1207, 1, 0.0), (1037, 1, 0.0), (1231, -1, 0.0), (1238, 2, 0.0), (1197, 2, 0.0), (1045, 1, 0.0), (949, -2, -1.0), (1146, 1, 0.0), (967, 1, 0.0), (1279, 1, 0.0), (1177, -2, -1.0), (1217, 1, 0.0), (1010, 2, 0.0), (1387, -2, -1.0), (1259, 1, 0.0), (1369, -2, -1.0), (938, 2, 1.0), (1351, 2, 1.0), (944, 1, 0.0), (970, 1, -1.0), (1145, 1, 0.0), (948, -2, -1.0), (1236, 2, 0.0), (1206, 1, 0.0), (1189, 1, 0.0), (1324, 1, 0.0), (935, 2, 1.0), (1019, 1, 0.0), (958, 1, 0.0), (965, 1, 0.0), (985, 2, 1.0), (1095, 2, 0.0), (1303, -2, -1.0), (1384, 1, 0.0), (1014, 1, 0.0), (1225, 1, 0.0), (1378, 2, 0.0), (1038, 1, 0.0), (1376, 2, 0.0), (1064, 2, 0.0), (1194, 1, 0.0), (936, 2, 1.0)], [(1175, -2, -1.0), (1309, -2, 0.0), (1176, -2, -1.0), (1322, 1, 0.0), (1291, 1, -1.0), (1367, -2, -1.0), (1001, 1, 0.0), (1313, 1, 0.0), (1307, -1, 0.0), (1174, 1, 0.0), (1283, 2, 1.0), (1211, 2, 0.0), (1084, 1, 0.0), (1181, 1, -1.0), (942, 1, 0.0), (1205, -1, 0.0), (1335, -1, 0.0), (973, 1, -1.0), (1016, 1, 0.0), (1379, 1, 0.0), (1223, 1, -1.0), (998, -2, -1.0), (1346, 2, 0.0), (1083, 1, 0.0), (1271, 1, 0.0), (1000, 1, 0.0), (1209, 1, 0.0), (1203, 1, 0.0), (1374, -2, 0.0), (1162, 1, 0.0), (1139, 1, 0.0), (1163, 2, 0.0), (1393, 1, 0.0), (978, 1, 0.0), (1317, 2, 0.0), (1207, -1, 0.0), (1037, 1, 0.0), (1231, 1, 0.0), (1238, 1, 0.0), (1197, 1, 0.0), (1045, 1, 0.0), (1292, 1, -1.0), (949, -2, -1.0), (1146, 1, 0.0), (967, 1, 0.0), (1279, 2, 0.0), (1177, -2, -1.0), (1010, 1, 0.0), (1259, 1, 0.0), (1351, 2, 1.0), (944, 1, 0.0), (970, 1, -1.0), (1145, 1, 0.0), (948, -2, -1.0), (1236, 2, 0.0), (1206, 1, 0.0), (1189, 1, 0.0), (1324, 1, 0.0), (1019, -1, 0.0), (958, 1, 0.0), (965, 1, 0.0), (985, 0, 1.0), (1095, 2, 0.0), (1303, -2, -1.0), (1384, -1, 0.0), (1270, 1, 0.0), (1014, -1, 0.0), (1225, 1, 0.0), (1378, 2, 0.0), (1038, 1, 0.0), (1376, 2, 0.0), (1064, 2, 0.0), (1194, 1, 0.0), (987, -1, 1.0)]]"
